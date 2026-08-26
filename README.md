@@ -5,49 +5,39 @@
 <td>
 
 ```text
-                      ....... .   . . . .       .
-             :.:........ .. .   .  . . . . .  .   .  .
-          ..:.  . ... . .  .  .  .   . .    .         . .
-        :..      .  . . .    .    .      .           .   .
-       :.. . . . ... .  . . .   . . .... .... .   .    .
-     ::.. .   . ..... ..      . .......::.:...  .  . .    . .
-    ::....  ....... ...  ......:.::;;;;;;;:;:........ ...  . .
-    :.....................:.::;;++++c+c++c++c++;:.............
-    .:..................::;;+++cccccccccccccccc+++::...........
-     .:...... ...:::::;++c+c+cccccxxxxcxcxxcccxxxcc+c+;::.......
-       ::.....:::::;+++c+cccccccxcxxxxxx*xxxxxxxxxxxcccc++::...
-        ......::::;++cc+ccccccccxxx*oaoo*cxxxxxxxxxxxcxcc+c+;..++c+
-         ::...:::;;+c+ccccccxcxx*a&aoxc+ccxx***o***xxxxcc+c+ccxa&ao*c
-          .::.:;:;++cccccxxx*x*ooxx+c+ccxo&a**x********xcc:c*aa&▒@*a*a
-            .:::;;c+ccccxcx***x*xccccxccc+++cc+cc**ooo**xccco*o**&aoao
-              :;::;;;:;;;+c+ccx&a**xxc+c+cc*oo**oaooooo*xxccx*o@&xa*&
-              :;::;+cccccc+c;;+xo***x*xxxx*x**oa&#&&aao**xxcca&##**o#
-               ;+ccc+c+++cccc:cc****x**oao**ooaa&#&&&aoo*xxccx**a&*#c
-                ++c;;+c+cccc+:+xx*o*****aaoooa&#@▒@#&ooo*xxccco&#a&x
-                 +++cccccxxx+;+cx*o**xxx*aooooa#@@#&aooo**xxcccccc
-                  c+c+cxx**o;;cc*oaoooaa**&aaooooaoooo*o***xccc
-                  ;+cccxoo&c++c+xo&ooao*x*ooooo*x*oaaaoooooxccxc
-                   +c+x**a&+;+c:+cccccx***o*o*x+cxoaaaaaaoxxcccx
-                    ccccx*xx+c+c+cccccxxxxccccccc*oaoooao**xccxxc
-                     +cccccc+++c++ccccccx*xxx*oa&&oooooo*xxxcxx**
-                      +c+ccc*c+:;c+ccxx*oaaa&&&#&&aaa***xxccx***a+
-                       ;+c+cc*xc+ccccxccxxooaa&aaa&o*xxxcccx*aaoax
-                         ;+c+cccccccxcxcxx*oa&aaaoxccccxxxx*a&aaoo
-                           :++++ccccccx***o&&oxxcccccxxcxxo&&#&&ooc
-                             :+;+++c+cxxxcc+c+ccccccccxx*a###&&#&o*c;
-                             .;+;::::;+++c+ccccccccxx*oo&#######&#a+c;
-                             ..:.:.:.:;++c+c+cccc*oaaaaa###@@###▒#c+;++:
-                           ..+:.;++++;:;;c+ccx*a&&&&&aa&#@@###▒▒o++;+;++c;
-                     ;;c+..: ;+:cccxxcc+ccccxx*oa&##&&##@@@@#▒#c+;:++;++c++:
-                ++c+c+++c:.;..c++cccxxcccccxx**oa&&#@#@@▒@#@▒x+;:;c+;++c+c++
-           ++c+c+c+c+cc+;:;:: :++ccxxx***xxxoa&#@@▒▒▒▒▒▒▒▒▒@c;+;+++++c+c+c+;
-      ++c+c+c+c+c+c+c++c+:;;;..:++ccxxxxcxxxcccccccccx*#@▒o+:;:++c+c+c+c++;;
-  +c+c+c+c+c+c+c+c+c+c+c++:;;+:..:;;+c+;+++::;;+++;;;;;++;::;;+c+c+c+c++;;;;
-+c+c+c+c++c+c++c++c+c+c+cc+:::++;:::.::;;;+;:;;c+++++;;::;;+c+++c+c+;;;:;;;;
-c+c+c+c+c+c++c+c+c+c+++;;:;:;:::;;+++;;::;++;:+:c+++;;++++c++c+c+;;;;;;;;;;;
-+c+c+c+c+c+c+c+c+c+++++++++++++;;::;;;;;:;;;;;+;;c++++++++++;;;;;;;;;;;;;;;;
-c+c+c++c+c+c+c+c+++++;;+;++++;;;;;;;;;;;+;;;c;;+;++++;+++;+;+++++++++++;;;;;
-+c+c+c+c+c+c+++;;;;;;;;;+;;;;:;;++;;;+;+;;+;++;;;;++++;++++++;++++;;;;:;;;;;
+                                    ......       .
+                            ::....... . .   . . . . .    .    .
+                         ....   . .  .    .           .         .
+                        :..    . . .  .      . . . .         .
+                       :..  . . ... .   .   .....::.::..   .   .   .
+                      :... . ........ ....:.:::;;;;;;;::...... .. .
+                     ::................:::;++ccc+cc+c+c++;::.........
+                      ::..... ...::::;;++ccccccxccccccccxcc+;::::.....
+                       .::....:::;;;+c+cccccccxxxxx*xxxxxxxxccc++::...
+                         :...::;;;+cc+cccccccxxooo*cccxcxxxxxcxc+c++.;+c+
+                          ::.:;:;++c+ccccxcxooo*cc+c*ooooo**xxxcc+ccco@#o*c
+                           .:::;;c+ccxcx****xxc+ccccccccccx****xx++oaoa#oo&+
+                             :;;;++++c+ccccooxxxcc+c+cxxc*ooooo*xxcx*ao*ao*
+                              ;;:++cc+c+c;+co**xxcxx***oo&&&aao*xxcca&@*x#c
+                               ++c+c+cccc+;cx*****oo**ooa&#&&ao**xccx*o&ao
+                               :c+;c+ccccc;cx***xx*aa*oa&@▒##ooo*xccc*a*x
+                                :c+cccxx*;;cxoo**o**aaoooa&aoo*o**xcc+
+                                 ++ccx*&x+c+coaooa*xoooo*x*ooaoo*oxccx
+                                  c+x**&++++++cccx*x***xcccoaaoao*xccxc
+                                  +c+cxxc+c++ccccccxccccxxoooooo*xxccxx
+                                    c+cccc+;+++ccxxoooo&&&&aooo*xxcc*xoc
+                                     +++cxxc+cccccxx*oaa&aaaoxxxccc*ooac
+                                       ;c+ccccccxccx*o&aaooxcccxcx*a&aoo
+                                         ;+++c+ccx**x**xccccccxcx*&#&&aoc
+                                          :+;;;++cc+c+c+cc+ccxx*a###&#&&*c;
+                                          .::::.::++ccccccx*ooaa######@@c++;
+                                        .:;.;+c++;;+c+cx*a&&&aa&##@##▒ac;;+++c:
+                                  ;;++;.: +++ccxccccccxx*o&&#&#@@@#▒@c+;;+;+++c;...
+                              ++c+c+cc;:;..++ccxxxxccx*oa##▒▒▒@@@@▒oc;;++++c+c+c:.:......
+                        ++c+c+c+c+c++c;:;;.:++ccx*xxxxxxx*xxx*&▒▒▒c;:++++c+c+c+;;:.:.:.......
+                    ++c+c+c+c+c+c++c++c;;;;:.;;+c+++c;;;+++;;;++++:;+++c+c+++;;;;;:.:..:........
+               ++c+c+c+c+c+c+c+c+c+cc+++:;;;;:;:::;;;;:;++c+++;;;;+++c+c++;;;;;;+;::.:..........
+            ++c+c+c+c+c+c++c++c+c+++;+;;;;;;;;;++;;;;+;;+;++;;+++c+++++;;;;;;;;;;+;::..:..:.....
 ```
 
 </td>
