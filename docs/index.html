@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Pip’s aquarium · Kaustubh Dalvi</title>
+<style>
+:root { color-scheme:dark; --ink:#0e151b; --card:#142129; --rule:#34444b; --cream:#f2e9d5; --muted:#afc1bd; --cyan:#84ddcc; --apricot:#ffb688; }
+* { box-sizing:border-box }
+body { margin:0; min-height:100svh; color:var(--cream); background:var(--ink); font-family:"Atkinson Hyperlegible Next","Helvetica Neue",Arial,sans-serif; display:grid; place-items:center; padding:clamp(16px,4vw,56px); }
+main { width:min(100%,840px) }
+header { display:flex; align-items:baseline; justify-content:space-between; gap:14px; flex-wrap:wrap; margin-bottom:17px; }
+h1 { font-family:"DM Serif Text",Georgia,serif; font-size:clamp(38px,6vw,64px); line-height:1; margin:0; font-weight:500; letter-spacing:-.055em; }
+.credit { font:12px/1.5 ui-monospace,Menlo,monospace; color:var(--muted); margin:0 }
+.aquarium { overflow:hidden; border:1px solid var(--rule); border-radius:18px; background:var(--card); }
+.readout { display:flex; justify-content:space-between; align-items:center; gap:10px; padding:13px clamp(14px,3vw,25px); background:#152128; border-bottom:1px solid var(--rule); color:var(--muted); font:12px/1.4 ui-monospace,Menlo,monospace; }
+.lamp { display:inline-block; margin-right:10px; width:8px; height:8px; background:var(--cyan); box-shadow:0 0 7px #7ed9c76b; }
+.readout[data-mode="sleep"] .lamp { background:#baabd7; box-shadow:none }
+.readout[data-mode="play"] .lamp { background:var(--apricot) }
+#label { color:var(--cream) }
+canvas { display:block; width:100%; height:auto; aspect-ratio:2/1; image-rendering:pixelated; cursor:crosshair; touch-action:manipulation; }
+.actions { display:flex; align-items:center; flex-wrap:wrap; gap:10px; border-top:1px solid var(--rule); padding:clamp(14px,3vw,23px); }
+button { min-height:44px; border:1px solid #435660; border-radius:9px; padding:8px 16px; line-height:1.4; font-family:inherit; font-size:15px; font-weight:600; color:var(--cream); background:#1b2a31; cursor:pointer; }
+button:hover { border-color:#8caaa9; background:#25363d }
+button:active { transform:translateY(1px) }
+button:focus-visible { outline:3px solid var(--cyan); outline-offset:4px }
+#feed { background:var(--apricot); color:#201c18; border-color:var(--apricot) }
+#feed:hover { background:#ffccaa }
+kbd { margin-left:10px; font:11px ui-monospace,Menlo,monospace; opacity:.75 }
+.hint { font-size:14px; line-height:1.55; color:var(--muted); margin:15px 1px 0 }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0 }
+@media(max-width:440px) { .actions { gap:7px } button { flex:1; padding:8px; } kbd { display:none } .readout {font-size:11px} }
+@media(prefers-reduced-motion:reduce) { button:active { transform:none } }
+</style>
+</head>
+<body>
+<main aria-labelledby="title">
+<header><h1 id="title">Pip’s aquarium</h1><p class="credit">A pixel axolotl by Kaustubh Dalvi</p></header>
+<section class="aquarium" aria-label="Interactive pixel aquarium">
+<div class="readout" id="readout" data-mode="awake"><span><span class="lamp" aria-hidden="true"></span><span id="label">Curious</span></span><span>Dots eaten <strong id="count">0</strong></span></div>
+<canvas id="tank" width="420" height="210" role="img" aria-label="Pip is an apricot axolotl with feathery pink gills, a long tail, and a speckled back. The controls below offer feeding, play, and sleep.">Pip’s interactive aquarium requires canvas support.</canvas>
+<div class="actions" role="group" aria-label="Care for Pip">
+<button type="button" id="feed" aria-keyshortcuts="F">Feed<kbd aria-hidden="true">F</kbd></button>
+<button type="button" id="play" aria-keyshortcuts="P">Play<kbd aria-hidden="true">P</kbd></button>
+<button type="button" id="nap" aria-keyshortcuts="N">Nap<kbd aria-hidden="true">N</kbd></button>
+</div>
+</section>
+<p class="hint">Move your pointer and Pip follows. Tap the water to drop a glowing dot, or use the buttons.</p>
+<p class="sr-only" id="announcer" role="status" aria-live="polite"></p>
+<noscript><p>Enable JavaScript to play with Pip.</p></noscript>
+</main>
+<script>
+'use strict';
+const tank = document.querySelector('#tank');
+const ctx = tank.getContext('2d');
+const label = document.querySelector('#label');
+const count = document.querySelector('#count');
+const nap = document.querySelector('#nap');
+const live = document.querySelector('#announcer');
+const readout = document.querySelector('#readout');
+const motion = matchMedia('(prefers-reduced-motion: reduce)');
+const W = tank.width, H = tank.height;
+let x = W / 2, y = H / 2 + 2, face = 1, eaten = 0, t = 0, last = 0;
+let state = 'awake', pointer = null, ball = null, dots = [], burst = null;
+let snackUntil = 0, eventNumber = 0;
+const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
+function homePoint(px, py) { return {x:clamp(px, 24, W-24), y:clamp(py, 30, H-24)}; }
+function announce(message) { live.textContent = message; }
+function setState(next, status) {
+  state = next; readout.dataset.mode = state; label.textContent = status;
+  nap.firstChild.nodeValue = state === 'sleep' ? 'Wake' : 'Nap';
+}
+function wake() {
+  if (state === 'sleep') { setState('awake', 'Curious'); announce('Pip woke up.'); }
+}
+function drop(px, py) {
+  wake(); ball = null; pointer = null;
+  const food = homePoint(px, py);
+  if (dots.length >= 5) dots.shift();
+  dots.push(food); setState('awake', 'Foraging'); announce('A food dot is in the water.');
+}
+function feed() {
+  eventNumber++;
+  const px = x < W / 2 ? x+56 : x-56;
+  drop(px, y + (eventNumber % 2 ? -16 : 16));
+}
+function play() {
+  wake(); dots = []; pointer = null; burst = null;
+  const side = x < W / 2 ? 1 : -1;
+  ball = {x:clamp(x+side*65, 34, W-34), y:clamp(y-18,33,H-34), age:0};
+  setState('play', 'Chasing the bubble'); announce('Pip is playing chase with a bubble.');
+}
+function toggleNap() {
+  if (state === 'sleep') { wake(); return; }
+  dots=[]; ball=null; pointer=null; burst=null; snackUntil=0;
+  setState('sleep','Napping'); announce('Pip curled up for a nap.');
+}
+document.querySelector('#feed').addEventListener('click', feed);
+document.querySelector('#play').addEventListener('click', play);
+nap.addEventListener('click', toggleNap);
+document.addEventListener('keydown', e => {
+  if (e.altKey || e.ctrlKey || e.metaKey || e.repeat) return;
+  const fn = {f:feed,p:play,n:toggleNap}[e.key.toLowerCase()];
+  if (fn) { e.preventDefault(); fn(); }
+});
+function position(e) {
+  const r = tank.getBoundingClientRect();
+  return homePoint((e.clientX-r.left)*W/r.width,(e.clientY-r.top)*H/r.height);
+}
+tank.addEventListener('pointermove', e => { if (e.pointerType !== 'touch' && state==='awake') pointer=position(e); });
+tank.addEventListener('pointerleave', () => {pointer=null;});
+tank.addEventListener('click',e => { const p=position(e); drop(p.x,p.y); });
+function box(a,b,w,h,color) { ctx.fillStyle=color; ctx.fillRect(Math.round(a),Math.round(b),w,h); }
+function oval(cx,cy,rx,ry,c) {
+  for (let j=-ry;j<=ry;j++) {
+    const d=Math.round(rx*Math.sqrt(Math.max(0,1-(j*j)/(ry*ry))));
+    box(cx-d,cy+j,2*d+1,1,c);
+  }
+}
+function stair(x0,y0,x1,y1,size,col) {
+  const n=Math.max(Math.abs(x1-x0),Math.abs(y1-y0),1);
+  for(let i=0;i<=n;i++) box(x0+(x1-x0)*i/n,y0+(y1-y0)*i/n,size,size,col);
+}
+let seed=1127;
+function random(){seed=(1664525*seed+1013904223)>>>0; return seed/4294967296;}
+const motes=Array.from({length:62},()=>[random()*W,8+random()*(H-19),random()]);
+function landscape() {
+  const grad=ctx.createLinearGradient(0,0,0,H); grad.addColorStop(0,'#21343d');grad.addColorStop(.65,'#162a32');grad.addColorStop(1,'#10232a');
+  ctx.fillStyle=grad;ctx.fillRect(0,0,W,H);
+  for(const [mx,my,n] of motes) {
+    const lift=motion.matches?0:Math.sin(t*.29+n*6)*2;
+    box(mx,my+lift,n>.86?2:1,1,n>.8?'#537372':'#314b52');
+  }
+  for(let i=0;i<7;i++){
+    const yy=H-12+i*2;
+    for(let a=0;a<W;a+=6) if((a+i*11)%13<5) box(a,yy,2,1,i%2?'#29434a':'#31484d');
+  }
+  for(const [gx,len,side] of [[21,34,1],[28,22,-1],[35,16,1],[378,22,-1],[390,38,-1],[402,25,1]]) {
+    const base=H-8;
+    for(let i=0;i<len;i++){
+      const u=i/len, k=Math.round(Math.sin(u*4.1)*4*side);
+      box(gx+k,base-i,2,1,'#436365');
+      if(i>3 && i%6===0) {
+        const sign=(i%12===0?1:-1)*side;
+        stair(gx+k,base-i,gx+k+sign*4,base-i-4,2,'#385a5c');
+      }
+    }
+  }
+}
+function pet(px,py) {
+  const asleep=state==='sleep', still=motion.matches;
+  const blink=!still && t%4.1>3.93;
+  const bob=(!still&&!asleep)?Math.round(Math.sin(t*2)*1.4):0;
+  ctx.save(); ctx.translate(Math.round(px), Math.round(py)+bob); ctx.scale(face*2,2);
+  const peach='#f7ad89', light='#ffd6a3', shade='#c77f74', dark='#533a45', pink='#ef8293', glow='#ffadb0';
+  // The tail arcs upward behind the torso.
+  const wave=asleep||still?0:Math.round(Math.sin(t*3.1)*1.5);
+  stair(4,5,16,4,7,shade); stair(12,7,22,2,5,peach);
+  stair(19,4,26,-2+wave,4,peach); stair(24,0+wave,29,-5+wave,2,light);
+  stair(7,3,17,2,3,'#e68e89'); stair(15,2,21,-1,2,'#f2aaa0');
+  // Feet tuck in underneath when sleeping.
+  if(!asleep){stair(-5,9,-7,15,3,shade);box(-9,15,5,2,peach);stair(5,8,9,13,3,shade);box(8,14,5,2,peach);}
+  oval(2,5,13,7,shade);oval(1,3,12,7,peach);
+  // Three feathery external gills on each side.
+  for(const s of [-1,1]){
+    const root=-6+s*8;
+    for(const [dy,reach,up] of [[-7,8,8],[-4,10,3],[0,8,-2]]){
+      const ex=root+s*reach, ey=dy-up;
+      stair(root,dy,ex,ey,2,'#b86078');
+      stair(root,dy-1,ex,ey-1,2,pink);
+      for(let n=3;n<reach;n+=3){
+        const ax=root+s*n, ay=dy-up*n/reach;
+        stair(ax,ay-1,ax,ay-3,1,glow); stair(ax,ay,ax+s*2,ay+1,1,pink);
+      }
+      box(ex,ey-1,2,1,glow);
+    }
+  }
+  oval(-6,-2,12,9,shade);oval(-6,-3,12,8,peach);
+  oval(-6,0,10,5,light);box(-15,-1,2,1,pink);box(1,-1,2,1,pink);
+  for(const ex of [-12,-2]){
+    if(asleep||blink)box(ex,-3,3,1,dark);
+    else { box(ex,-5,3,3,dark);box(ex,-5,1,1,'#fff7da'); }
+  }
+  if(!asleep&&t<snackUntil){box(-8,0,3,2,dark);box(-7,1,1,1,pink);}
+  else {box(-9,0,1,1,dark);box(-8,1,2,1,dark);box(-6,0,1,1,dark);}
+  for(const [sx,sy] of [[-8,-9],[-5,-8],[-2,-9],[5,1],[8,2],[10,4],[5,4]])box(sx,sy,1,1,shade);
+  ctx.restore();
+  if(asleep){ const drift=still?0:Math.round(Math.sin(t)*2); ctx.save();ctx.font='9px monospace';ctx.fillStyle='#b6c5d6';ctx.fillText('z',px+15,py-26+drift);ctx.fillText('z',px+21,py-33+drift);ctx.restore();}
+}
+function targetForPlay() {
+  return homePoint(ball.x+(motion.matches?0:Math.cos(ball.age*2.7)*9),ball.y+(motion.matches?0:Math.sin(ball.age*3.2)*5));
+}
+function update(dt) {
+  if(state==='sleep')return;
+  if(ball)ball.age+=dt;
+  const target=dots[0]||(ball?targetForPlay():pointer);
+  if(!target) {if(t>=snackUntil&&label.textContent==='Happy') setState('awake','Curious');return;}
+  // The fish approaches with its mouth. Reserve a margin so its gills remain visible.
+  const tx=clamp(target.x+face*10,39,W-42),ty=clamp(target.y,32,H-34);
+  const dx=tx-x,dy=ty-y,d=Math.hypot(dx,dy);
+  if(Math.abs(target.x-x)>22)face=target.x<x?1:-1;
+  const step=motion.matches?d:Math.min(d,(dots.length||ball?94:63)*dt);
+  if(d>.01){x+=dx*step/d;y+=dy*step/d;}
+  if(d-step>1.1)return;
+  if(dots.length){
+    const food=dots.shift(); eaten++;count.textContent=eaten;
+    burst={x:food.x,y:food.y,at:t};snackUntil=t+.75;
+    setState('awake',dots.length?'Foraging':'Happy');
+    announce('Pip ate a dot. Total eaten: '+eaten+'.');
+  } else if(ball){
+    burst={x:target.x,y:target.y,at:t};ball=null;snackUntil=t+.75;
+    setState('awake','Happy');announce('Pip caught the bubble!');
+  } else if(t>=snackUntil && label.textContent==='Happy')setState('awake','Curious');
+}
+function toys(){
+  for(const q of dots){oval(q.x,q.y,4,4,'#385859');oval(q.x,q.y,2,2,'#92ddc7');box(q.x-1,q.y-2,2,1,'#f3efc0');}
+  if(ball){const p=targetForPlay();oval(p.x,p.y,6,6,'#69aaad');oval(p.x,p.y,5,5,'#27414b');box(p.x-3,p.y-4,3,1,'#c4eee2');}
+  if(burst && !motion.matches && t-burst.at<.4){
+    const r=3+(t-burst.at)*18;
+    for(let n=0;n<6;n++)box(burst.x+Math.cos(n*Math.PI/3)*r,burst.y+Math.sin(n*Math.PI/3)*r,1,1,'#e6dbb5');
+  }
+}
+function frame(now){
+  const dt=last ? Math.min((now-last)/1000,.05) : 0;
+  last=now;t+=dt;update(dt);landscape();toys();pet(x,y);
+  requestAnimationFrame(frame);
+}
+document.addEventListener('visibilitychange',()=>{last=0;});
+requestAnimationFrame(frame);
+</script>
+</body>
+</html>
