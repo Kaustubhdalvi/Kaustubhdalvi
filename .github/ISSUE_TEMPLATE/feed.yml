@@ -1,0 +1,15 @@
+name: Feed the puppies
+description: Offer a free virtual meal to the dogs in the profile garden.
+title: "Feed the profile puppies"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The first person to open a feeding issue after the garden's 12-hour cooldown gets the meal. GitHub's submission time decides the order. An early request expires, so come back after the listed time for another try.
+  - type: checkboxes
+    id: credit
+    attributes:
+      label: Feeding credit
+      options:
+        - label: Credit my GitHub username on the public feeding leaderboard if this meal is accepted.
+          required: true
