@@ -15,11 +15,13 @@ from urllib.request import build_opener, HTTPRedirectHandler, Request
 START = "<!-- community:start -->"
 END = "<!-- community:end -->"
 FEED = "Feed the profile puppies"
+VISIT = "Record a feed & play visit"
 BOOK = "Suggest a book for the bookshelf"
 EXTRA = "Request an extra meal for the profile puppies"
 EXTRA_CONFIRMATION = re.compile(r"Confirm extra meal #([1-9][0-9]{0,14})")
 EXTRA_CONSENT = "- [x] List my GitHub username for this extra meal once the owner verifies it."
 FEED_CONSENT = "- [x] Credit my GitHub username on the public feeding leaderboard if this meal is accepted."
+VISIT_CONSENT = "- [x] List my GitHub username on the garden leaderboard for this visit."
 BOOK_CONSENT = "- [x] List my suggestion and GitHub username on the public profile."
 MEDALS = {1: " 🥇", 2: " 🥈", 3: " 🥉"}
 COOLDOWN = timedelta(hours=12)
@@ -95,8 +97,8 @@ def form_field(body, label):
     return fields[0].strip() if len(fields) == 1 else ""
 
 
-def has_consent(body, label, checkbox):
-    return form_field(body, label).replace("- [X] ", "- [x] ", 1) == checkbox
+def has_consent(body, label, *checkboxes):
+    return form_field(body, label).replace("- [X] ", "- [x] ", 1) in checkboxes
 
 
 def book_field(body, label, limit):
@@ -154,8 +156,8 @@ def render(issues, repository, extra_meals=False, events=None):
         if issue["transfers"]["totalCount"]:
             # Imported issues retain an older creation date from another repository.
             continue
-        if original == FEED:
-            if not has_consent(body, "Feeding credit", FEED_CONSENT):
+        if original in (FEED, VISIT):
+            if not has_consent(body, "Feeding credit", FEED_CONSENT, VISIT_CONSENT):
                 continue
             if last and when < last[0] + COOLDOWN:
                 continue
@@ -186,46 +188,37 @@ def render(issues, repository, extra_meals=False, events=None):
                 books.append((number, user_id, title, book_field(body, "Book author", 90)))
 
     issue_url = "https://github.com/{}/issues/".format(repository)
-    lines = [START, ""]
+    book_form = "https://github.com/{}/issues/new?template=book.yml".format(repository)
+    book_chip = "https://raw.githubusercontent.com/{}/main/assets/action-book.svg".format(repository)
+    lines = [START, "", "**Bookshelf** · [![Suggest a book]({})]({})".format(book_chip, book_form)]
+    if books:
+        lines.append("")
+        for number, person, title, author in reversed(books[-3:]):
+            work = title + (" by " + author if author else "")
+            lines.append("- {} · {} · [suggestion #{}]({}{})".format(
+                work, credited_user(logins[person]), number, issue_url, number))
+
     totals = free + extras
+    visits = sum(totals.values())
+    noun = "visit" if visits == 1 else "visits"
+    lines.extend(["", "<details><summary>Garden leaderboard · {} recorded {}</summary>".format(visits, noun), ""])
     if totals:
-        heading = ["| Rank | Garden visitor | Meals |", "| ---: | :--- | ---: |"]
+        lines.extend(["These visitors chose public credit through a GitHub issue. "
+                      "Free leaderboard entries are at least 12 hours apart.", ""])
         if extras:
-            heading = ["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"]
-        lines.extend(["**Feeding leaderboard**", ""] + heading)
+            lines.extend(["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"])
+        else:
+            lines.extend(["| Rank | Garden visitor | Meals |", "| ---: | :--- | ---: |"])
         ranked = sorted(totals, key=lambda user: (-totals[user], first_meal[user]))
-        rows = []
         for rank, person in enumerate(ranked, start=1):
             cells = [str(rank) + MEDALS.get(rank, ""), credited_user(logins[person])]
             if extras:
                 cells.extend([str(free[person]), str(extras[person])])
             cells.append(str(totals[person]))
-            rows.append("| " + " | ".join(cells) + " |")
-        lines.extend(rows[:5])
-        if len(rows) > 5:
-            lines.extend(["", "<details><summary>More garden visitors ({})</summary>".format(len(rows) - 5), ""])
-            lines.extend(heading + rows[5:] + ["", "</details>"])
-        if last:
-            last_at, last_issue, last_user = last
-            next_feed = (last_at + COOLDOWN).strftime("%d %b %Y, %H:%M:%S UTC")
-            name = "Last free meal" if extras else "Last meal"
-            next_name = "Next eligible free feeding" if extras else "Next eligible feeding"
-            lines.extend(["", "[{}]({}{}) from {} · {} **{}**.".format(
-                name, issue_url, last_issue, credited_user(logins[last_user]), next_name, next_feed)])
-        else:
-            lines.extend(["", "The first free feeding spot is open."])
+            lines.append("| " + " | ".join(cells) + " |")
     else:
-        lines.append("**Feeding leaderboard** · The first feeding spot is open.")
-    lines.append("")
-    if books:
-        lines.extend(["**Bookshelf**", ""])
-        for number, person, title, author in reversed(books[-3:]):
-            work = title + (" by " + author if author else "")
-            lines.append("- {} · {} · [suggestion #{}]({}{})".format(
-                work, credited_user(logins[person]), number, issue_url, number))
-    else:
-        lines.append("**Bookshelf** · Be the first to suggest a book.")
-    lines.extend(["", END])
+        lines.append("The first recorded visit will appear here. Playing on the profile is anonymous.")
+    lines.extend(["", "</details>", "", END])
     return "\n".join(lines)
 
 
