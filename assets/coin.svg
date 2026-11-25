@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="136" viewBox="0 0 640 136" role="img" aria-labelledby="title desc">
+<title id="title">Race between two three-flip patterns</title>
+<desc id="desc">Read the marked coins from left to right. The pattern heads, heads, tails races against heads, tails, heads.</desc>
+<defs><pattern id="grain" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#6a8196" opacity=".25"/></pattern></defs>
+<rect width="640" height="136" rx="12" fill="#101926"/><rect x=".5" y=".5" width="639" height="135" rx="12" fill="url(#grain)" stroke="#364457"/>
+<path d="M13 23V13h10m594 0h10v10M13 113v10h10m594 0h10v-10" fill="none" stroke="#546270" stroke-width="1.1"/>
+<path d="M42 110H246m-5 -4 6 4 -6 4" fill="none" stroke="#85735b" stroke-width="1.45"/><g transform="translate(70 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(145 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(220 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#805f40" stroke="#dbb67a" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#fae0b3" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#fae0b3" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#fae0b3" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >T</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#fae0b3" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><path d="M392 110H596m-5 -4 6 4 -6 4" fill="none" stroke="#85735b" stroke-width="1.45"/><g transform="translate(420 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(495 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#805f40" stroke="#dbb67a" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#fae0b3" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#fae0b3" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#fae0b3" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >T</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#fae0b3" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(570 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><path d="M320 24v19m0 46v22" stroke="#506173" stroke-width="1" stroke-dasharray="2 4"/><text x="320" y="75" fill="#b6c5d0" font-size="26" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="400" font-style="italic">vs</text>
+</svg>

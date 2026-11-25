@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="136" viewBox="0 0 640 136" role="img" aria-labelledby="title desc">
+  <title id="title">Two data feeds, two clocks</title>
+  <desc id="desc">The local feed records 05:28 and 05:30 on January 7 at UTC+05:30. The UTC feed records 23:58 and 00:00 across January 6 and 7. The two strips feed into a single merge.</desc>
+  <defs>
+    <pattern id="dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r=".7" fill="#354454"/></pattern>
+    <pattern id="perfs" width="13" height="9" patternUnits="userSpaceOnUse"><circle cx="6" cy="4.5" r="1.55" fill="#101926"/></pattern>
+    <linearGradient id="local-paper" x2="1" y2=".3" gradientUnits="objectBoundingBox"><stop stop-color="#303139"/><stop offset="1" stop-color="#26282c"/></linearGradient>
+    <linearGradient id="utc-paper" x2="1" y2=".3" gradientUnits="objectBoundingBox"><stop stop-color="#21363c"/><stop offset="1" stop-color="#1c2d33"/></linearGradient>
+    <path id="stub" d="M2 0H260l5 4-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 4H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2Z"/>
+    <path id="time-arrow" d="M0 0h17m-5-5 5 5-5 5" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </defs>
+  <rect x=".5" y=".5" width="639" height="135" rx="8" fill="#101926" stroke="#364457"/>
+  <rect x="1" y="1" width="638" height="134" rx="8" fill="url(#dots)" opacity=".68"/>
+  <path d="M9 19v-9h11M620 10h11v9M9 117v9h11m600 0h11v-9" fill="none" stroke="#526272" stroke-width="1"/>
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M278 67h17c8 0 9 4 13 9l12 15" stroke="#dbb583" stroke-width="2"/>
+    <path d="M362 67h-17c-8 0-9 4-13 9l-12 15" stroke="#83c6bb" stroke-width="2"/>
+    <path d="M320 91v16m-4-4 4 4 4-4" stroke="#c8d3d7" stroke-width="2"/>
+  </g>
+  <circle cx="320" cy="91" r="3.8" stroke="#c8d3d7" stroke-width="1.5" fill="#101926"/>
+  <g transform="translate(22 21) rotate(-1 132 45)">
+    <use href="#stub" transform="translate(0 4)" fill="#0c121b"/>
+    <use href="#stub" fill="url(#local-paper)" stroke="#947c60" stroke-width="1"/>
+    <rect x="6" y="2" width="244" height="10" fill="url(#perfs)"/>
+    <path d="M7 17h242" stroke="#796950" stroke-width=".8"/>
+    <g font-family="Menlo,Consolas,'DejaVu Sans Mono',monospace">
+      <text x="13" y="41" font-size="17" fill="#e5c8a2">JAN 7 · UTC+05:30</text>
+      <g fill="#fae8c1" font-size="28" font-weight="bold"><text x="13" y="74">05:28</text><text x="150" y="74">05:30</text></g>
+    </g>
+    <use href="#time-arrow" transform="translate(112 65)" stroke="#dbb583"/>
+  </g>
+  <g transform="translate(354 21) rotate(1 132 45)">
+    <use href="#stub" transform="translate(0 4)" fill="#0c121b"/>
+    <use href="#stub" fill="url(#utc-paper)" stroke="#577f7d" stroke-width="1"/>
+    <rect x="6" y="2" width="244" height="10" fill="url(#perfs)"/>
+    <path d="M7 17h242" stroke="#476d6e" stroke-width=".8"/>
+    <g font-family="Menlo,Consolas,'DejaVu Sans Mono',monospace">
+      <text x="13" y="41" font-size="17" fill="#acdbce">JAN 6–7 · UTC</text>
+      <g fill="#d4f3e7" font-size="28" font-weight="bold"><text x="13" y="74">23:58</text><text x="150" y="74">00:00</text></g>
+    </g>
+    <use href="#time-arrow" transform="translate(112 65)" stroke="#83c6bb"/>
+  </g>
+</svg>
