@@ -22,6 +22,7 @@ EXTRA_CONFIRMATION = re.compile(r"Confirm extra meal #([1-9][0-9]{0,14})")
 EXTRA_CONSENT = "- [x] List my GitHub username for this extra meal once the owner verifies it."
 FEED_CONSENT = "- [x] Credit my GitHub username on the public feeding leaderboard if this meal is accepted."
 VISIT_CONSENT = "- [x] List my GitHub username on the garden leaderboard for this visit."
+YARD_CONSENT = "- [x] Credit my GitHub username for this visit to [Pip’s yard](https://github.com/Kaustubhdalvi#pips-yard)."
 BOOK_CONSENT = "- [x] List my suggestion and GitHub username on the public profile."
 MEDALS = {1: " 🥇", 2: " 🥈", 3: " 🥉"}
 COOLDOWN = timedelta(hours=12)
@@ -125,7 +126,7 @@ def record_meal(events, kind, request, number, when, choice):
                    "issued_at": when.strftime("%Y-%m-%dT%H:%M:%SZ"), "visitor": visitor})
 
 
-def render(issues, repository, extra_meals=False, events=None):
+def build_community(issues, repository, extra_meals=False, events=None):
     if not re.fullmatch(r"[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+", repository):
         raise ValueError("Expected a GitHub owner/repository name.")
     free = Counter()
@@ -157,7 +158,7 @@ def render(issues, repository, extra_meals=False, events=None):
             # Imported issues retain an older creation date from another repository.
             continue
         if original in (FEED, VISIT):
-            if not has_consent(body, "Feeding credit", FEED_CONSENT, VISIT_CONSENT):
+            if not has_consent(body, "Feeding credit", FEED_CONSENT, VISIT_CONSENT, YARD_CONSENT):
                 continue
             if last and when < last[0] + COOLDOWN:
                 continue
@@ -203,8 +204,7 @@ def render(issues, repository, extra_meals=False, events=None):
     noun = "visit" if visits == 1 else "visits"
     lines.extend(["", "<details><summary>Garden leaderboard · {} recorded {}</summary>".format(visits, noun), ""])
     if totals:
-        lines.extend(["These visitors chose public credit through a GitHub issue. "
-                      "Free leaderboard entries are at least 12 hours apart.", ""])
+        lines.extend(["Free leaderboard entries are at least 12 hours apart.", ""])
         if extras:
             lines.extend(["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"])
         else:
@@ -217,9 +217,16 @@ def render(issues, repository, extra_meals=False, events=None):
             cells.append(str(totals[person]))
             lines.append("| " + " | ".join(cells) + " |")
     else:
-        lines.append("The first recorded visit will appear here. Playing on the profile is anonymous.")
+        lines.append("The first credited visit will appear here.")
     lines.extend(["", "</details>", "", END])
-    return "\n".join(lines)
+    next_free_at = (last[0] + COOLDOWN).isoformat().replace("+00:00", "Z") if last else None
+    return "\n".join(lines), next_free_at
+
+
+def render(issues, repository, extra_meals=False, events=None):
+    """Return the profile Markdown for callers that only render the community section."""
+    block, _ = build_community(issues, repository, extra_meals, events)
+    return block
 
 
 def replace_block(readme, block):
@@ -252,19 +259,20 @@ def main():
     # The optional issue form is installed on the trusted default branch at activation.
     active_form = args.readme.parent / ".github" / "ISSUE_TEMPLATE" / "extra-meal.yml"
     events = [] if args.garden else None
-    block = render(issues, args.repository, extra_meals=active_form.is_file(), events=events)
+    block, next_free_at = build_community(issues, args.repository, extra_meals=active_form.is_file(), events=events)
     updated_readme = replace_block(before.decode("utf-8"), block)
     files = {}
     if args.garden:
         from garden import reconcile_files
         updated_readme, files = reconcile_files(args.readme.parent, updated_readme, issues, events,
-                                                args.repository, args.installed_at)
+                                                args.repository, args.installed_at, next_free_at)
     files[args.readme] = updated_readme.encode("utf-8")
-    changed = {path: data for path, data in files.items() if path.read_bytes() != data}
+    changed = {path: data for path, data in files.items() if not path.is_file() or path.read_bytes() != data}
     if changed and args.check:
         print("Profile needs updating.", file=sys.stderr)
         return 1
     for path, data in changed.items():
+        path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(data)
     return 0
 
