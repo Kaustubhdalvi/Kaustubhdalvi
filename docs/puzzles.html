@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Puzzle notebook · Kaustubh Dalvi</title>
+<style>
+:root{color-scheme:light;--paper:#f6f5ef;--ink:#18292a;--muted:#4d5e5d;--rule:#c7cebf;--dark:#152b2b;--accent:#20594e;--focus:#006ca6;--serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;--sans:"Avenir Next",Avenir,system-ui,sans-serif;--mono:ui-monospace,SFMono-Regular,Consolas,monospace}
+*{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--paper);font:16px/1.52 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit;text-underline-offset:.23em}button,summary,a{-webkit-tap-highlight-color:transparent}button{font:inherit;color:inherit}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--focus);outline-offset:3px}
+[hidden]{display:none!important}.shell{width:min(1050px,100% - 64px);margin-inline:auto}.skip{position:absolute;left:12px;top:-80px;background:white;padding:8px;z-index:4}.skip:focus{top:8px}.mast{border-bottom:1px solid var(--rule)}.mast .shell{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:15px}.author,.back{font-size:.82rem}.author{display:flex;align-items:center;gap:9px;font-weight:650;text-decoration:none}.back{color:var(--muted)}.mark{width:27px;height:27px;flex:none}
+header.intro{padding-block:clamp(30px,5vw,54px) clamp(24px,4vw,40px)}h1,h2{font-family:var(--serif);font-weight:500;margin:0;line-height:1.05;letter-spacing:-.052em}h1{font-size:clamp(42px,6.8vw,78px)}.intro p{margin:12px 0 0;color:var(--muted);font-size:clamp(15px,1.5vw,18px)}
+.layout{border-top:2px solid var(--dark);display:grid;grid-template-columns:minmax(155px,192px) minmax(0,1fr);gap:clamp(28px,4vw,60px);padding-top:26px;padding-bottom:60px}
+nav[aria-label="Challenges"]{align-self:start}nav ul{list-style:none;margin:0;padding:0}.navlink{display:flex;align-items:baseline;justify-content:space-between;gap:8px;padding:13px 10px 13px 0;border-bottom:1px solid var(--rule);color:var(--muted);text-decoration:none;font-size:.92rem;font-weight:560}.navlink:hover{text-decoration:underline}.navlink[aria-current]{color:#174f45;font-weight:720}.navlink[aria-current]::after{content:"→";color:#174f45;font-family:var(--mono)}
+article{scroll-margin-top:18px}article+article{margin-top:50px;border-top:1px solid var(--rule);padding-top:26px}.enhanced article+article{margin-top:0;border-top:0;padding-top:0}.domain{margin:0 0 7px;text-transform:uppercase;font:650 11px/1.4 var(--mono);letter-spacing:.12em;color:var(--accent)}
+h2{font-size:clamp(33px,4.6vw,56px)}h2:focus{outline:0}.figure{margin:19px 0 19px;background:#101926;border-radius:10px;overflow:hidden}.figure svg{width:100%;height:auto;display:block}.body-copy{margin:10px 0 12px;max-width:68ch}.question{font-weight:700;margin:14px 0 10px}.choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.choice{display:flex;align-items:center;gap:.65em;justify-content:flex-start;min-width:0;text-align:left;min-height:48px;padding:11px clamp(8px,1.7vw,17px);border:1px solid #aebbb1;background:#fffefa;border-radius:5px;cursor:pointer;font-weight:650}.choice::before{content:"";display:block;width:.8em;height:.8em;flex:none;border:1.5px solid #65786e;border-radius:50%}.choice:hover{border-color:var(--dark);background:#f0f4e9}.choice[aria-pressed="true"]{color:#fff;background:var(--dark);border-color:var(--dark)}.choice[aria-pressed="true"]::before{background:#e0eacd;border:3px solid #355451;outline:1px solid #d3e6d7}
+.feedback{margin:0}.feedback:not(:empty){margin:12px 0 0;border-left:3px solid var(--accent);padding:5px 12px;background:#edf3eb}.feedback.wrong{border-color:#975a2b;background:#f6efe3}.actions{margin:16px 0;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}details>summary{cursor:pointer;font-size:.91rem;font-weight:650;padding:13px 3px}details[open]>summary{color:var(--accent)}details p{margin:0 0 14px;max-width:67ch}.foot{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:.88rem}.foot a{color:var(--muted)}.next{font-weight:650}.math,code{font-family:var(--mono);font-size:.9em}.feeds{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.feed{padding:10px 13px;background:#eeefe7;border-left:2px solid #768e7e;font-size:.9rem}.feed strong{display:block;margin-bottom:3px}.feed span{display:block}.runs{grid-template-columns:1fr}.runs .choice{align-items:flex-start}.runs .choice::before{margin-top:.35em}.run{white-space:nowrap}.samples{font-family:var(--mono);font-size:.76rem;line-height:1.65;font-weight:460}.samples span{display:block}.nojs{color:var(--muted);font-size:.86rem}
+@media(max-width:760px){.shell{width:min(700px,100% - 36px)}.layout{grid-template-columns:1fr;gap:22px;padding-top:0}.layout nav ul{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-bottom:1px solid var(--rule)}.navlink{font-size:.82rem;display:block;text-align:center;border:0;padding:12px 2px}.navlink[aria-current]{box-shadow:inset 0 -3px #2d6156}.navlink[aria-current]::after{content:none}.intro p{max-width:48ch}}
+@media(max-width:480px){.shell{width:calc(100% - 28px)}.mast .shell{padding-block:11px}.layout{gap:19px}.choices{gap:5px}.choice{gap:6px;padding:9px 7px;font-size:.86rem}.feeds{grid-template-columns:1fr}.runs .choice{padding:10px}.figure{margin:15px 0}.foot{font-size:.82rem}.body-copy,.question{font-size:.95rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<a class="skip" href="#notebook">Skip to challenges</a>
+<div class="mast"><div class="shell"><a class="author" href="https://github.com/Kaustubhdalvi"><svg class="mark" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="27" height="27" rx="4" fill="#1b3935"/><g fill="#e5e9cc"><circle cx="8" cy="8" r="1.8"/><circle cx="8" cy="14" r="1.8"/><circle cx="8" cy="20" r="1.8"/><circle cx="14" cy="14" r="1.8"/><circle cx="20" cy="8" r="1.8"/><circle cx="20" cy="20" r="1.8"/></g></svg>Kaustubh Dalvi</a><a class="back" href="https://github.com/Kaustubhdalvi">GitHub profile ↗</a></div></div>
+<main class="shell"><header class="intro"><h1>Puzzle notebook</h1><p>Pick a challenge, make a prediction, then see what your answer explains.</p></header>
+<div class="layout" id="notebook" tabindex="-1">
+<nav aria-label="Challenges"><ul>
+<li><a class="navlink" href="#transit">Transits</a></li><li><a class="navlink" href="#qubits">Qubits</a></li><li><a class="navlink" href="#coin">Coin race</a></li><li><a class="navlink" href="#weather">Weather</a></li>
+</ul></nav>
+<div class="pages"><noscript><p class="nojs">JavaScript enables feedback on each guess. Each worked solution also opens below.</p></noscript>
+<article id="transit" aria-labelledby="t-transit">
+<p class="domain">Astrophysics</p><h2 id="t-transit" tabindex="-1">A shadow across a star</h2>
+<div class="figure"><svg xmlns="http://www.w3.org/2000/svg" width="640" height="136" viewBox="0 0 640 136" role="img" aria-labelledby="transit-title transit-desc">
+<title id="transit-title">Two crossings of the same star</title>
+<desc id="transit-desc">Two views of the same stellar disk with equal central chords. The 8-day orbit has a 64-minute transit. The 27-day orbit has an unknown transit time.</desc>
+<defs><pattern id="transit-grain" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#6a8196" opacity=".25"/></pattern><linearGradient id="transit-amber" x1="0" y1="0" x2=".9" y2="1" gradientUnits="objectBoundingBox"><stop stop-color="#ffddb1"/><stop offset=".47" stop-color="#efa36d"/><stop offset="1" stop-color="#d47258"/></linearGradient>
+<clipPath id="transit-disk"><circle r="38"/></clipPath></defs>
+<rect width="640" height="136" rx="12" fill="#101926"/><rect x=".5" y=".5" width="639" height="135" rx="12" fill="url(#transit-grain)" stroke="#364457"/>
+<path d="M13 23V13h10m594 0h10v10M13 113v10h10m594 0h10v-10" fill="none" stroke="#546270" stroke-width="1.1"/>
+<g transform="translate(82 67)">
+<circle r="45" fill="none" stroke="#794c42" stroke-width=".8" stroke-dasharray="2 4"/>
+<path d="M41.00 0.00 L44.00 0.00 M40.10 8.52 L41.57 8.84 M37.46 16.68 L38.83 17.29 M33.17 24.10 L34.38 24.98 M27.43 30.47 L28.44 31.58 M20.50 35.51 L22.00 38.11 M12.67 38.99 L13.13 40.42 M4.29 40.78 L4.44 42.27 M-4.29 40.78 L-4.44 42.27 M-12.67 38.99 L-13.13 40.42 M-20.50 35.51 L-22.00 38.11 M-27.43 30.47 L-28.44 31.58 M-33.17 24.10 L-34.38 24.98 M-37.46 16.68 L-38.83 17.29 M-40.10 8.52 L-41.57 8.84 M-41.00 0.00 L-44.00 0.00 M-40.10 -8.52 L-41.57 -8.84 M-37.46 -16.68 L-38.83 -17.29 M-33.17 -24.10 L-34.38 -24.98 M-27.43 -30.47 L-28.44 -31.58 M-20.50 -35.51 L-22.00 -38.11 M-12.67 -38.99 L-13.13 -40.42 M-4.29 -40.78 L-4.44 -42.27 M4.29 -40.78 L4.44 -42.27 M12.67 -38.99 L13.13 -40.42 M20.50 -35.51 L22.00 -38.11 M27.43 -30.47 L28.44 -31.58 M33.17 -24.10 L34.38 -24.98 M37.46 -16.68 L38.83 -17.29 M40.10 -8.52 L41.57 -8.84" fill="none" stroke="#f2a174" stroke-width="1"/>
+<circle r="38" fill="url(#transit-amber)" stroke="#fbd5a4" stroke-width="1.25"/>
+<g clip-path="url(#transit-disk)" fill="none" stroke-linecap="round">
+<path d="M-37 -18C-22 -27,-10 -15,2 -22s23 -9,39 -5 M-41 -12q18 -12 28 -5t26 -5q11 -6 24 -5 M-35 26q9 -12 19 -7t21 -5q15 -10 27 -4m-56 22q14 -8 24 -5t21 -8 M-44 9q6 -8 13 -6t12 -3 M11 -37q-3 9 -12 11" stroke="#a95949" opacity=".46" stroke-width="1.3"/>
+<path d="M-29 -21q10 -5 18 -2m16 37q6 -4 11 -4m-36 17q3 -3 7 -3m25 -48q4 -3 9 -3m-14 11q6 -2 10 0" stroke="#fff2ce" opacity=".68" stroke-width="1.4"/>
+</g>
+<path d="M-55 0H55" stroke="#fbd8a9" stroke-width="1.4" stroke-dasharray="3 3"/>
+<path d="M-55 -3v6m110 -6v6" stroke="#db9e77"/>
+<circle cx="6" cy="0" r="6.3" fill="#101926" stroke="#fbe6c2" stroke-width="1.2"/>
+</g><g transform="translate(397 67)">
+<circle r="45" fill="none" stroke="#794c42" stroke-width=".8" stroke-dasharray="2 4"/>
+<path d="M41.00 0.00 L44.00 0.00 M40.10 8.52 L41.57 8.84 M37.46 16.68 L38.83 17.29 M33.17 24.10 L34.38 24.98 M27.43 30.47 L28.44 31.58 M20.50 35.51 L22.00 38.11 M12.67 38.99 L13.13 40.42 M4.29 40.78 L4.44 42.27 M-4.29 40.78 L-4.44 42.27 M-12.67 38.99 L-13.13 40.42 M-20.50 35.51 L-22.00 38.11 M-27.43 30.47 L-28.44 31.58 M-33.17 24.10 L-34.38 24.98 M-37.46 16.68 L-38.83 17.29 M-40.10 8.52 L-41.57 8.84 M-41.00 0.00 L-44.00 0.00 M-40.10 -8.52 L-41.57 -8.84 M-37.46 -16.68 L-38.83 -17.29 M-33.17 -24.10 L-34.38 -24.98 M-27.43 -30.47 L-28.44 -31.58 M-20.50 -35.51 L-22.00 -38.11 M-12.67 -38.99 L-13.13 -40.42 M-4.29 -40.78 L-4.44 -42.27 M4.29 -40.78 L4.44 -42.27 M12.67 -38.99 L13.13 -40.42 M20.50 -35.51 L22.00 -38.11 M27.43 -30.47 L28.44 -31.58 M33.17 -24.10 L34.38 -24.98 M37.46 -16.68 L38.83 -17.29 M40.10 -8.52 L41.57 -8.84" fill="none" stroke="#f2a174" stroke-width="1"/>
+<circle r="38" fill="url(#transit-amber)" stroke="#fbd5a4" stroke-width="1.25"/>
+<g clip-path="url(#transit-disk)" fill="none" stroke-linecap="round">
+<path d="M-37 -18C-22 -27,-10 -15,2 -22s23 -9,39 -5 M-41 -12q18 -12 28 -5t26 -5q11 -6 24 -5 M-35 26q9 -12 19 -7t21 -5q15 -10 27 -4m-56 22q14 -8 24 -5t21 -8 M-44 9q6 -8 13 -6t12 -3 M11 -37q-3 9 -12 11" stroke="#a95949" opacity=".46" stroke-width="1.3"/>
+<path d="M-29 -21q10 -5 18 -2m16 37q6 -4 11 -4m-36 17q3 -3 7 -3m25 -48q4 -3 9 -3m-14 11q6 -2 10 0" stroke="#fff2ce" opacity=".68" stroke-width="1.4"/>
+</g>
+<path d="M-55 0H55" stroke="#fbd8a9" stroke-width="1.4" stroke-dasharray="3 3"/>
+<path d="M-55 -3v6m110 -6v6" stroke="#db9e77"/>
+<circle cx="6" cy="0" r="6.3" fill="#101926" stroke="#fbe6c2" stroke-width="1.2"/>
+</g><path d="M319 23v90" stroke="#354252" stroke-width="1" stroke-dasharray="2 5"/><text x="155" y="55" fill="#f4eee1" font-size="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="start" font-weight="600" >8-day orbit</text><path d="M155 75h17m-17 -3v6m17 -6v6" fill="none" stroke="#e8a87e" stroke-width="1.6"/><text x="180" y="81" fill="#f8bc93" font-size="20" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="start" font-weight="600" >64 min</text><text x="155" y="104" fill="#b6c5d0" font-size="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="start" font-weight="500" >transit time</text><text x="470" y="55" fill="#f4eee1" font-size="24" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="start" font-weight="600" >27-day orbit</text><path d="M470 75h17m-17 -3v6m17 -6v6" fill="none" stroke="#e8a87e" stroke-width="1.6"/><text x="495" y="81" fill="#f8bc93" font-size="20" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="start" font-weight="600" >? min</text><text x="470" y="104" fill="#b6c5d0" font-size="16" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="start" font-weight="500" >transit time</text>
+</svg></div>
+<p class="body-copy">Two tiny planets cross the center of the same star on circular, edge-on orbits. One orbits every 8 days, the other every 27. The inner planet’s transit lasts 64 minutes. Treat each planet as a point and each crossing as a straight line at mid-transit speed.</p>
+<p class="question" id="q-transit">How long does the outer planet take to cross?</p>
+<div class="choices" role="group" aria-labelledby="q-transit"><button type="button" class="choice" value="0" disabled>64 min</button><button type="button" class="choice" value="1" disabled>96 min</button><button type="button" class="choice" value="2" disabled>216 min</button></div>
+<p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+<details class="actions"><summary>Show worked solution</summary><p><strong>96 minutes.</strong> Both shadows cross the same stellar diameter. Kepler’s third law gives orbital radius proportional to period to the power ⅔. Orbital speed is circumference divided by period, so transit time scales with the cube root of the period. Multiply 64 by the cube root of 27/8, or 3/2.</p></details>
+<div class="foot"><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/puzzle_checks.py">Verify with Python</a><a class="next" href="#qubits">Next · Qubits →</a></div></article>
+
+<article id="qubits" aria-labelledby="t-qubits">
+<p class="domain">Quantum computing</p><h2 id="t-qubits" tabindex="-1">Two fair qubits</h2>
+<div class="figure"><svg xmlns="http://www.w3.org/2000/svg" width="640" height="136" viewBox="0 0 640 136" role="img" aria-labelledby="qubits-title qubits-desc">
+<title id="qubits-title">Measure a Bell pair after a possible phase flip</title>
+<desc id="qubits-desc">The top wire optionally passes through Z in one quarter of trials. Both wires then pass through H and are measured in the computational basis.</desc>
+<defs><pattern id="qubits-grain" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#6a8196" opacity=".25"/></pattern></defs>
+<rect width="640" height="136" rx="12" fill="#101926"/><rect x=".5" y=".5" width="639" height="135" rx="12" fill="url(#qubits-grain)" stroke="#364457"/>
+<path d="M13 23V13h10m594 0h10v10M13 113v10h10m594 0h10v-10" fill="none" stroke="#546270" stroke-width="1.1"/>
+<text x="32" y="65" fill="#f4eee1" font-size="25" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="start" font-weight="600" >Bell pair</text><text x="32" y="96" fill="#9cddce" font-size="27" font-family="Georgia, 'Times New Roman', serif" text-anchor="start" font-weight="600" >Φ⁺</text><path d="M137 47h9v57h-9m9 -28h11" fill="none" stroke="#709c9c" stroke-width="1.6"/><path d="M162 52H534m-372 48H534" fill="none" stroke="#8cbab7" stroke-width="2.3"/><text x="284" y="24" fill="#bceadf" font-size="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="middle" font-weight="600" >1 in 4 trials</text><rect x="263" y="34" width="42" height="36" rx="4" fill="#203b40" stroke="#a0daca" stroke-width="1.75" stroke-dasharray="4 2.2"/><text x="284" y="60" fill="#e1f4ed" font-size="24" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="middle" font-weight="600" >Z</text><rect x="363" y="35" width="42" height="34" rx="4" fill="#acdcca" stroke="#d2f1e6" stroke-width="1.4"/><text x="384" y="60" fill="#112b31" font-size="23" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700" >H</text><rect x="363" y="83" width="42" height="34" rx="4" fill="#acdcca" stroke="#d2f1e6" stroke-width="1.4"/><text x="384" y="108" fill="#112b31" font-size="23" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" text-anchor="middle" font-weight="700" >H</text><text x="523" y="24" fill="#b6c5d0" font-size="18" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif" text-anchor="middle" font-weight="600" >Measure</text><path d="M546 50h48m-48 4h48" fill="none" stroke="#77979e" stroke-width="1.25"/><rect x="498" y="35" width="52" height="34" rx="4" fill="#1a2938" stroke="#aac9cb" stroke-width="1.6"/><path d="M510 58c3 -16 23 -16 28 0m-14 0 10 -12" fill="none" stroke="#c7e7e1" stroke-linecap="round" stroke-width="2.4"/><circle cx="524" cy="58" r="2.4" fill="#c7e7e1"/><path d="M546 98h48m-48 4h48" fill="none" stroke="#77979e" stroke-width="1.25"/><rect x="498" y="83" width="52" height="34" rx="4" fill="#1a2938" stroke="#aac9cb" stroke-width="1.6"/><path d="M510 106c3 -16 23 -16 28 0m-14 0 10 -12" fill="none" stroke="#c7e7e1" stroke-linecap="round" stroke-width="2.4"/><circle cx="524" cy="106" r="2.4" fill="#c7e7e1"/>
+</svg></div>
+<p class="body-copy">Prepare the Bell pair <span class="math">(|00⟩ + |11⟩)/√2</span>. A phase flip (Z) hits the first qubit in a quarter of otherwise ideal trials. Apply a Hadamard (H) to each qubit and measure both in the computational basis. Each bit on its own is fair.</p>
+<p class="question" id="q-qubits">How often do the two measurements match?</p>
+<div class="choices" role="group" aria-labelledby="q-qubits"><button type="button" class="choice" value="0" disabled>1/2</button><button type="button" class="choice" value="1" disabled>3/4</button><button type="button" class="choice" value="2" disabled>Always</button></div>
+<p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+<details class="actions"><summary>Show worked solution</summary><p><strong>3/4 of the trials.</strong> With no flip, the two Hadamards restore the original Bell pair and the measured strings are 00 or 11. A Z flip turns the plus sign into a minus. The two Hadamards then produce <span class="math">(|01⟩ + |10⟩)/√2</span>. Every flipped trial yields opposite bits.</p></details>
+<div class="foot"><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/puzzle_checks.py">Verify with Python</a><a class="next" href="#coin">Next · Coin race →</a></div></article>
+
+<article id="coin" aria-labelledby="t-coin">
+<p class="domain">Mathematics</p><h2 id="t-coin" tabindex="-1">Race to three tosses</h2>
+<div class="figure"><svg xmlns="http://www.w3.org/2000/svg" width="640" height="136" viewBox="0 0 640 136" role="img" aria-labelledby="coin-title coin-desc">
+<title id="coin-title">Race between two three-flip patterns</title>
+<desc id="coin-desc">Read the marked coins from left to right. The pattern heads, heads, tails races against heads, tails, heads.</desc>
+<defs><pattern id="coin-grain" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#6a8196" opacity=".25"/></pattern></defs>
+<rect width="640" height="136" rx="12" fill="#101926"/><rect x=".5" y=".5" width="639" height="135" rx="12" fill="url(#coin-grain)" stroke="#364457"/>
+<path d="M13 23V13h10m594 0h10v10M13 113v10h10m594 0h10v-10" fill="none" stroke="#546270" stroke-width="1.1"/>
+<path d="M42 110H246m-5 -4 6 4 -6 4" fill="none" stroke="#85735b" stroke-width="1.45"/><g transform="translate(70 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(145 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(220 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#805f40" stroke="#dbb67a" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#fae0b3" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#fae0b3" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#fae0b3" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >T</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#fae0b3" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><path d="M392 110H596m-5 -4 6 4 -6 4" fill="none" stroke="#85735b" stroke-width="1.45"/><g transform="translate(420 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(495 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#805f40" stroke="#dbb67a" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#fae0b3" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#fae0b3" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#fae0b3" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >T</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#fae0b3" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><g transform="translate(570 63)">
+<circle cy="3.6" r="29.5" fill="#7a573d" stroke="#b48e59" stroke-width="1.5"/>
+<circle r="29.5" fill="#e5ba76" stroke="#f5d59b" stroke-width="2"/>
+<path d="M24.80 0.00l1.90 0.00 M24.32 4.84l1.86 0.37 M22.91 9.49l1.76 0.73 M20.62 13.78l1.58 1.06 M17.54 17.54l1.34 1.34 M13.78 20.62l1.06 1.58 M9.49 22.91l0.73 1.76 M4.84 24.32l0.37 1.86 M0.00 24.80l0.00 1.90 M-4.84 24.32l-0.37 1.86 M-9.49 22.91l-0.73 1.76 M-13.78 20.62l-1.06 1.58 M-17.54 17.54l-1.34 1.34 M-20.62 13.78l-1.58 1.06 M-22.91 9.49l-1.76 0.73 M-24.32 4.84l-1.86 0.37 M-24.80 0.00l-1.90 0.00 M-24.32 -4.84l-1.86 -0.37 M-22.91 -9.49l-1.76 -0.73 M-20.62 -13.78l-1.58 -1.06 M-17.54 -17.54l-1.34 -1.34 M-13.78 -20.62l-1.06 -1.58 M-9.49 -22.91l-0.73 -1.76 M-4.84 -24.32l-0.37 -1.86 M-0.00 -24.80l-0.00 -1.90 M4.84 -24.32l0.37 -1.86 M9.49 -22.91l0.73 -1.76 M13.78 -20.62l1.06 -1.58 M17.54 -17.54l1.34 -1.34 M20.62 -13.78l1.58 -1.06 M22.91 -9.49l1.76 -0.73 M24.32 -4.84l1.86 -0.37" fill="none" stroke="#563d30" opacity=".71" stroke-width="1"/>
+<circle r="22.3" fill="none" stroke="#563d30" opacity=".5" stroke-width="1"/>
+<text x="0" y="10.5" fill="#563d30" font-size="31" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="700" >H</text>
+<path d="M-17 13q5 6 11 7m12 0q6 -1 11 -7" stroke="#563d30" opacity=".5" stroke-width="1.2" fill="none"/>
+</g><path d="M320 24v19m0 46v22" stroke="#506173" stroke-width="1" stroke-dasharray="2 4"/><text x="320" y="75" fill="#b6c5d0" font-size="26" font-family="Georgia, 'Times New Roman', serif" text-anchor="middle" font-weight="400" font-style="italic">vs</text>
+</svg></div>
+<p class="body-copy">Toss a fair coin independently until <b>HHT</b> or <b>HTH</b> first appears in three consecutive tosses. Each pattern has probability 1/8 in a fixed three-toss window.</p>
+<p class="question" id="q-coin">What is the chance that HHT appears first?</p>
+<div class="choices" role="group" aria-labelledby="q-coin"><button type="button" class="choice" value="0" disabled>1/3</button><button type="button" class="choice" value="1" disabled>1/2</button><button type="button" class="choice" value="2" disabled>2/3</button></div>
+<p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+<details class="actions"><summary>Show worked solution</summary><p><strong>2/3.</strong> Start at the first H. If the next toss is H, the next T seals an HHT win. If the next two tosses are TH, HTH wins. If they are TT, you are back to waiting for the first H. So one round yields an HHT win with probability 1/2, an HTH win with 1/4, and a restart with 1/4. Conditioning on a decisive round gives (1/2)/(3/4) = 2/3.</p></details>
+<div class="foot"><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/puzzle_checks.py">Verify with Python</a><a class="next" href="#weather">Next · Weather →</a></div></article>
+
+<article id="weather" aria-labelledby="t-weather">
+<p class="domain">Coding challenge</p><h2 id="t-weather" tabindex="-1">Which run would you ship?</h2>
+<div class="figure"><svg xmlns="http://www.w3.org/2000/svg" width="640" height="136" viewBox="0 0 640 136" role="img" aria-labelledby="weather-title weather-desc">
+  <title id="weather-title">Two data feeds, two clocks</title>
+  <desc id="weather-desc">The local feed records 05:28 and 05:30 on January 7 at UTC+05:30. The UTC feed records 23:58 and 00:00 across January 6 and 7. The two strips feed into a single merge.</desc>
+  <defs>
+    <pattern id="weather-dots" width="12" height="12" patternUnits="userSpaceOnUse"><circle cx="6" cy="6" r=".7" fill="#354454"/></pattern>
+    <pattern id="weather-perfs" width="13" height="9" patternUnits="userSpaceOnUse"><circle cx="6" cy="4.5" r="1.55" fill="#101926"/></pattern>
+    <linearGradient id="weather-local-paper" x2="1" y2=".3" gradientUnits="objectBoundingBox"><stop stop-color="#303139"/><stop offset="1" stop-color="#26282c"/></linearGradient>
+    <linearGradient id="weather-utc-paper" x2="1" y2=".3" gradientUnits="objectBoundingBox"><stop stop-color="#21363c"/><stop offset="1" stop-color="#1c2d33"/></linearGradient>
+    <path id="weather-stub" d="M2 0H260l5 4-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 5 5 5-5 4H2a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2Z"/>
+    <path id="weather-time-arrow" d="M0 0h17m-5-5 5 5-5 5" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </defs>
+  <rect x=".5" y=".5" width="639" height="135" rx="8" fill="#101926" stroke="#364457"/>
+  <rect x="1" y="1" width="638" height="134" rx="8" fill="url(#weather-dots)" opacity=".68"/>
+  <path d="M9 19v-9h11M620 10h11v9M9 117v9h11m600 0h11v-9" fill="none" stroke="#526272" stroke-width="1"/>
+  <g fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <path d="M278 67h17c8 0 9 4 13 9l12 15" stroke="#dbb583" stroke-width="2"/>
+    <path d="M362 67h-17c-8 0-9 4-13 9l-12 15" stroke="#83c6bb" stroke-width="2"/>
+    <path d="M320 91v16m-4-4 4 4 4-4" stroke="#c8d3d7" stroke-width="2"/>
+  </g>
+  <circle cx="320" cy="91" r="3.8" stroke="#c8d3d7" stroke-width="1.5" fill="#101926"/>
+  <g transform="translate(22 21) rotate(-1 132 45)">
+    <use href="#weather-stub" transform="translate(0 4)" fill="#0c121b"/>
+    <use href="#weather-stub" fill="url(#weather-local-paper)" stroke="#947c60" stroke-width="1"/>
+    <rect x="6" y="2" width="244" height="10" fill="url(#weather-perfs)"/>
+    <path d="M7 17h242" stroke="#796950" stroke-width=".8"/>
+    <g font-family="Menlo,Consolas,'DejaVu Sans Mono',monospace">
+      <text x="13" y="41" font-size="17" fill="#e5c8a2">JAN 7 · UTC+05:30</text>
+      <g fill="#fae8c1" font-size="28" font-weight="bold"><text x="13" y="74">05:28</text><text x="150" y="74">05:30</text></g>
+    </g>
+    <use href="#weather-time-arrow" transform="translate(112 65)" stroke="#dbb583"/>
+  </g>
+  <g transform="translate(354 21) rotate(1 132 45)">
+    <use href="#weather-stub" transform="translate(0 4)" fill="#0c121b"/>
+    <use href="#weather-stub" fill="url(#weather-utc-paper)" stroke="#577f7d" stroke-width="1"/>
+    <rect x="6" y="2" width="244" height="10" fill="url(#weather-perfs)"/>
+    <path d="M7 17h242" stroke="#476d6e" stroke-width=".8"/>
+    <g font-family="Menlo,Consolas,'DejaVu Sans Mono',monospace">
+      <text x="13" y="41" font-size="17" fill="#acdbce">JAN 6–7 · UTC</text>
+      <g fill="#d4f3e7" font-size="28" font-weight="bold"><text x="13" y="74">23:58</text><text x="150" y="74">00:00</text></g>
+    </g>
+    <use href="#weather-time-arrow" transform="translate(112 65)" stroke="#83c6bb"/>
+  </g>
+</svg></div>
+<p class="body-copy">Two fictional weather feeds overlap at midnight. Convert to UTC, expand N/S to NORTH/SOUTH, and merge identical reports for one station and instant. Reject conflicting readings for that pair. Keep simultaneous readings from different stations and sort by instant, then station. Times have minute precision.</p>
+<div class="feeds"><div class="feed"><strong>January 7 · UTC+05:30</strong><span>05:28 · N · 4 °C</span><span>05:30 · S · 7 °C</span></div><div class="feed"><strong>January 6–7 · UTC</strong><span>Jan 6, 23:58 · NORTH · 4 °C</span><span>Jan 7, 00:00 · NORTH · 5 °C</span></div></div>
+<p class="question" id="q-weather">All three runs return three rows totaling 16 °C. Which ordered UTC output would you ship?</p>
+<div class="choices runs" role="group" aria-labelledby="q-weather">
+<button type="button" class="choice" value="0" disabled><span class="run">Run A</span><span class="samples"><span>Jan 7, 00:00 · NORTH 5°, SOUTH 7°</span><span>Jan 7, 23:58 · NORTH 4°</span></span></button>
+<button type="button" class="choice" value="1" disabled><span class="run">Run B</span><span class="samples"><span>Jan 6, 23:58 · NORTH 4°</span><span>Jan 7, 00:00 · NORTH 5°, SOUTH 7°</span></span></button>
+<button type="button" class="choice" value="2" disabled><span class="run">Run C</span><span class="samples"><span>Jan 6, 23:58 · NORTH 4°</span><span>Jan 7, 00:00 · NORTH 7°, SOUTH 5°</span></span></button></div>
+<p class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+<details class="actions"><summary>Show worked solution</summary><p><strong>Ship B.</strong> Subtract 5 hours and 30 minutes from the local timestamps. The first local reading moves to January 6 at 23:58 UTC and matches the UTC feed exactly. At midnight NORTH reports 5 °C and SOUTH reports 7 °C. A shifts the earlier date a day forward. C gives each station the other station’s midnight reading.</p></details>
+<div class="foot"><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/station_merge.py">Inspect the verifier</a><a class="next" href="#transit">Back to transits ↑</a></div></article>
+</div></div></main>
+<script>
+(() => {
+  const responses = {
+    transit: {correct: 1, text: ['Both crossings cover the same distance. A longer-period planet moves at a different speed. Try another answer.', 'Correct. The outer planet crosses more slowly. Its transit takes 1.5 times as long.', '216 minutes scales the duration directly with orbital period. The longer orbit also has a larger circumference. Try another answer.']},
+    qubits: {correct: 1, text: ['One half would fit independent fair bits. These qubits share a Bell state. Try another answer.', 'Correct. The clean trials produce matching bits and the flipped trials produce opposite bits.', 'The final Hadamards make the phase flip visible in the pair’s measurement correlations. Try another answer.']},
+    coin: {correct: 2, text: ['After HH, every further H preserves the chance to finish with the next T. Which pattern does that favor? Try again.', 'One half treats successive three-toss windows as independent. Look at the possible next toss after HH or HT. Try again.', 'Correct. HHT can wait through any number of extra heads after HH. HTH loses its head start after HT followed by T.']},
+    weather: {correct: 1, text: ['Check the date. January 7 at 05:28 local converts to 23:58 UTC on the previous day. Try another run.', 'Correct. B merges the duplicate on January 6 and keeps each station’s midnight temperature.', 'The dates line up. Follow the midnight readings back to their stations: which one reported 7 °C? Try another run.']}
+  };
+  const panels = Array.from(document.querySelectorAll('article'));
+  const links = Array.from(document.querySelectorAll('.navlink'));
+  const ids = new Set(panels.map(panel => panel.id));
+  function openPanel(id, focus) {
+    for (const panel of panels) panel.hidden = panel.id !== id;
+    for (const link of links) {
+      if (link.hash.slice(1) === id) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    }
+    if (focus) document.getElementById('t-' + id).focus({preventScroll:true});
+  }
+  function fromUrl() {
+    const id = location.hash.slice(1);
+    return ids.has(id) ? id : 'transit';
+  }
+  document.documentElement.classList.add('enhanced');
+  openPanel(fromUrl(), false);
+  window.addEventListener('hashchange', () => { if (ids.has(location.hash.slice(1)) || !location.hash) openPanel(fromUrl(), true); });
+  for (const link of document.querySelectorAll('.navlink,.next')) {
+    link.addEventListener('click', event => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+      event.preventDefault();
+      const id = link.hash.slice(1);
+      if (location.hash !== link.hash) history.pushState(null, '', link.hash);
+      openPanel(id, true);
+      if (link.classList.contains('next')) document.getElementById('notebook').scrollIntoView({block:'start'});
+    });
+  }
+  for (const panel of panels) {
+    const choices = Array.from(panel.querySelectorAll('.choice'));
+    const message = panel.querySelector('.feedback');
+    const exercise = responses[panel.id];
+    for (const choice of choices) {
+      choice.disabled = false;
+      choice.setAttribute('aria-pressed','false');
+      choice.addEventListener('click', () => {
+        const answer = Number(choice.value);
+        for (const button of choices) button.setAttribute('aria-pressed', String(button === choice));
+        message.classList.toggle('wrong', answer !== exercise.correct);
+        message.textContent = exercise.text[answer];
+      });
+    }
+  }
+})();
+</script>
+</body></html>
