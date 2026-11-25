@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="referrer" content="no-referrer">
+<title>Pip’s yard · Kaustubh Dalvi</title>
+<style>
+:root{color-scheme:light dark;--page:#f4f4eb;--panel:#fffef7;--ink:#203a30;--muted:#54695d;--line:#c7d1c1;--green:#225542;--on-green:#fffef7;--well:#e9eddd;--ground:#f6f5ef;--sans:"Avenir Next",Avenir,system-ui,sans-serif;--serif:"Iowan Old Style",Palatino,Georgia,serif;--mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+@media(prefers-color-scheme:dark){:root{--page:#101e19;--panel:#1c3027;--ink:#eef4e7;--muted:#bdcec0;--line:#44594a;--green:#b7d99f;--on-green:#14291d;--well:#263c2f}}
+*{box-sizing:border-box}body{margin:0;background:var(--page);color:var(--ink);font:16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+[hidden]{display:none!important}a{color:inherit;text-underline-offset:.22em}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #3982ba;outline-offset:4px}
+.wrap{width:min(820px,calc(100% - 36px));margin-inline:auto}
+.mast{border-bottom:1px solid var(--line)}.mast .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-block:12px}
+.author,.back{font-size:.84rem}.author{display:flex;align-items:center;gap:9px;text-decoration:none;font-weight:670}.mark{width:27px;height:27px}.back{color:var(--muted)}
+main{padding-block:clamp(24px,6vw,65px) 25px}h1{font:500 clamp(43px,8.5vw,78px)/.98 var(--serif);letter-spacing:-.055em;margin:0 0 10px}.intro{margin:0 0 20px;color:var(--muted);max-width:53ch}
+.yard{margin:0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.canvas{display:grid;align-content:center;min-height:clamp(108px,19vw,176px);background:var(--ground);padding:clamp(5px,2vw,14px) 0}
+.frame{position:relative;aspect-ratio:576 / 84;width:100%;overflow:hidden}
+.frame img,.frame video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;image-rendering:pixelated}
+figcaption{display:flex;align-items:baseline;justify-content:space-between;gap:8px 18px;padding:10px 16px;border-top:1px solid var(--line);font-size:.88rem;color:var(--muted)}
+figcaption p{margin:0}.motion{font:inherit;color:var(--muted);background:transparent;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.19em;white-space:nowrap}
+.bowl{display:flex;align-items:center;justify-content:space-between;gap:12px 22px;flex-wrap:wrap;margin-top:17px}
+.bowl p{margin:0;font-weight:620}.clock{display:block;font:.86rem/1.5 var(--mono);font-variant-numeric:tabular-nums;color:var(--muted)}
+.feed{color:var(--on-green);background:var(--green);border:0;border-radius:6px;padding:13px 23px;min-height:46px;font:690 1rem/1.3 var(--sans);cursor:pointer}.feed:hover{filter:brightness(1.08)}.feed:disabled{opacity:.62;cursor:wait}
+.note{margin:10px 0 0;color:var(--muted);font-size:.9rem}.extras{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}.extras h2{margin:0;font:500 1.45rem/1.1 var(--serif);letter-spacing:-.025em}.extras>p{margin:5px 0 10px;color:var(--muted);font-size:.88rem}
+.methods{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:7px}.methods details{border:1px solid var(--line);border-radius:5px;background:var(--panel);min-width:0}.methods summary{padding:9px 11px;cursor:pointer;font-size:.86rem;font-weight:650}.methods details p{font-size:.8rem;color:var(--muted);margin:0;padding:0 11px 10px}
+.skip{position:absolute;left:8px;top:-60px;background:var(--panel);padding:6px}.skip:focus{top:8px}
+@media(max-width:480px){.wrap{width:calc(100% - 28px)}.mast .wrap{padding-block:9px}.intro{font-size:.9rem}.canvas{min-height:88px}.bowl{gap:8px}.feed{padding:11px 17px}figcaption{padding:8px 11px;flex-wrap:wrap}.methods{grid-template-columns:1fr}.methods summary{padding-block:8px}}
+@media(max-width:350px){.bowl{align-items:flex-start;flex-direction:column}.bowl .feed{align-self:stretch}}
+</style>
+<script src="yard-api.js" defer></script>
+<script src="play.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to the yard</a>
+<nav class="mast" aria-label="Profile"><div class="wrap"><a class="author" href="https://github.com/Kaustubhdalvi"><svg class="mark" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="27" height="27" rx="4" fill="#1b3935"/><g fill="#e5e9cc"><circle cx="8" cy="8" r="1.8"/><circle cx="8" cy="14" r="1.8"/><circle cx="8" cy="20" r="1.8"/><circle cx="14" cy="14" r="1.8"/><circle cx="20" cy="8" r="1.8"/><circle cx="20" cy="20" r="1.8"/></g></svg>Kaustubh Dalvi</a><a class="back" href="https://github.com/Kaustubhdalvi#pips-yard">Compare the profile yard ↗</a></div></nav>
+<main class="wrap" id="main" tabindex="-1">
+<h1>Pip’s yard</h1>
+<p class="intro"><strong>Browser-only review.</strong> Try a feeding in this browser. Its tabs share one free bowl every 12 hours. Visits stay on this device.</p>
+<figure class="yard">
+  <div class="canvas"><div class="frame">
+    <img id="idle" width="576" height="84" src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" alt="Puppies play in the grass beside their mother and doghouse.">
+    <img id="poster" width="576" height="84" alt="A visitor kneels to share food with both puppies." hidden>
+    <video id="movie" width="576" height="84" playsinline muted preload="auto" aria-hidden="true" hidden></video>
+  </div></div>
+  <figcaption><p id="scene" role="status" aria-live="polite">The puppies are playing in the grass.</p><button class="motion" id="motion" type="button" hidden>Pause motion</button></figcaption>
+</figure>
+<div class="bowl"><div><p id="bowl" role="status" aria-live="polite">Checking the shared bowl…</p><time id="clock" class="clock" hidden></time></div>
+<button class="feed" type="button" id="feed" disabled aria-controls="extras">Feed &amp; Play</button></div>
+<p class="note" id="note" role="status" aria-live="polite" hidden></p>
+<section class="extras" id="extras" aria-labelledby="extras-title" hidden>
+ <h2 id="extras-title">Extra bowls</h2><p>Payment methods are shown for review. This page accepts no payments.</p>
+ <div class="methods">
+  <details><summary>PayPal</summary><p>The checkout link is pending.</p></details>
+  <details><summary>Crypto</summary><p>The wallet address and network are pending.</p></details>
+  <details><summary>QR code</summary><p>The payment QR code is pending.</p></details>
+ </div>
+</section>
+<noscript><p class="note">Enable JavaScript to check the shared bowl and watch a feeding visit.</p></noscript>
+</main></body></html>
