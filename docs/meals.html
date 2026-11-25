@@ -1,93 +1,12 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="color-scheme" content="light dark">
-<title>Feed &amp; Play · Pip’s yard</title>
-<style>
-:root{color-scheme:light dark;--bg:#f5f6f0;--panel:#fffefa;--ink:#233b30;--muted:#526459;--line:#cbd5c8;--accent:#275d4b}
-@media(prefers-color-scheme:dark){:root{--bg:#13211c;--panel:#1d3027;--ink:#edf0e6;--muted:#c2cfc4;--line:#42594b;--accent:#a6d9bc}}
-*{box-sizing:border-box}[hidden]{display:none!important}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
-main{width:min(100% - 32px,560px);margin:clamp(28px,10vh,90px) auto}
-main>a{font-size:.875rem}
-a,button{color:var(--accent);text-underline-offset:.2em}
-h1{font:normal clamp(2.2rem,7vw,3.4rem)/1.07 Georgia,serif;letter-spacing:-.045em;margin:26px 0 12px}
-p{margin:8px 0 16px}
-section{padding:clamp(16px,4vw,28px);border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-top:20px}
-h2{font-size:1.08rem;margin:0 0 12px}
-output{display:block;font:600 2rem/1.2 ui-monospace,monospace;letter-spacing:-.07em}
-time,small{color:var(--muted);font-size:.84rem}
-ul{list-style:none;padding:0;margin:20px 0 8px}.method{color:var(--accent);background:none;border:0;padding:2px 0;font-weight:650;cursor:pointer}.method:hover{text-decoration:underline}.info{font-size:.92rem;color:var(--muted)}
-li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:9px 0;border-top:1px solid var(--line)}
-button{font:inherit;background:none;border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer;margin-right:12px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-</style>
-</head>
-<body><main>
-<a href="https://github.com/Kaustubhdalvi#pips-yard">← Pip’s yard</a>
-<h1>Feed &amp; Play</h1>
-<p role="status" id="message">Checking the shared free visit…</p>
-<section id="methods" hidden><h2>Next free visit</h2><output id="countdown" aria-live="off"></output><time id="deadline"></time>
-<ul>
-<li><button type="button" class="method" data-method="paypal">PayPal</button><small>Payment link pending</small></li>
-<li><button type="button" class="method" data-method="crypto">Crypto</button><small>Wallet pending</small></li>
-<li><button type="button" class="method" data-method="qr">QR code</button><small>Code pending</small></li>
-</ul><p class="info" id="method-note" aria-live="polite">Paid visits will open when Kaustubh connects the payment details.</p></section>
-<p id="actions" hidden><button id="retry" type="button">Check again</button><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml">Open GitHub confirmation</a></p>
-<noscript><p>Confirm a free visit on GitHub. The shared 12-hour rule still applies.</p><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml">Open GitHub confirmation</a></noscript>
-</main>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pip’s yard</title><link rel="canonical" href="https://github.com/Kaustubhdalvi#pips-yard"></head>
+<body><p><a href="https://github.com/Kaustubhdalvi#pips-yard">Back to Pip’s yard</a></p>
 <script>
-const message=document.querySelector('#message'),actions=document.querySelector('#actions'),methods=document.querySelector('#methods');
-const deadline=document.querySelector('#deadline'),countdown=document.querySelector('#countdown'),retry=document.querySelector('#retry');
-const form=actions.querySelector('a').href, yard=document.querySelector('main>a').href;
-const params=new URLSearchParams(location.search);
-const fromButton=params.get('visit')==='1'||params.has('free_at');
-const slug='Kaustubhdalvi/Kaustubhdalvi', file='garden/last-feeding.json';
-let busy=false, timer, heldUntil=0;
-function stamp(s){
-  if(typeof s!=='string'||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{1,6})?Z$/.test(s))throw Error('UTC timestamp required');
-  const t=Date.parse(s);if(!Number.isFinite(t)||new Date(t).toISOString().slice(0,19)!==s.slice(0,19))throw Error('invalid date');return t;
+const old = new URLSearchParams(location.search);
+if (old.get('visit') === '1' || old.has('free_at')) {
+  location.replace('feed-and-play.html?visit=1');
+} else {
+  location.replace('https://github.com/Kaustubhdalvi#pips-yard');
 }
-async function readState(url) {
-  const abort=new AbortController();const timeout=setTimeout(()=>abort.abort(),5000);
-  try {
-    const res=await fetch(url,{cache:'no-store',credentials:'omit',headers:{Accept:'application/vnd.github.raw+json'},signal:abort.signal});
-    if(!res.ok)throw Error('unavailable');
-    const s=await res.json();if(s?.version!==1||!Object.hasOwn(s,'next_free_at'))throw Error('missing cooldown');
-    return s.next_free_at===null?0:stamp(s.next_free_at);
-  }finally{clearTimeout(timeout)}
-}
-function remaining(){
-  const seconds=Math.max(0,Math.ceil((heldUntil-Date.now())/1000));
-  countdown.textContent=[Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60].map(x=>String(x).padStart(2,'0')).join(':');
-  if(!seconds){clearInterval(timer);check(false)}
-}
-async function check(forward){
-  if(busy)return;busy=true;clearInterval(timer);retry.disabled=true;message.textContent='Checking the shared free visit…';
-  try {
-    let next;
-    try{next=await readState('https://api.github.com/repos/'+slug+'/contents/'+file+'?ref=main')}
-    catch{next=await readState('https://raw.githubusercontent.com/'+slug+'/main/'+file+'?checked='+Date.now())}
-    if(next>Date.now()){
-      heldUntil=next;message.textContent='The free visit is on cooldown. You can wait for the next one or check the extra-visit options below.';
-      methods.hidden=false;actions.hidden=true;deadline.dateTime=new Date(next).toISOString();deadline.textContent=new Date(next).toISOString().slice(0,19).replace('T',' ')+' UTC';
-      remaining();timer=setInterval(remaining,1000);
-    }else{
-      methods.hidden=true;actions.hidden=false;message.textContent='The free visit is available.';
-      if(forward)location.replace(fromButton?form:yard);
-    }
-  }catch{methods.hidden=true;actions.hidden=false;message.textContent='The timer is unavailable. Try again or open GitHub to request a visit.'}
-  finally{busy=false;retry.disabled=false}
-}
-const instructions={
-  paypal:'The PayPal checkout link will appear here when it is connected.',
-  crypto:'The receiving wallet and its network will appear here when they are connected.',
-  qr:'The payment QR code will appear here when it is connected.'
-};
-for(const option of document.querySelectorAll('.method')){
-  option.addEventListener('click',()=>{document.querySelector('#method-note').textContent=instructions[option.dataset.method]});
-}
-retry.addEventListener('click',()=>check(false));check(true);
 </script></body></html>
