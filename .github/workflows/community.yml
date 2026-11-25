@@ -4,7 +4,7 @@ on:
   issues:
     types: [opened, edited, deleted, transferred]
   schedule:
-    - cron: '17 4 * * *'
+    - cron: '17 * * * *'
   workflow_dispatch:
 
 permissions:
@@ -19,26 +19,39 @@ jobs:
   update:
     if: github.event_name != 'workflow_dispatch' || github.ref_name == github.event.repository.default_branch
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           ref: ${{ github.event.repository.default_branch }}
-      - name: Rebuild the community section
+          fetch-depth: 0
+      - name: Publish new feedings and restore the yard after each visit
         env:
           GH_TOKEN: ${{ github.token }}
           PROFILE_BRANCH: ${{ github.event.repository.default_branch }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          for attempt in 1 2 3; do
-            git fetch --no-tags origin "refs/heads/$PROFILE_BRANCH"
-            git checkout -B community-update FETCH_HEAD
-            python3 scripts/community.py
-            if git diff --quiet -- README.md; then exit 0; fi
-            git add -- README.md
-            git commit -m 'Refresh garden credits and bookshelf'
-            if git push origin "HEAD:refs/heads/$PROFILE_BRANCH"; then exit 0; fi
-            sleep "$((attempt * 2))"
+          while true; do
+            for attempt in 1 2 3; do
+              git fetch --no-tags origin "refs/heads/$PROFILE_BRANCH"
+              git checkout -B community-update FETCH_HEAD
+              installed=$(git log -1 --diff-filter=A --format=%cI -- .github/garden-ledger.json)
+              test -n "$installed"
+              python3 scripts/community.py --garden --installed-at "$installed"
+              git add -- README.md garden/last-feeding.json .github/garden-ledger.json
+              if git diff --cached --quiet; then break; fi
+              git commit -m 'Refresh the profile garden and community credits'
+              if git push origin "HEAD:refs/heads/$PROFILE_BRANCH"; then break; fi
+              if [ "$attempt" -eq 3 ]; then exit 1; fi
+              sleep "$((attempt * 2))"
+            done
+            remaining=$(python3 scripts/garden.py --remaining)
+            if [ "$remaining" -eq 0 ]; then
+              # A push can take long enough for the visit to expire. Restore any
+              # still-active README picture on a fresh pass before exiting.
+              if ! grep -q 'pip-visitor.*?visit=' README.md; then break; fi
+              continue
+            fi
+            sleep "$remaining"
           done
-          exit 1
