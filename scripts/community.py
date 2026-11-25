@@ -115,7 +115,15 @@ def credited_user(login):
     return "[@{}](https://github.com/{})".format(login, login)
 
 
-def render(issues, repository, extra_meals=False):
+def record_meal(events, kind, request, number, when, choice):
+    if events is None:
+        return
+    visitor = {"Cap": "cap", "Braids": "braids"}.get(choice, "cap" if number % 2 == 0 else "braids")
+    events.append({"id": "{}-{}".format(kind, request), "kind": kind, "issue_number": number,
+                   "issued_at": when.strftime("%Y-%m-%dT%H:%M:%SZ"), "visitor": visitor})
+
+
+def render(issues, repository, extra_meals=False, events=None):
     if not re.fullmatch(r"[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+", repository):
         raise ValueError("Expected a GitHub owner/repository name.")
     free = Counter()
@@ -154,16 +162,20 @@ def render(issues, repository, extra_meals=False):
             free[user_id] += 1
             first_meal.setdefault(user_id, (when, number))
             last = (when, number, user_id)
+            record_meal(events, "free", number, number, when, form_field(body, "Yard visitor"))
         elif extra_meals and original == EXTRA:
             if has_consent(body, "Extra meal credit", EXTRA_CONSENT):
-                extra_requests[number] = user_id
+                extra_requests[number] = (user_id, form_field(body, "Yard visitor"))
         elif extra_meals and user_id == issue.get("repositoryOwnerId"):
             confirmation = EXTRA_CONFIRMATION.fullmatch(original)
             if confirmation:
                 # The referenced request must already exist and belong to the visitor.
                 # Consuming its number makes repeat confirmations idempotent.
-                recipient = extra_requests.pop(int(confirmation.group(1)), None)
-                if recipient:
+                request_number = int(confirmation.group(1))
+                claim = extra_requests.pop(request_number, None)
+                if claim:
+                    recipient, choice = claim
+                    record_meal(events, "extra", request_number, number, when, choice)
                     extras[recipient] += 1
                     first_meal.setdefault(recipient, (when, number))
         if original == BOOK:
@@ -234,7 +246,11 @@ def main():
     parser.add_argument("--readme", type=Path, default=Path("README.md"))
     parser.add_argument("--repository", default=os.getenv("GITHUB_REPOSITORY", "Kaustubhdalvi/Kaustubhdalvi"))
     parser.add_argument("--check", action="store_true", help="exit 1 if the README needs updating")
+    parser.add_argument("--garden", action="store_true", help="also reconcile the visitor scene and event files")
+    parser.add_argument("--installed-at", help="UTC timestamp when the garden was added to the default branch")
     args = parser.parse_args()
+    if args.garden and not args.installed_at:
+        parser.error("--garden requires --installed-at from the first ledger commit")
     if args.fixture:
         issues = json.loads(args.fixture.read_text(encoding="utf-8"))
     else:
@@ -242,13 +258,21 @@ def main():
     before = args.readme.read_bytes()
     # The optional issue form is installed on the trusted default branch at activation.
     active_form = args.readme.parent / ".github" / "ISSUE_TEMPLATE" / "extra-meal.yml"
-    block = render(issues, args.repository, extra_meals=active_form.is_file())
-    after = replace_block(before.decode("utf-8"), block).encode("utf-8")
-    if before != after:
-        if args.check:
-            print("Community section needs updating.", file=sys.stderr)
-            return 1
-        args.readme.write_bytes(after)
+    events = [] if args.garden else None
+    block = render(issues, args.repository, extra_meals=active_form.is_file(), events=events)
+    updated_readme = replace_block(before.decode("utf-8"), block)
+    files = {}
+    if args.garden:
+        from garden import reconcile_files
+        updated_readme, files = reconcile_files(args.readme.parent, updated_readme, issues, events,
+                                                args.repository, args.installed_at)
+    files[args.readme] = updated_readme.encode("utf-8")
+    changed = {path: data for path, data in files.items() if path.read_bytes() != data}
+    if changed and args.check:
+        print("Profile needs updating.", file=sys.stderr)
+        return 1
+    for path, data in changed.items():
+        path.write_bytes(data)
     return 0
 
 
