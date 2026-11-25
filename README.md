@@ -21,14 +21,16 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 ## Pip’s yard
 
+<!-- yard:start -->
 <picture>
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard.gif">
   <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies chase a ball near the balloons. When it rolls away, they fetch their mother to play. The ball returns, and she eats beside the tree before going back to sleep.">
 </picture>
+<!-- yard:end -->
 
-[Claim the free bowl](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml) · [Extra meal (preview)](https://kaustubhdalvi.github.io/Kaustubhdalvi/meals.html) · [Suggest my next book](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
+[Watch the live yard](https://kaustubhdalvi.github.io/Kaustubhdalvi/yard.html) · [Claim the free bowl](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml) · [Extra meal (preview)](https://kaustubhdalvi.github.io/Kaustubhdalvi/meals.html) · [Suggest my next book](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
 
-Everyone shares one free bowl every 12 hours. The first eligible feeder earns one leaderboard point.
+Everyone shares one free bowl every 12 hours. The first eligible feeder earns a point and sends a visitor to feed and play with the puppies for one minute.
 
 <!-- community:start -->
 
