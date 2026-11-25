@@ -1,25 +1,11 @@
-name: Sign the puppy guestbook
-description: Opt in to a public credit after a visit to Pip’s yard.
+name: Feed & Play
+description: Request the next free visit to Pip’s yard.
 title: "Record a feed & play visit"
 body:
   - type: markdown
     attributes:
       value: |
-        You can feed and play with both puppies directly in [Pip’s yard](https://github.com/Kaustubhdalvi#pips-yard). Open **Feed & play with the puppies** and press Play.
-
-        This optional entry adds your GitHub name to the garden leaderboard if the shared 12-hour credit is available. GitHub uses the issue submission time to decide which entry earns it.
-  - type: dropdown
-    id: yard_visitor
-    attributes:
-      label: Yard visitor
-      description: Choose the character who brings the bowl.
-      options:
-        - Surprise me
-        - Cap
-        - Braids
-      default: 0
-    validations:
-      required: false
+        One free visit is shared by everyone every 12 hours. GitHub uses the submission time to award the first eligible request. The puppies meet their visitor for one minute in [Pip’s yard](https://github.com/Kaustubhdalvi#pips-yard).
   - type: checkboxes
     id: credit
     attributes:
