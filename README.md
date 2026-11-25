@@ -1,10 +1,10 @@
-# Kaustubh Dalvi
-
-<a name="self-portrait-in-type"></a>
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/portrait-dots-dark.svg">
-  <img align="right" width="170" src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/portrait-dots-light.svg" alt="Kaustubh, drawn in halftone dots">
-</picture>
+<a name="kaustubh-dalvi"></a><a name="self-portrait-in-type"></a>
+<h1 align="center">
+  <picture>
+    <source media="(max-width: 740px)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/profile-masthead-compact.svg">
+    <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/profile-masthead-wide.svg" alt="Kaustubh Dalvi, AI Research Engineer">
+  </picture>
+</h1>
 
 I build reinforcement learning environments for coding agents and write the Python tests that score their work. When a score surprises me, I trace the agent’s steps to see what the test rewarded.
 
@@ -16,8 +16,10 @@ I’m exploring how mixtures of specialized models can work together in the next
 </p>
 
 <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a>
-
-**[Puzzle notebook ↗](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html)** · [Play the chess puzzle ♞](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#chess)
+<p>
+  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Open the puzzle notebook"></a>
+  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#chess"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-chess.svg" alt="Play the chess puzzles"></a>
+</p>
 
 ## Pip’s yard
 
@@ -28,15 +30,28 @@ I’m exploring how mixtures of specialized models can work together in the next
 </picture>
 <!-- yard:end -->
 
-[Watch the live yard](https://kaustubhdalvi.github.io/Kaustubhdalvi/yard.html) · [Claim the free bowl](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml) · [Extra meal (preview)](https://kaustubhdalvi.github.io/Kaustubhdalvi/meals.html) · [Suggest my next book](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
+<details>
+<summary><strong>Feed &amp; play with the puppies</strong> · 1 min</summary>
 
-Everyone shares one free bowl every 12 hours. The first eligible feeder earns a point and sends a visitor to feed and play with the puppies for one minute.
+**Visitor in a cap**
+
+https://github.com/user-attachments/assets/7e79b9cf-6f3f-4ce1-b587-f981b0a55db6
+
+**Visitor with braids**
+
+https://github.com/user-attachments/assets/4f4d9372-0551-43fb-834a-c1f3d4d195ef
+
+</details>
 
 <!-- community:start -->
 
-**Feeding leaderboard** · The first feeding spot is open.
+**Bookshelf** · [![Suggest a book](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-book.svg)](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
 
-**Bookshelf** · Be the first to suggest a book.
+<details><summary>Garden leaderboard · 0 recorded visits</summary>
+
+The first recorded visit will appear here. Playing on the profile is anonymous.
+
+</details>
 
 <!-- community:end -->
 
