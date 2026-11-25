@@ -30,26 +30,13 @@ I’m exploring how mixtures of specialized models can work together in the next
 </picture>
 <!-- yard:end -->
 
-<details>
-<summary><strong>Feed &amp; play with the puppies</strong> · 1 min</summary>
-
-**Visitor in a cap**
-
-https://github.com/user-attachments/assets/7e79b9cf-6f3f-4ce1-b587-f981b0a55db6
-
-**Visitor with braids**
-
-https://github.com/user-attachments/assets/4f4d9372-0551-43fb-834a-c1f3d4d195ef
-
-</details>
-
 <!-- community:start -->
 
 **Bookshelf** · [![Suggest a book](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-book.svg)](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
 
 <details><summary>Garden leaderboard · 0 recorded visits</summary>
 
-The first recorded visit will appear here. Playing on the profile is anonymous.
+The first credited visit will appear here.
 
 </details>
 
