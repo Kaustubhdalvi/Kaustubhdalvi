@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>An extra bowl · Pip’s yard</title>
+<style>
+:root {
+  --paper:#f6f5ef;
+  --ink:#18292a;
+  --muted:#4d5e5d;
+  --rule:#c7cebf;
+  --green:#20594e;
+  --deep:#1b3935;
+  --soft:#e9eee2;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:"Avenir Next",Avenir,system-ui,sans-serif;
+}
+* {box-sizing:border-box}
+body {margin:0; background:var(--paper); color:var(--ink); font:16px/1.5 var(--sans); -webkit-font-smoothing:antialiased}
+a {color:var(--green); text-underline-offset:.2em}
+a:focus-visible, button:focus-visible {outline:3px solid #006ca6; outline-offset:4px}
+[hidden] {display:none!important}
+.shell {width:min(720px,calc(100% - 40px)); margin-inline:auto}
+.mast {border-bottom:1px solid var(--rule)}
+.mast .shell {display:flex; align-items:center; justify-content:space-between; gap:12px; padding-block:12px}
+.author, .back {font-size:.82rem}
+.author {display:inline-flex; align-items:center; gap:8px; color:var(--ink); font-weight:650; text-decoration:none}
+.back {color:var(--muted)}
+.author svg {width:27px; height:27px}
+.skip {position:absolute; left:8px; top:-70px; padding:7px; background:white}
+.skip:focus {top:8px}
+header {padding-top:clamp(30px,6vw,52px)}
+.kicker {margin:0 0 4px; color:var(--green); text-transform:uppercase; letter-spacing:.12em; font:650 .67rem/1.6 ui-monospace,SFMono-Regular,Consolas,monospace}
+h1,h2 {margin:0; font-family:var(--serif); font-weight:500; letter-spacing:-.047em; line-height:1.04}
+h1 {font-size:clamp(45px,8vw,70px)}
+h2 {font-size:clamp(26px,4.5vw,36px)}
+.intro {color:var(--muted); margin:10px 0 0; max-width:53ch}
+.yard {display:block; width:min(576px,100%); height:auto; margin:24px auto 18px; image-rendering:pixelated}
+.methods {display:flex; gap:0; border-block:1px solid var(--rule); margin-block:0 22px}
+.methods a {flex:1; padding:13px 5px; min-width:0; text-align:center; text-decoration:none; font-size:.91rem; font-weight:650; color:var(--muted)}
+.methods a:hover {background:var(--soft)}
+.methods a[aria-current] {color:var(--deep); box-shadow:inset 0 -3px var(--green)}
+.panel {scroll-margin-top:16px; margin-bottom:22px; padding:4px 0}
+.panel + .panel {border-top:1px solid var(--rule); padding-top:20px}
+.enhanced .panel + .panel {border:0; padding-top:4px}
+.panel p {max-width:52ch; margin:8px 0 17px; color:var(--muted)}
+button {border:0; border-radius:5px; background:var(--deep); color:white; padding:11px 16px; min-height:44px; font:650 .88rem/1.3 var(--sans); cursor:pointer}
+button:hover {background:var(--green)}
+button:active {transform:translateY(1px)}
+.panel p.status:not(:empty) {border-left:3px solid var(--green); padding:6px 10px; margin-block:14px 0; background:var(--soft); color:var(--ink); width:fit-content}
+.qr-layout {display:flex; gap:clamp(18px,4vw,32px); align-items:center; margin-top:4px}
+.qr-layout svg {flex:none; width:134px; height:auto; border:1px solid var(--rule); border-radius:5px; background:white}
+.qr-layout a {font-weight:650; font-size:.88rem}
+footer {display:flex; align-items:baseline; justify-content:space-between; gap:8px 16px; margin:10px 0 40px; padding-top:14px; border-top:1px solid var(--rule); color:var(--muted); font-size:.86rem}
+footer a {font-weight:650; white-space:nowrap}
+@media (max-width:480px) {
+  .shell {width:calc(100% - 30px)}
+  .mast .shell {padding-block:10px}
+  .yard {margin-block:18px 12px}
+  .methods {margin-bottom:17px}
+  .qr-layout {gap:13px}
+  .qr-layout svg {width:clamp(102px,31vw,134px)}
+  footer {flex-wrap:wrap}
+}
+@media (max-width:330px) { .qr-layout {align-items:flex-start; flex-direction:column} }
+@media (prefers-reduced-motion:reduce) { button:active {transform:none} }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to meal preview</a>
+<div class="mast">
+  <div class="shell">
+    <a class="author" href="https://github.com/Kaustubhdalvi">
+      <svg aria-hidden="true" viewBox="0 0 28 28"><rect x=".5" y=".5" width="27" height="27" rx="4" fill="#1b3935"/><g fill="#e5e9cc"><circle cx="8" cy="8" r="1.8"/><circle cx="8" cy="14" r="1.8"/><circle cx="8" cy="20" r="1.8"/><circle cx="14" cy="14" r="1.8"/><circle cx="20" cy="8" r="1.8"/><circle cx="20" cy="20" r="1.8"/></g></svg>
+      Kaustubh Dalvi
+    </a>
+    <a class="back" href="https://github.com/Kaustubhdalvi/Kaustubhdalvi#pips-yard">Back to Pip’s yard ↗</a>
+  </div>
+</div>
+<main class="shell" id="main" tabindex="-1">
+  <header>
+    <p class="kicker">Payment preview</p>
+    <h1>An extra bowl</h1>
+    <p class="intro">Try giving Pip and the puppies an extra meal at any time. Demo feedings collect no money and earn no leaderboard points.</p>
+    <img class="yard" height="84" width="576" src="data:image/png;base64,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" alt="Two puppies play beside their mother’s doghouse.">
+  </header>
+  <nav class="methods" aria-label="Meal preview methods">
+    <a href="#paypal">PayPal</a><a href="#crypto">Crypto</a><a href="#qr">QR code</a>
+  </nav>
+  <section class="panel" id="paypal" aria-labelledby="paypal-title">
+    <h2 id="paypal-title" tabindex="-1">PayPal preview</h2>
+    <p>Try a virtual bowl in one click. The preview runs here without opening a PayPal account.</p>
+    <button type="button" data-method="PayPal" hidden>Try a PayPal feeding</button>
+    <p class="status" role="status"></p>
+  </section>
+  <section class="panel" id="crypto" aria-labelledby="crypto-title">
+    <h2 id="crypto-title" tabindex="-1">Crypto preview</h2>
+    <p>Try a virtual bowl using a simulated crypto payment. You can leave your wallet disconnected.</p>
+    <button type="button" data-method="crypto" hidden>Try a crypto feeding</button>
+    <p class="status" role="status"></p>
+  </section>
+  <section class="panel" id="qr" aria-labelledby="qr-title">
+    <div class="qr-layout">
+      <svg xmlns="http://www.w3.org/2000/svg" width="328" height="328" viewBox="0 0 41 41" role="img" aria-label="Scan to open the puppy meals page" shape-rendering="crispEdges"><rect width="41" height="41" fill="#fff"/><path fill="#000" d="M4 4h7v1h-7zM13 4h1v1h-1zM16 4h2v1h-2zM20 4h4v1h-4zM26 4h2v1h-2zM30 4h7v1h-7zM4 5h1v1h-1zM10 5h1v1h-1zM13 5h1v1h-1zM15 5h1v1h-1zM17 5h3v1h-3zM22 5h1v1h-1zM24 5h2v1h-2zM28 5h1v1h-1zM30 5h1v1h-1zM36 5h1v1h-1zM4 6h1v1h-1zM6 6h3v1h-3zM10 6h1v1h-1zM12 6h2v1h-2zM15 6h3v1h-3zM20 6h1v1h-1zM22 6h1v1h-1zM25 6h2v1h-2zM30 6h1v1h-1zM32 6h3v1h-3zM36 6h1v1h-1zM4 7h1v1h-1zM6 7h3v1h-3zM10 7h1v1h-1zM12 7h1v1h-1zM14 7h3v1h-3zM18 7h1v1h-1zM20 7h2v1h-2zM23 7h1v1h-1zM28 7h1v1h-1zM30 7h1v1h-1zM32 7h3v1h-3zM36 7h1v1h-1zM4 8h1v1h-1zM6 8h3v1h-3zM10 8h1v1h-1zM12 8h2v1h-2zM15 8h3v1h-3zM19 8h1v1h-1zM21 8h1v1h-1zM23 8h3v1h-3zM27 8h1v1h-1zM30 8h1v1h-1zM32 8h3v1h-3zM36 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM12 9h4v1h-4zM19 9h3v1h-3zM25 9h2v1h-2zM28 9h1v1h-1zM30 9h1v1h-1zM36 9h1v1h-1zM4 10h7v1h-7zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h7v1h-7zM12 11h5v1h-5zM18 11h2v1h-2zM22 11h6v1h-6zM4 12h1v1h-1zM6 12h5v1h-5zM14 12h1v1h-1zM16 12h4v1h-4zM21 12h1v1h-1zM23 12h1v1h-1zM26 12h1v1h-1zM30 12h5v1h-5zM4 13h1v1h-1zM7 13h1v1h-1zM11 13h2v1h-2zM14 13h2v1h-2zM22 13h3v1h-3zM27 13h1v1h-1zM30 13h2v1h-2zM33 13h2v1h-2zM36 13h1v1h-1zM7 14h1v1h-1zM9 14h3v1h-3zM15 14h2v1h-2zM19 14h1v1h-1zM26 14h1v1h-1zM32 14h1v1h-1zM34 14h2v1h-2zM5 15h1v1h-1zM11 15h1v1h-1zM14 15h1v1h-1zM18 15h1v1h-1zM22 15h7v1h-7zM30 15h1v1h-1zM32 15h5v1h-5zM4 16h1v1h-1zM9 16h3v1h-3zM13 16h4v1h-4zM19 16h1v1h-1zM21 16h1v1h-1zM26 16h1v1h-1zM29 16h1v1h-1zM31 16h3v1h-3zM36 16h1v1h-1zM4 17h1v1h-1zM8 17h2v1h-2zM14 17h2v1h-2zM18 17h3v1h-3zM22 17h2v1h-2zM25 17h1v1h-1zM27 17h1v1h-1zM30 17h1v1h-1zM34 17h3v1h-3zM5 18h1v1h-1zM7 18h1v1h-1zM10 18h1v1h-1zM13 18h2v1h-2zM16 18h1v1h-1zM18 18h1v1h-1zM21 18h1v1h-1zM24 18h1v1h-1zM28 18h3v1h-3zM33 18h3v1h-3zM5 19h5v1h-5zM12 19h3v1h-3zM17 19h1v1h-1zM20 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM29 19h2v1h-2zM33 19h2v1h-2zM4 20h1v1h-1zM7 20h2v1h-2zM10 20h1v1h-1zM18 20h1v1h-1zM21 20h1v1h-1zM24 20h1v1h-1zM26 20h2v1h-2zM29 20h1v1h-1zM31 20h3v1h-3zM36 20h1v1h-1zM4 21h3v1h-3zM11 21h1v1h-1zM13 21h3v1h-3zM17 21h1v1h-1zM20 21h5v1h-5zM27 21h1v1h-1zM30 21h2v1h-2zM33 21h2v1h-2zM5 22h1v1h-1zM7 22h4v1h-4zM13 22h1v1h-1zM15 22h3v1h-3zM19 22h2v1h-2zM25 22h2v1h-2zM30 22h3v1h-3zM34 22h2v1h-2zM4 23h3v1h-3zM12 23h1v1h-1zM14 23h1v1h-1zM18 23h3v1h-3zM24 23h3v1h-3zM31 23h6v1h-6zM5 24h1v1h-1zM8 24h3v1h-3zM15 24h3v1h-3zM19 24h3v1h-3zM23 24h2v1h-2zM26 24h1v1h-1zM28 24h2v1h-2zM32 24h2v1h-2zM35 24h2v1h-2zM4 25h2v1h-2zM8 25h1v1h-1zM11 25h4v1h-4zM16 25h1v1h-1zM18 25h2v1h-2zM21 25h4v1h-4zM27 25h1v1h-1zM30 25h1v1h-1zM33 25h2v1h-2zM36 25h1v1h-1zM4 26h1v1h-1zM6 26h1v1h-1zM10 26h1v1h-1zM13 26h3v1h-3zM19 26h2v1h-2zM22 26h1v1h-1zM25 26h1v1h-1zM30 26h2v1h-2zM33 26h3v1h-3zM4 27h1v1h-1zM9 27h1v1h-1zM12 27h3v1h-3zM16 27h2v1h-2zM19 27h1v1h-1zM24 27h2v1h-2zM28 27h3v1h-3zM33 27h2v1h-2zM4 28h1v1h-1zM6 28h5v1h-5zM13 28h4v1h-4zM19 28h3v1h-3zM23 28h1v1h-1zM26 28h1v1h-1zM28 28h6v1h-6zM36 28h1v1h-1zM12 29h3v1h-3zM20 29h2v1h-2zM23 29h3v1h-3zM27 29h2v1h-2zM32 29h1v1h-1zM34 29h1v1h-1zM36 29h1v1h-1zM4 30h7v1h-7zM13 30h2v1h-2zM16 30h1v1h-1zM19 30h1v1h-1zM24 30h5v1h-5zM30 30h1v1h-1zM32 30h1v1h-1zM34 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM12 31h1v1h-1zM15 31h2v1h-2zM19 31h1v1h-1zM22 31h1v1h-1zM25 31h4v1h-4zM32 31h5v1h-5zM4 32h1v1h-1zM6 32h3v1h-3zM10 32h1v1h-1zM12 32h1v1h-1zM16 32h1v1h-1zM22 32h1v1h-1zM26 32h1v1h-1zM28 32h6v1h-6zM35 32h2v1h-2zM4 33h1v1h-1zM6 33h3v1h-3zM10 33h1v1h-1zM12 33h2v1h-2zM15 33h6v1h-6zM22 33h4v1h-4zM27 33h3v1h-3zM32 33h1v1h-1zM34 33h3v1h-3zM4 34h1v1h-1zM6 34h3v1h-3zM10 34h1v1h-1zM12 34h1v1h-1zM14 34h1v1h-1zM16 34h1v1h-1zM18 34h1v1h-1zM24 34h3v1h-3zM28 34h1v1h-1zM30 34h2v1h-2zM33 34h1v1h-1zM4 35h1v1h-1zM10 35h1v1h-1zM13 35h3v1h-3zM20 35h1v1h-1zM22 35h1v1h-1zM25 35h1v1h-1zM29 35h1v1h-1zM32 35h3v1h-3zM4 36h7v1h-7zM12 36h1v1h-1zM16 36h1v1h-1zM18 36h1v1h-1zM21 36h1v1h-1zM26 36h3v1h-3zM31 36h1v1h-1zM33 36h1v1h-1zM35 36h1v1h-1z"/></svg>
+      <div>
+        <h2 id="qr-title" tabindex="-1">Scan the preview</h2>
+        <p>Open this meal preview on another device. The code contains the page address.</p>
+        <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/meals.html">Open the encoded link ↗</a>
+      </div>
+    </div>
+  </section>
+  <noscript><p>Enable JavaScript to try the simulated feedings. The QR code and free bowl work without it.</p></noscript>
+  <footer>
+    <span>Everyone shares one free bowl every 12 hours.</span>
+    <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml">Claim a free bowl ↗</a>
+  </footer>
+</main>
+<script>
+const panels = Array.from(document.querySelectorAll('.panel'));
+const methods = Array.from(document.querySelectorAll('.methods a'));
+function showMethod(focusHeading) {
+  const panel = panels.find(item => '#' + item.id === location.hash) || panels[0];
+  for (const item of panels) item.hidden = item !== panel;
+  for (const link of methods) {
+    if (link.getAttribute('href') === '#' + panel.id) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  }
+  if (focusHeading) panel.querySelector('h2').focus({preventScroll:true});
+}
+for (const link of methods) {
+  link.addEventListener('click', event => {
+    if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || event.button !== 0) return;
+    event.preventDefault();
+    const next = link.getAttribute('href');
+    if (location.hash !== next) history.pushState(null, '', next);
+    showMethod(true);
+  });
+}
+for (const button of document.querySelectorAll('[data-method]')) {
+  button.hidden = false;
+  let bowls = 0;
+  button.addEventListener('click', () => {
+    bowls++;
+    const serving = bowls === 1 ? '1 demo bowl filled' : bowls + ' demo bowls filled';
+    button.parentElement.querySelector('.status').textContent = serving + ' with ' + button.dataset.method + '.';
+  });
+}
+window.addEventListener('hashchange', () => showMethod(false));
+window.addEventListener('popstate', () => showMethod(false));
+document.documentElement.classList.add('enhanced');
+showMethod(false);
+</script>
+</body>
+</html>
