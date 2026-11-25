@@ -5,11 +5,13 @@ body:
   - type: markdown
     attributes:
       value: |
-        One free visit is shared by everyone every 12 hours. GitHub uses the submission time to award the first eligible request. The puppies meet their visitor for one minute in [Pip’s yard](https://github.com/Kaustubhdalvi#pips-yard).
+        One free visit is shared by everyone every 12 hours. GitHub uses the submission time to award the first eligible request. After submitting, follow the yard link in your issue. Refresh the profile once GitHub records your visit to see the puppies greet you for one minute.
+
+        If another visitor gets there first, **Feed & Play** in the yard shows when the next free visit opens.
   - type: checkboxes
     id: credit
     attributes:
       label: Feeding credit
       options:
-        - label: List my GitHub username on the garden leaderboard for this visit.
+        - label: "Credit my GitHub username for this visit to [Pip’s yard](https://github.com/Kaustubhdalvi#pips-yard)."
           required: true
