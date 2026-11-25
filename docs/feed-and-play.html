@@ -10,7 +10,7 @@
 @media(prefers-color-scheme:dark){:root{--bg:#13211c;--panel:#1d3027;--ink:#edf0e6;--muted:#c2cfc4;--line:#42594b;--accent:#a6d9bc}}
 *{box-sizing:border-box}[hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,sans-serif}
-main{width:min(100% - 32px,560px);margin:clamp(28px,10vh,90px) auto}
+main{width:min(100% - 32px,720px);margin:clamp(24px,7vh,70px) auto}
 main>a{font-size:.875rem}
 a,button{color:var(--accent);text-underline-offset:.2em}
 h1{font:normal clamp(2.2rem,7vw,3.4rem)/1.07 Georgia,serif;letter-spacing:-.045em;margin:26px 0 12px}
@@ -23,25 +23,85 @@ ul{list-style:none;padding:0;margin:20px 0 8px}.method{color:var(--accent);backg
 li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:9px 0;border-top:1px solid var(--line)}
 button{font:inherit;background:none;border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer;margin-right:12px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+figure{margin:20px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
+.scene{display:block;width:100%;aspect-ratio:48/7;object-fit:contain;image-rendering:pixelated}
+figcaption{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:9px 13px;font-size:.875rem}
+figcaption button{margin:0}
+#claim{display:inline-block;color:var(--panel);background:var(--accent);border-radius:8px;padding:8px 14px;font-weight:650;text-decoration:none}
+#claim:hover{text-decoration:underline}
 </style>
 </head>
 <body><main>
-<a href="https://github.com/Kaustubhdalvi#pips-yard">← Pip’s yard</a>
+<a href="https://github.com/Kaustubhdalvi#pips-yard">← Back to the GitHub profile</a>
 <h1>Feed &amp; Play</h1>
-<p role="status" id="message">Checking the shared free visit…</p>
+<figure>
+<img id="idle" class="scene" width="576" height="84" src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" alt="Two puppies in the grass beside the doghouse.">
+<video id="movie" class="scene" width="576" height="84" muted playsinline preload="none" hidden aria-label="A visitor feeds both puppies, plays ball with them, then waves goodbye."></video>
+<figcaption><span id="scene-note">Pip’s yard</span><button type="button" id="motion" aria-controls="movie" hidden>Play visit</button></figcaption>
+</figure>
+<p id="video-error" hidden>The video could not load. <a id="movie-link" href="pip-visitor-minute.mp4" target="_blank" rel="noopener">Open the animation in a new tab</a>.</p>
+<p role="status" id="message"></p>
+<div id="actions" hidden><a id="claim" href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml" target="_blank" rel="noopener">Record my visit on GitHub ↗</a>
+<p class="info">A new tab opens for confirmation. The first eligible request earns your GitHub username a spot on the leaderboard.</p></div>
+<button id="retry" type="button" hidden>Check again</button>
 <section id="methods" hidden><h2>Next free visit</h2><output id="countdown" aria-live="off"></output><time id="deadline"></time>
 <ul>
 <li><button type="button" class="method" data-method="paypal">PayPal</button><small>Payment link pending</small></li>
 <li><button type="button" class="method" data-method="crypto">Crypto</button><small>Wallet pending</small></li>
 <li><button type="button" class="method" data-method="qr">QR code</button><small>Code pending</small></li>
 </ul><p class="info" id="method-note" aria-live="polite">Paid visits will open when Kaustubh connects the payment details.</p></section>
-<p id="actions" hidden><button id="retry" type="button">Check again</button><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml">Open GitHub confirmation</a></p>
-<noscript><p>Confirm a free visit on GitHub. The shared 12-hour rule still applies.</p><a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml">Open GitHub confirmation</a></noscript>
+<noscript><p><a href="pip-visitor-minute.mp4">Watch the one-minute visit</a></p><p>One free bowl is shared every 12 hours. <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml" target="_blank" rel="noopener">Request leaderboard credit on GitHub (new tab)</a>.</p></noscript>
 </main>
 <script>
 const message=document.querySelector('#message'),actions=document.querySelector('#actions'),methods=document.querySelector('#methods');
 const deadline=document.querySelector('#deadline'),countdown=document.querySelector('#countdown'),retry=document.querySelector('#retry');
-const form=actions.querySelector('a').href;
+const movie=document.querySelector('#movie'), motion=document.querySelector('#motion'), idle=document.querySelector('#idle');
+const sceneNote=document.querySelector('#scene-note'), videoError=document.querySelector('#video-error');
+const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+let sceneStarted=false, wantsPlay=false, playAttempt=0;
+
+function updatePlayback(){
+  const attempt=++playAttempt;
+  if(!wantsPlay||document.hidden){
+    movie.pause();
+    motion.textContent=movie.ended?'Replay visit':'Play visit';
+    return;
+  }
+  motion.textContent='Pause visit';
+  movie.play().catch(()=>{
+    if(attempt===playAttempt){wantsPlay=false;motion.textContent='Play visit'}
+  });
+}
+function startScene(userRequested=false){
+  if(sceneStarted)return;
+  sceneStarted=true;
+  const name=Math.random()<.5?'pip-visitor':'pip-visitor-braids';
+  movie.poster='https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/'+name+'-still.png';
+  movie.src=name+'-minute.mp4';
+  document.querySelector('#movie-link').href=movie.src;
+  idle.hidden=true;movie.hidden=false;motion.hidden=false;
+  sceneNote.textContent='A minute with the puppies';
+  wantsPlay=userRequested||!reduced.matches;
+  updatePlayback();
+}
+motion.addEventListener('click',()=>{
+  if(!sceneStarted){startScene(true);return}
+  if(movie.error){movie.load();videoError.hidden=true}
+  if(movie.ended)movie.currentTime=0;
+  wantsPlay=!wantsPlay;updatePlayback();
+});
+movie.addEventListener('ended',()=>{wantsPlay=false;motion.textContent='Replay visit'});
+movie.addEventListener('error',()=>{playAttempt++;wantsPlay=false;motion.textContent='Retry video';videoError.hidden=false});
+reduced.addEventListener('change',()=>{
+  if(reduced.matches&&sceneStarted){wantsPlay=false;updatePlayback()}
+});
+document.addEventListener('visibilitychange',()=>{
+  if(sceneStarted){
+    if(document.hidden&&reduced.matches)wantsPlay=false;
+    updatePlayback();
+  }
+  if(!document.hidden)check();
+});
 
 const slug='Kaustubhdalvi/Kaustubhdalvi', file='garden/last-feeding.json';
 let busy=false, timer, heldUntil=0;
@@ -61,23 +121,31 @@ async function readState(url) {
 function remaining(){
   const seconds=Math.max(0,Math.ceil((heldUntil-Date.now())/1000));
   countdown.textContent=[Math.floor(seconds/3600),Math.floor(seconds/60)%60,seconds%60].map(x=>String(x).padStart(2,'0')).join(':');
-  if(!seconds){clearInterval(timer);check(false)}
+  if(!seconds){clearInterval(timer);check()}
 }
-async function check(forward){
-  if(busy)return;busy=true;clearInterval(timer);retry.disabled=true;message.textContent='Checking the shared free visit…';
+async function check(){
+  if(busy)return;
+  busy=true;clearInterval(timer);retry.disabled=true;actions.hidden=true;
+  message.textContent='Checking the shared free visit…';
   try {
     let next;
     try{next=await readState('https://api.github.com/repos/'+slug+'/contents/'+file+'?ref=main')}
     catch{next=await readState('https://raw.githubusercontent.com/'+slug+'/main/'+file+'?checked='+Date.now())}
     if(next>Date.now()){
-      heldUntil=next;message.textContent='The free visit is on cooldown. You can wait for the next one or check the extra-visit options below.';
+      heldUntil=next;message.textContent='The shared bowl has been claimed.';
+      if(!sceneStarted)motion.hidden=true;
       methods.hidden=false;actions.hidden=true;deadline.dateTime=new Date(next).toISOString();deadline.textContent=new Date(next).toISOString().slice(0,19).replace('T',' ')+' UTC';
       remaining();timer=setInterval(remaining,1000);
     }else{
-      methods.hidden=true;actions.hidden=false;message.textContent='The free visit is available.';
-      if(forward)location.replace(form);
+      methods.hidden=true;actions.hidden=false;message.textContent='The free bowl is available. One visit can earn credit every 12 hours.';
+      startScene();
     }
-  }catch{methods.hidden=true;actions.hidden=false;message.textContent='The timer is unavailable. Try again or open GitHub to request a visit.'}
+    retry.hidden=true;
+  }catch{
+    methods.hidden=true;actions.hidden=false;retry.hidden=false;
+    if(!sceneStarted){motion.hidden=false;motion.textContent='Watch without credit'}
+    message.textContent='The timer is unavailable. GitHub will check eligibility if you request credit.';
+  }
   finally{busy=false;retry.disabled=false}
 }
 const instructions={
@@ -88,5 +156,7 @@ const instructions={
 for(const option of document.querySelectorAll('.method')){
   option.addEventListener('click',()=>{document.querySelector('#method-note').textContent=instructions[option.dataset.method]});
 }
-retry.addEventListener('click',()=>check(false));check(true);
+retry.addEventListener('click',check);
+if(new URLSearchParams(location.search).get('replay')==='1')startScene();
+check();
 </script></body></html>
