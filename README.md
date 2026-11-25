@@ -4,10 +4,10 @@ My work in AI research engineering focuses on measuring what coding agents can d
 
 [Science puzzles](#science-puzzles) · [Coding challenge](#which-run-would-you-ship) · [LinkedIn](https://www.linkedin.com/in/kaustubhdalvi02/)
 
-<a name="pip"><picture>
-  <source media="(prefers-reduced-motion: reduce)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-rest.png">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip.gif" width="244" height="52" alt="Pip, a tiny pixel octopus, walks, blinks, curls up for a nap, and wakes.">
-</picture></a>
+<picture>
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip.gif">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-rest.png" width="244" height="52" alt="Pip, a tiny pixel octopus, walks, blinks, curls up for a nap, and wakes.">
+</picture>
 
 ## Self portrait in type
 
