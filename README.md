@@ -5,8 +5,8 @@ My work in AI research engineering focuses on measuring what coding agents can d
 [Science puzzles](#science-puzzles) · [Coding challenge](#which-run-would-you-ship) · [LinkedIn](https://www.linkedin.com/in/kaustubhdalvi02/)
 
 <picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-rest.png" width="244" height="52" alt="Pip, a tiny pixel octopus, walks, blinks, curls up for a nap, and wakes.">
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-family.gif">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-family-rest.png" width="288" height="60" alt="Pip the dog and two puppies trot along together, then curl up for a nap.">
 </picture>
 
 ## Self portrait in type
@@ -57,109 +57,6 @@ My work in AI research engineering focuses on measuring what coding agents can d
 
 </td></tr>
 </table>
-
-<details>
-<summary>See the finer desktop cut · 148 columns</summary>
-
-<table align="center">
-<tr><td>
-
-```text
-                                                                           .
-                                                          .......      .    . .
-                                                    .::......... . . . .... .  . .     . .  .
-                                           :;:::.:............ .  .  .    .. ..  . . . . . .   ..
-                                         .::..    . .. . .      .  .  . .  . . .  . .         .   ..
-                                      ;:..     . . . . . ... . . .  .    .      .              . .  ..
-                                     ;:.. .. .   . .. . .   .        . .   . .   . .. .      .  .  .  .
-                                    ;..  .    . ...... . ..   . .  . ................  . . .  .  .  .   .
-                                   ;:....  . . ..... ....     .  . .....:.:::;:;;:::..    . .  .        .
-                                 :;.... . . ............. . .:..:.::.:::;;;;;;;;;;;:::.... .... .... .. ..
-                                 ::........................:.::::::;;++c+cccccc++c++++;;:::.:.............
-                                 :::.::.:.............::...:::::;++cccccccccc+ccccccccc++;;::::::.... .....
-                                  :::............:::::.:.:;;;+cccccccccxcxcccxcxcccccccxccc;;....::.......:.
-                                   ::::.:......::::::;:;+c+cccc+cccccxx**x*xxxxxxxxxxxxxxxxxcccc+;;;::......
-                                    :::::....:::::;;;++c+cccc+cccccxxcxxxxxx*x****x*xx*x**xxxxxxccc++;:::...
-                                      :.... .:::;;;;+c+ccccccccxcxccxcxxx*ooooo*xxx*xxxxxx*xxxcxxxcc+c+;:...;++
-                                       :::::.:;:;:;;+ccc+ccccccxccxxx*oa##&&*xccccccxxx*x*x*xxxxcxcc+cccc;+xoo**xc
-                                        :::.::;;;;;++c+cccccxxxxxxx*aa&a*xcc+;cc*a#&&&a&aaoo****xxcc+;ccc*&#@▒&oo**c
-                                         .:::::;;;++ccccccxxxx*oo**ooxccc+c+c**oa&a*xxxxx*x*o**o**xxc:+ao&ao▒▒@**@x#c
-                                           .::;;;;+ccccxxxxxx*******xxccxxxxxccc::;;+c+ccx*o*oooo**xxccoo*o*x*##*aaa
-                                             :;;;;;++;;;;;++cccccc*&ao**xxccc+cccc*a&o**ooooooooo**xxxcc***@&*x&a*@+
-                                              :+:::::;++c+c+c+c+;cco&o****xxccccxx*x**oo&&&&aaoaoo**xxccx#&#▒▒x*ao#
-                                              :;;;+ccxxxxxxccccc::cxx****x***ooo****ooaa&&&&#a&aoo**xxxccaaaooo**@*
-                                               :cc+cc+c+;.+ccx+c+:cx**oo*****oaaoo*oooaa&##&&&aaa*o**xcccxx*o@&*aa
-                                                :ccc;;+cccxxxccc:;ccx**o*o***oaaoooaa&&##@@@##aoooox*xxccxa&&&aa&
-                                                 +++++c+cccccx*c:;ccx*ooo*xxxc*a#o*ooo&#@▒@##&aoooo**xxccxcxoxxc
-                                                  ;cc+cccxx***oc.++cx*o****oaooxoaaoo*ooa&&aaoa*ooo****cccc:
-                                                  .+cccccx**oo&+;ccc*a#@&aaaao**a&&&#ao***oooaooooo*oo*xccx*
-                                                   ;c+ccx*ooa@c:ccc+cxoao*oaaoxx*o****o*xx*oaaaaaoaoaoxxcccxc
-                                                    c+ccx**o&#c.;c+::+ccccxcx****oaooo*cccxoaa&aoaaao*xxccxxx
-                                                    ;cccxx*****cc+c+ccccxxccx*o*xxcccccccc*aaooooaao*x*xcxcx*
-                                                     +cccccxxccc+cc+ccccccccccccxccccx*oaaaooooaooo**x*ccxxx*c
-                                                       +ccccccccc;;;;;+ccccxx*o##oooa&a&#&&aoaoooo*xxxccxx****
-                                                        ++c+ccxoox+;;ccccxxxxxx*oo&&&#&&&&&a&ao****xxxcx*ooooa+
-                                                         :ccc+ccx**cc+c+ccxcccx*xoooaa&&aa&&o*x*xxxcccxxoaaoaax
-                                                           :+ccccccccccxcxx*xxxxx**aaaa&aaa*xxxccxxxxx*oa&a&ooo
-                                                             :;++ccccccxxcccxxx*oa###&a***xccccxxxxxxxa&&&&&aooc
-                                                               :;+;+ccccccxx*oo****o*xccccccccxxxcxx*a#&#&&&aaoo+
-                                                                ::+;;;+;++c+xxxcc+c+c+cccccccccxxx*o######&#&&aac++
-                                                                 .cc;;::;::;;++cccccccxcccccxx**ooa######&###&&@c;c+
-                                                                  .::::::::;++c+cccccccccxxoaaaaaa&&########&@▒*+c;++:
-                                                                :+ .:::::.:.:::;++ccccxoa&&&&aaaa&####@####@▒▒c++;+++c+;
-                                                            ...::c;:+ccccccc++c+cccxx*oaa&&&#&&&&&##@####@▒▒oc;;;++;;+cc+:.
-                                                     ;++ccc;.:;  +c:+ccxxxxxcccccccxx***aa&&#&#&##@#@@##@▒#c;;;:+c;;++c+cc+:....
-                                                +c+cc+c+c+c;:.;: :c++cccxxxxxccccxxx**oaa&&###@#@@@@@@#▒▒x;;+:;cc;;+cccc+cc;:..:.......
-                                           ++cc+c+c+cc+c+c+:+::+  ;c++cxxxx**x*xxxx**oa&##@@▒▒▒▒@@@@@@▒@c:+;;+++;ccc+c+cc++::::.:.:.:.......
-                                      +cc+cc+c+ccccc+cccccc::+;;:. ++c+cx**ooao*oooooa&&&&aao&@▒▒▒▒▒▒▒o;:+;;++c+c+c++cc+c+;;;:.::.:..:.:..:....
-                                 +c+ccc+cc+cc+c+c++cc+c++c++.:+++.. :+c+cccccc+ccccc;++++++;;;;+cx**oc::;:+++cccc++cc+++;;;+;;:.:.:.:.:.............
-                             +cc+c+c+c+c+c+c+ccc+cc+c+ccc+ccc::;++;:. .:;:;+;;+++;: +;+++++++++;;;::..:;;c+cc+c+c+cc++;;;+;+;;:::.:.:..:.:.:.:......
-                        +cc+cc+cc+ccc+ccc+ccc+c+cc+ccc+c+c+c+c;::;+c+;::..:::;;;;c+.:;;ccc+++++;;::;;++cc+++cc+c++;;;;;;;;;;+;;:::.:.:.:.......:.:.:
-                     cc+c++cc+c+cc+c+c+c+c+c+cc+c+c+c+c++;;;:;;;::::;;+cc++;:::;;++c::+:;c+++;;;;++++c+++c+c+c;;;;+;;;;;;+;++++;::..:.:...:.:.......
-                 +cc+c+cccc+cccc+cc+ccc+ccc+c+cc+ccc++++;+++++++++;;;;::;;++++;;;++;;+c:;++++;++c+c+ccc+++;+;;;;;;;;;;;;+;;;;+;;;:::.:.:.....:.:..:.
-```
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary>See the pocket cut · 40 columns</summary>
-
-<table align="center">
-<tr><td>
-
-```text
-            ... . .      .
-          .  . .    ..
-         ...... .:;+;++;.. .
-          ....;+++coox**c++..
-           .::+cx**x++xx*ox+c&*
-            .;+;++*xccc*&&*co@#
-             ;++c;xaoa&#▒aoccc
-              +oo;+****cxaa*c
-               +c+;+cx*o&a*cx+
-                :++cx*&axccx#a
-                 .:.;++++xo@▒▓+
-               :..;c++ca▓▓▓▒@+:++
-          :;++++:.;+xcccxxax::+;+:....
-      ;+++++;+;+;:::.::::.::;+;::;:.....
-```
-
-</td></tr>
-</table>
-
-</details>
-
-<details>
-<summary>How the portrait was made</summary>
-
-The sunlit wall in the original photograph was brighter than my face. A person mask removed the wall before the photograph was sampled into a grid. Each cell became a character selected for its ink coverage. Letters carry the middle tones and block characters pick out highlights.
-
-The shape of the grid matters as much as the choice of characters. In the measured GitHub view, a text cell was about 2.36 times as tall as it was wide. Correcting for that keeps the face in proportion. The portrait is tuned for dark mode, where more ink makes a brighter highlight.
-
-</details>
 
 ## Science puzzles
 
