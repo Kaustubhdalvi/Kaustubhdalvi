@@ -60,72 +60,93 @@ My work in AI research engineering focuses on measuring what coding agents can d
 
 ## Science puzzles
 
-### Astrophysics · A shadow across a star
+**[Play all four challenges with instant feedback →](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html)**
 
-Two small planets cross the center of the same star’s disk on circular, edge-on orbits. Treat each planet as a point. Their orbital periods are 8 and 27 days. The inner planet’s transit lasts 64 minutes. Approximate each crossing as a straight line at its mid-transit speed. **Does the outer planet take 64, 96, or 216 minutes?**
+Pick an illustration to play that question, or make a prediction here and open the explanation.
+
+### Astrophysics · How long does the shadow last?
+
+[![Two planets cross the same star. The inner orbit takes 8 days and the outer orbit takes 27.](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/transit.svg)](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#transit)
+
+Two planets orbit the same star every **8 days** and **27 days**. Both cross the center of the star’s disk. The inner planet takes **64 minutes** from one edge to the other. Treat each planet as a point on a circular, edge-on orbit and each crossing as a straight line at its mid-transit speed.
+
+**How long does the outer planet take?** 64 minutes, 96 minutes, or 216 minutes?
 
 <details>
-<summary>Reveal the transit time</summary>
+<summary>Check the transit time</summary>
 
-**96 minutes.** Both shadows travel the same distance across the star. By Kepler’s third law, orbital radius scales as <i>P</i><sup>2/3</sup>, where P is the orbital period. Speed is circumference divided by period, so transit duration scales with the cube root of the period. The cube root of 27/8 is 3/2, and 64 × 3/2 = 96.
+**96 minutes.** Both planets travel one stellar diameter during transit. Kepler’s third law gives orbital radii in the ratio 9 to 4 for periods of 27 and 8 days. Divide each orbital circumference by its period and the outer planet moves at **two-thirds** of the inner planet’s speed. The crossing takes 64 × 3/2 = 96 minutes.
 
 </details>
 
-### Quantum computing · Two fair qubits
+### Quantum computing · Can two fair bits hide an error?
 
-Prepare the Bell pair `(|00⟩ + |11⟩)/√2`. In one quarter of otherwise ideal trials, a phase flip (Z gate) hits the first qubit. Apply a Hadamard (H gate) to each qubit and measure both in the computational basis. Each individual bit looks perfectly fair. **Do the two bits match in half of the trials, in three quarters, or in all of them?**
+[![A Bell pair with a possible phase flip on the first qubit, followed by a Hadamard on each qubit and two measurements.](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/qubits.svg)](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#qubits)
+
+Start with the Bell pair `(|00⟩ + |11⟩)/√2`. In one quarter of otherwise ideal trials, a Z gate flips the phase on the first qubit. Apply a Hadamard to each qubit and measure both in the computational basis. Each bit on its own still looks perfectly fair.
+
+**How often do the two bits match?** Half the trials, three quarters, or every trial?
 
 <details>
-<summary>Reveal the measurement odds</summary>
+<summary>Check the measurement odds</summary>
 
-**3/4.** With no phase flip, the two Hadamards reproduce the initial Bell pair, yielding 00 or 11. A phase flip changes the plus sign to a minus. The Hadamards then give `(|01⟩ + |10⟩)/√2`, yielding opposite bits. Paired readings expose an error that inspecting either qubit alone would miss.
+**Three quarters.** In a clean trial, the two Hadamards restore the original Bell pair, so the result is `00` or `11`. A phase flip changes the plus sign to a minus. The Hadamards then produce `(|01⟩ + |10⟩)/√2`. Every flipped trial gives opposite bits. Looking at the two readings together exposes the error.
 
 </details>
 
-### Mathematics · A race between coin patterns
+### Mathematics · Which coin pattern wins the race?
 
-Toss a fair coin independently until either **HHT** or **HTH** appears for the first time in consecutive tosses. Both patterns have probability 1/8 in any fixed three-toss window. **Does HHT win with probability 1/3, 1/2, or 2/3?**
+[![Two competing three-toss sequences, heads-heads-tails and heads-tails-heads.](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/coin.svg)](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#coin)
+
+Flip a fair coin independently until **HHT** or **HTH** first appears on three consecutive tosses. Each pattern has a 1/8 chance in any fixed window of three. You're betting on HHT.
+
+**What’s your chance of winning?** One third, one half, or two thirds?
 
 <details>
-<summary>Reveal the winning odds</summary>
+<summary>Check the winning odds</summary>
 
-**2/3.** Start at the first H. If the next toss is H, the next T completes HHT. If the next two tosses are TH, HTH wins. If they are TT, you are back to waiting for a fresh H. Thus HHT wins on this attempt with probability 1/2, HTH wins with 1/4, and 1/4 starts the race over. The eventual chance of HHT winning is (1/2) ÷ (1 − 1/4) = 2/3.
+**Two thirds.** Start at the first H. If the next toss is H, the next T guarantees HHT. If the next two tosses are TH, then HTH wins. If they’re TT, the race resets. Each attempt therefore gives HHT a 1/2 chance to win, HTH a 1/4 chance, and a 1/4 chance to start over. Among attempts that decide the race, HHT wins twice as often as HTH.
 
 </details>
 
-[Check all three answers in Python](https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/puzzle_checks.py).
+[Check all three predictions with Python](https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/puzzle_checks.py)
 
 ## Which run would you ship?
 
-Two weather feeds overlap at midnight. The readings below are invented for this puzzle. Merge them into UTC, expand `N` to `NORTH` and `S` to `SOUTH`, and collapse repeated reports for the same station and instant. Reject conflicting readings for one station and instant. Keep both stations when they report at the same time. Sort by instant, then station name. All times below have minute precision.
+[![Two weather feeds meet at midnight. One uses local time at UTC+05:30 and one uses UTC.](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/weather.svg)](https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#weather)
 
-| Feed | First reading | Next reading |
-| --- | --- | --- |
-| Local · Jan 7 · UTC+05:30 | 05:28 · N · 4 °C | 05:30 · S · 7 °C |
-| UTC · Jan 6–7 | 23:58 · NORTH · 4 °C | 00:00 · NORTH · 5 °C |
+You’re reviewing a weather-feed merge. All three runs return **three rows totaling 16 °C**. Only one preserves the source readings.
 
-All three runs report three rows that add up to 16 °C. Pick one before opening the answer.
-
-| Run | UTC output in order |
+| Local feed · UTC+05:30 | UTC feed |
 | --- | --- |
-| **A** | Jan 7 00:00 NORTH 5°, SOUTH 7° · Jan 7 23:58 NORTH 4° |
-| **B** | Jan 6 23:58 NORTH 4° · Jan 7 00:00 NORTH 5°, SOUTH 7° |
-| **C** | Jan 6 23:58 NORTH 4° · Jan 7 00:00 NORTH 7°, SOUTH 5° |
+| Jan 7, 05:28 · N · 4 °C | Jan 6, 23:58 · NORTH · 4 °C |
+| Jan 7, 05:30 · S · 7 °C | Jan 7, 00:00 · NORTH · 5 °C |
+
+Convert to UTC and expand the station names to NORTH and SOUTH. Merge matching readings for the same station and instant. Reject conflicting values for that pair. Keep both stations at a shared instant and sort by time, then station. These fictional readings use whole minutes.
+
+**Which run passes review?** All three put NORTH at 4 °C at 23:58 UTC. Pick the right date for that row and the right midnight temperatures (NORTH / SOUTH) for Jan 7.
 
 <details>
-<summary>Get a hint</summary>
+<summary><strong>Ship A</strong> · Jan 7 at 23:58 · midnight 5° / 7°</summary>
 
-What date is it in UTC when a station at UTC+05:30 reads 05:28 on January 7? Then check which station owns each value.
+**Check the date.** Subtract 5 hours 30 minutes from Jan 7 at 05:28. That puts the first NORTH reading two minutes before the start of Jan 7. A places it a full day late. Try another run.
 
 </details>
 
 <details>
-<summary>Reveal the answer and inspect the check</summary>
+<summary><strong>Ship B</strong> · Jan 6 at 23:58 · midnight 5° / 7°</summary>
 
-**Ship B.** Subtracting five hours and thirty minutes takes the first local reading back to January 6. Both feeds describe the same North reading then. At midnight the two stations really did record different temperatures. A shifts the date and C swaps their measurements. A check that counts three rows and sums their temperatures to 16 accepts all three.
-
-Run <code>python3 examples/station_merge.py</code> from a copy of the repository to check all three candidates. [Inspect the Python verifier](https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/station_merge.py).
+**Ship it.** Both feeds describe the same 4 °C NORTH reading at 23:58 UTC on Jan 6. At midnight, the UTC feed gives NORTH 5 °C and the local feed gives SOUTH 7 °C. Deduplicating by station and UTC instant produces exactly these three rows.
 
 </details>
+
+<details>
+<summary><strong>Ship C</strong> · Jan 6 at 23:58 · midnight 7° / 5°</summary>
+
+**Check the station labels.** The date is right. At midnight, the UTC feed says NORTH measured 5 °C. C assigns it 7 °C and gives SOUTH the 5 °C reading. Swapping them preserves the total, which is why the 16 °C check passes. Try another run.
+
+</details>
+
+From a checkout, run `python3 examples/station_merge.py` to compare all three verdicts. [Inspect the verifier](https://github.com/Kaustubhdalvi/Kaustubhdalvi/blob/main/examples/station_merge.py)
 
 If you’re working on coding-agent benchmarks, Harbor tasks, or verifier design, I’d like to compare failure cases. [Connect on LinkedIn](https://www.linkedin.com/in/kaustubhdalvi02/).
