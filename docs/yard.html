@@ -150,8 +150,9 @@ select,.action{background:#fffefa;border:1px solid #aab9ab;border-radius:5px;pad
       video.pause();
     } else {
       const path = stem + '-minute.mp4';
+      video.poster = visitor.getAttribute('src');
+      video.hidden = false;
       if (video.getAttribute('src') !== path) {
-        video.hidden = true;
         video.src = path;
         video.load();
       }
@@ -165,12 +166,14 @@ select,.action{background:#fffefa;border:1px solid #aab9ab;border-radius:5px;pad
         const epoch = mediaEpoch;
         pendingPlay = true;
         video.play().catch(() => {
-          if (epoch === mediaEpoch && animate && !document.hidden) mediaBlocked = true;
+          if (epoch === mediaEpoch && animate && !document.hidden) {
+            mediaBlocked = true;
+            render();
+          }
         }).finally(() => {
           if (epoch === mediaEpoch) pendingPlay = false;
         });
       }
-      video.hidden = video.readyState < 2 || video.paused || video.seeking || video.ended;
     }
     // Align the next update to an event-second boundary, including the exact end.
     if (!document.hidden) timer = setTimeout(render, Math.min(remaining, 1000 - (now - event.start) % 1000));
