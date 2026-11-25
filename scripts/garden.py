@@ -69,7 +69,7 @@ def reconcile(issues, accepted, public, ledger, now, installed_at):
 
 def feeding_control(repository, next_free_at, now):
     owner, name = repository.split("/")
-    route = "https://{}.github.io/{}/meals.html?visit=1".format(owner.lower(), name)
+    route = "https://{}.github.io/{}/feed-and-play.html?visit=1".format(owner.lower(), name)
     status = "Free now · every 12h"
     cache_key = "ready"
     width = 190
