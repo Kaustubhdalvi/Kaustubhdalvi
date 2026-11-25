@@ -6,6 +6,20 @@ body:
     attributes:
       value: |
         The first person to open a feeding issue after the garden's 12-hour cooldown gets the meal. GitHub's submission time decides the order. An early request expires, so come back after the listed time for another try.
+
+        [Open the live yard](https://kaustubhdalvi.github.io/Kaustubhdalvi/yard.html) in another tab before submitting to see your visitor arrive when GitHub accepts the meal.
+  - type: dropdown
+    id: yard_visitor
+    attributes:
+      label: Yard visitor
+      description: Choose the character who brings the bowl.
+      options:
+        - Surprise me
+        - Cap
+        - Braids
+      default: 0
+    validations:
+      required: false
   - type: checkboxes
     id: credit
     attributes:
