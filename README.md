@@ -25,8 +25,8 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 <!-- yard:start -->
 <picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-visitor-braids.svg?visit=free-1">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-visitor-braids-still.png?visit=free-1" width="576" height="84" alt="A visitor kneels to feed both puppies, plays fetch with them, and waves goodbye while their mother naps beside the doghouse.">
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard.gif">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies chase a ball near the balloons. When it rolls away, they fetch their mother to play. The ball returns, and she eats beside the tree before going back to sleep.">
 </picture>
 
 <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?visit=1&amp;free_at=2026-11-26T10%3A09%3A27Z#methods"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-feed-play.svg?free_at=2026-11-26T10%3A09%3A27Z" alt="Feed &amp; Play — Next free · 2026-11-26 10:09:27 UTC"></a>
