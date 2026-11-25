@@ -39,7 +39,7 @@ jobs:
               installed=$(git log -1 --diff-filter=A --format=%cI -- .github/garden-ledger.json)
               test -n "$installed"
               python3 scripts/community.py --garden --installed-at "$installed"
-              git add -- README.md garden/last-feeding.json .github/garden-ledger.json
+              git add -- README.md assets/action-feed-play.svg garden/last-feeding.json .github/garden-ledger.json
               if git diff --cached --quiet; then break; fi
               git commit -m 'Refresh the profile garden and community credits'
               if git push origin "HEAD:refs/heads/$PROFILE_BRANCH"; then break; fi
