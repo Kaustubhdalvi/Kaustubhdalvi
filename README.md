@@ -5,8 +5,8 @@ My work in AI research engineering focuses on measuring what coding agents can d
 [Science puzzles](#science-puzzles) · [Coding challenge](#which-run-would-you-ship) · [LinkedIn](https://www.linkedin.com/in/kaustubhdalvi02/)
 
 <picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-family.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-family-rest.png" width="288" height="60" alt="Pip the dog and two puppies trot along together, then curl up for a nap.">
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-yard.gif">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-yard-rest.png" width="328" height="68" alt="Pip and two puppies trot through short grass, then nap beside their little doghouse and tree.">
 </picture>
 
 ## Self portrait in type
