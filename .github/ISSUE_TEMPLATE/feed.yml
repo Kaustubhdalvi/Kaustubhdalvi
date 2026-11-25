@@ -1,13 +1,13 @@
-name: Feed the puppies
-description: Offer a free virtual meal to the dogs in the profile garden.
-title: "Feed the profile puppies"
+name: Sign the puppy guestbook
+description: Opt in to a public credit after a visit to Pip’s yard.
+title: "Record a feed & play visit"
 body:
   - type: markdown
     attributes:
       value: |
-        The first person to open a feeding issue after the garden's 12-hour cooldown gets the meal. GitHub's submission time decides the order. An early request expires, so come back after the listed time for another try.
+        You can feed and play with both puppies directly in [Pip’s yard](https://github.com/Kaustubhdalvi#pips-yard). Open **Feed & play with the puppies** and press Play.
 
-        [Open the live yard](https://kaustubhdalvi.github.io/Kaustubhdalvi/yard.html) in another tab before submitting to see your visitor arrive when GitHub accepts the meal.
+        This optional entry adds your GitHub name to the garden leaderboard if the shared 12-hour credit is available. GitHub uses the issue submission time to decide which entry earns it.
   - type: dropdown
     id: yard_visitor
     attributes:
@@ -25,5 +25,5 @@ body:
     attributes:
       label: Feeding credit
       options:
-        - label: Credit my GitHub username on the public feeding leaderboard if this meal is accepted.
+        - label: List my GitHub username on the garden leaderboard for this visit.
           required: true
