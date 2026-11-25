@@ -5,9 +5,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        One free visit is shared by everyone every 12 hours. GitHub uses the submission time to award the first eligible request. After submitting, follow the yard link in your issue. Refresh the profile once GitHub records your visit to see the puppies greet you for one minute.
+        One free bowl is shared every 12 hours. Submit this issue to request credit under your signed-in GitHub username. The first eligible submission earns a leaderboard point.
 
-        If another visitor gets there first, **Feed & Play** in the yard shows when the next free visit opens.
+        Return to your yard tab to continue the animation. If you closed it, [replay the one-minute visit](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?replay=1).
   - type: checkboxes
     id: credit
     attributes:
