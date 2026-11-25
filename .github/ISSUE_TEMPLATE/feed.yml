@@ -5,9 +5,9 @@ body:
   - type: markdown
     attributes:
       value: |
-        One free bowl is shared every 12 hours. Submit this issue to request credit under your signed-in GitHub username. The first eligible submission earns a leaderboard point.
+        Everyone shares one free bowl every 12 hours. The first eligible request earns one leaderboard point under your GitHub username.
 
-        Return to your yard tab to continue the animation. If you closed it, [replay the one-minute visit](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?replay=1).
+        [Return to Pip’s yard to play the one-minute visit.](https://github.com/Kaustubhdalvi#pips-yard)
   - type: checkboxes
     id: credit
     attributes:
