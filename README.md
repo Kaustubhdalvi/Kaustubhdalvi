@@ -24,12 +24,13 @@ I’m exploring how mixtures of specialized models can work together in the next
 ## Pip’s yard
 
 <!-- yard:start -->
-<picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies chase a ball near the balloons. When it rolls away, they fetch their mother to play. The ball returns, and she eats beside the tree before going back to sleep.">
-</picture>
 
-<a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?visit=1"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-feed-play.svg?ready" alt="Feed &amp; Play — Free now · every 12h"></a>
+Feed & Play · 1 min
+
+https://github.com/user-attachments/assets/7e79b9cf-6f3f-4ce1-b587-f981b0a55db6
+
+[Record a leaderboard visit on GitHub](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml) · Free now · every 12h
+
 <!-- yard:end -->
 
 <!-- community:start -->
