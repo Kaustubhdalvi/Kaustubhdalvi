@@ -25,20 +25,24 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 <!-- yard:start -->
 <picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies chase a ball near the balloons. When it rolls away, they fetch their mother to play. The ball returns, and she eats beside the tree before going back to sleep.">
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-visitor-braids.svg?visit=free-1">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-visitor-braids-still.png?visit=free-1" width="576" height="84" alt="A visitor kneels to feed both puppies, plays fetch with them, and waves goodbye while their mother naps beside the doghouse.">
 </picture>
 
-<a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?visit=1"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-feed-play.svg?ready" alt="Feed &amp; Play — Free now · every 12h"></a>
+<a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?visit=1&amp;free_at=2026-11-26T10%3A09%3A27Z#methods"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-feed-play.svg?free_at=2026-11-26T10%3A09%3A27Z" alt="Feed &amp; Play — Next free · 2026-11-26 10:09:27 UTC"></a>
 <!-- yard:end -->
 
 <!-- community:start -->
 
 **Bookshelf** · [![Suggest a book](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-book.svg)](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
 
-<details><summary>Garden leaderboard · 0 recorded visits</summary>
+<details><summary>Garden leaderboard · 1 recorded visit</summary>
 
-The first credited visit will appear here.
+Free leaderboard entries are at least 12 hours apart.
+
+| Rank | Garden visitor | Meals |
+| ---: | :--- | ---: |
+| 1 🥇 | [@Kaustubhdalvi](https://github.com/Kaustubhdalvi) | 1 |
 
 </details>
 

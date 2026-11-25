@@ -1,5 +1,7 @@
 {
-  "observed": [],
+  "observed": [
+    1
+  ],
   "extra_requests": [],
   "pending": []
 }

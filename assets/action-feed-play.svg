@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="190" height="44" viewBox="0 0 190 44" role="img" aria-labelledby="label">
-  <title id="label">Feed &amp; Play — Free now · every 12h</title>
-  <rect x=".5" y=".5" width="189" height="43" rx="9" fill="#edf1e7" stroke="#91a690"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="254" height="44" viewBox="0 0 254 44" role="img" aria-labelledby="label">
+  <title id="label">Feed &amp; Play — Next free · 2026-11-26 10:09:27 UTC</title>
+  <rect x=".5" y=".5" width="253" height="43" rx="9" fill="#edf1e7" stroke="#91a690"/>
   <g transform="translate(11 13)" stroke="#35594d" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M1 8h21l-2.5 7H3.5z" fill="#d7e4d0"/>
     <path d="M1 15.5h21M4 8c0-2 2-3.4 4-2.7M11 5.8a3 3 0 0 1 6-.4" fill="none"/>
@@ -8,7 +8,7 @@
   </g>
   <g font-family="Arial,Helvetica,sans-serif">
     <text x="43" y="19" fill="#243c32" font-size="14" font-weight="700">Feed &amp; Play</text>
-    <text x="43" y="33" fill="#3e5648" font-size="11">Free now · every 12h</text>
+    <text x="43" y="33" fill="#3e5648" font-size="11">Next free · 2026-11-26 10:09:27 UTC</text>
   </g>
-  <path d="m175 18 4 4-4 4" fill="none" stroke="#48684f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="m239 18 4 4-4 4" fill="none" stroke="#48684f" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
