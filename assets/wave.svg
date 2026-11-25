@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 28" width="700" height="28" aria-hidden="true">
+<style>
+@keyframes tide{to{transform:translateX(-224px)}}
+@keyframes undertow{from{transform:translateX(-224px)}to{transform:translateX(0)}}
+.tide{animation:tide 15s linear infinite}.undertow{animation:undertow 21s linear infinite}
+@media(prefers-reduced-motion:reduce){.tide,.undertow{animation:none}}
+</style>
+  <g class="undertow"><path d="M-224 15q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0V27H-224Z" fill="#7e9eaf" opacity=".18"/><path d="M-224 15q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0" fill="none" stroke="#7b9aaa" stroke-width="1.1" opacity=".68"/></g>
+  <g class="tide"><path d="M-224 17q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0V27H-224Z" fill="#729c87" opacity=".34"/><path d="M-224 17q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0" fill="none" stroke="#648c7c" stroke-width="1.1" opacity=".68"/></g>
+</svg>
