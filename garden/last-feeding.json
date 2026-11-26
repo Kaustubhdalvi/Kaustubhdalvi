@@ -1,13 +1,15 @@
 {
   "version": 1,
   "event": {
-    "id": "free-1",
+    "id": "discussion-DC_kwDOGewqxM4BL9a3",
     "kind": "free",
-    "issue_number": 1,
-    "issued_at": "2026-11-25T22:09:27Z",
-    "visitor": "braids",
-    "started_at": "2026-11-25T22:09:39Z",
+    "issue_number": 3,
+    "issued_at": "2026-11-26T05:41:36Z",
+    "visitor": "cap",
+    "comment_id": "DC_kwDOGewqxM4BL9a3",
+    "discussion_number": 3,
+    "started_at": "2026-11-26T05:41:36Z",
     "duration_seconds": 60
   },
-  "next_free_at": null
+  "next_free_at": "2026-11-26T17:41:36Z"
 }

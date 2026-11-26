@@ -27,9 +27,9 @@ I’m exploring how mixtures of specialized models can work together in the next
 <p><picture>
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard.gif">
   <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
-</picture><br><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/yard-guest-sign.svg?guest=" width="576" height="46" alt="Garden sign awaiting its first guest."></p>
+</picture><br><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/yard-guest-sign.svg?guest=Kaustubhdalvi" width="576" height="46" alt="Garden sign for @Kaustubhdalvi"></p>
 
-[Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) · Post `feed` or `fetch` as a top-level comment. One free visit every 12 hours. The bowl is ready.
+[Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) · Post `feed` or `fetch` as a top-level comment. The next free visit opens at 2026-11-26 17:41:36 UTC. [Extra visit options](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods)
 
 <!-- yard:end -->
 
@@ -37,9 +37,13 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 **Bookshelf** · [![Suggest a book](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-book.svg)](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
 
-<details><summary>Garden leaderboard · 0 recorded visits</summary>
+<details><summary>Garden leaderboard · 1 recorded visit</summary>
 
-The first credited visit will appear here.
+Free leaderboard entries are at least 12 hours apart.
+
+| Rank | Garden visitor | Meals |
+| ---: | :--- | ---: |
+| 1 🥇 | [@Kaustubhdalvi](https://github.com/Kaustubhdalvi) | 1 |
 
 </details>
 

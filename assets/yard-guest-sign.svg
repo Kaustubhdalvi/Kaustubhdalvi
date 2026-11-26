@@ -1,16 +1,16 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 46" width="576" height="46" role="img" aria-labelledby="title">
-  <title id="title">Garden sign awaiting its first guest.</title>
+  <title id="title">Garden sign for @Kaustubhdalvi</title>
   <g shape-rendering="crispEdges">
     <path fill="#739462" d="M379 40h6v2h-6zm6-3h2v3h-2zm38 3h7v2h-7zm7-3h2v3h-2z"/>
     <path fill="#9cab75" d="M393 41h6v2h-6zm31 2h11v2h-11z"/>
     <path fill="#8e6a47" d="M398 0h4v40h-4zm14 0h4v40h-4z"/>
-    <rect x="309" y="3" width="194" height="33" rx="2" fill="#72543b"/>
-    <rect x="311" y="5" width="190" height="28" rx="1" fill="#edd8a7"/>
-    <path fill="#92704d" d="M314 16h2v2h-2zm180 0h2v2h-2z"/>
-    <path fill="#9d805d" d="M485 30h10v1h-10z"/>
+    <rect x="328" y="3" width="156" height="33" rx="2" fill="#72543b"/>
+    <rect x="330" y="5" width="152" height="28" rx="1" fill="#edd8a7"/>
+    <path fill="#92704d" d="M333 16h2v2h-2zm142 0h2v2h-2z"/>
+    <path fill="#9d805d" d="M466 30h10v1h-10z"/>
   </g>
   <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" text-anchor="middle" fill="#42392b">
     <text x="406" y="14" font-size="8" letter-spacing="1.1">LATEST GUEST</text>
-    <text x="406" y="29" font-size="15" font-weight="600">Be the first guest</text>
+    <text x="406" y="29" font-size="15" font-weight="600">@Kaustubhdalvi</text>
   </g>
 </svg>
