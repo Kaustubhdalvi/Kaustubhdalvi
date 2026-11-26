@@ -14,6 +14,8 @@ from urllib.request import build_opener, HTTPRedirectHandler, Request
 
 START = "<!-- community:start -->"
 END = "<!-- community:end -->"
+VISIT_START = "<!-- pip-visit:start -->"
+VISIT_END = "<!-- pip-visit:end -->"
 FEED = "Feed the profile puppies"
 VISIT = "Record a feed & play visit"
 BOOK = "Suggest a book for the bookshelf"
@@ -76,7 +78,7 @@ class NoRedirect(HTTPRedirectHandler):
         return None
 
 
-def github_repository(query, variables, token):
+def github_graphql(query, variables, token):
     request = Request(
         "https://api.github.com/graphql",
         data=json.dumps({"query": query, "variables": variables}).encode(),
@@ -86,8 +88,12 @@ def github_repository(query, variables, token):
     with build_opener(NoRedirect()).open(request, timeout=45) as response:
         result = json.load(response)
     if result.get("errors"):
-        raise ValueError("GitHub could not read the complete community history.")
-    return result["data"]["repository"]
+        raise ValueError("GitHub could not complete the community request.")
+    return result["data"]
+
+
+def github_repository(query, variables, token):
+    return github_graphql(query, variables, token)["repository"]
 
 
 def load_github_page(variables, token):
@@ -335,15 +341,53 @@ def render(issues, repository, extra_meals=False, events=None, guestbook=None):
     return block
 
 
-def replace_block(readme, block):
-    starts = list(re.finditer(r"(?m)^" + re.escape(START) + r"\r?$", readme))
-    ends = list(re.finditer(r"(?m)^" + re.escape(END) + r"\r?$", readme))
+def replace_block(readme, block, start_marker=START, end_marker=END):
+    starts = list(re.finditer(r"(?m)^" + re.escape(start_marker) + r"\r?$", readme))
+    ends = list(re.finditer(r"(?m)^" + re.escape(end_marker) + r"\r?$", readme))
     if len(starts) != 1 or len(ends) != 1 or starts[0].start() >= ends[0].start():
-        raise ValueError("README.md needs one ordered pair of community markers.")
+        raise ValueError("Expected one ordered pair of markers: {} and {}".format(start_marker, end_marker))
     newline = "\r\n" if readme[starts[0].end() - 1] == "\r" else "\n"
     # Keep the original final newline and every byte outside the marker block.
     end = ends[0].end() - (1 if readme[ends[0].end() - 1] == "\r" else 0)
     return readme[:starts[0].start()] + block.replace("\n", newline) + readme[end:]
+
+
+def visit_block(next_free_at, now):
+    opens = utc_time(next_free_at) if next_free_at else None
+    if opens and opens > now:
+        india = opens.astimezone(timezone(timedelta(hours=5, minutes=30)))
+        status = "**Next free visit** · " + india.strftime("%d %b %Y at %I:%M:%S %p IST")
+    else:
+        status = "**The puppies are ready for a visit 🐾**"
+    return "\n\n".join([VISIT_START, "**How would you spend a minute with the puppies?**",
+                        "Leave a new top-level comment with just one word.",
+                        " · ".join("`{}`".format(word) for word in CARE_WORDS), status, VISIT_END])
+
+
+def sync_guestbook(repository, number, next_free_at, token):
+    # Fetch the current starter immediately before patching its opted-in block.
+    owner, name = repository.split("/")
+    query = """query VisitPost($owner: String!, $name: String!, $number: Int!) {
+      repository(owner: $owner, name: $name) { discussion(number: $number) { id body viewerCanUpdate } }
+    }"""
+    post = github_repository(query, {"owner": owner, "name": name, "number": number}, token)["discussion"]
+    if not post:
+        raise ValueError("The configured guestbook discussion is unavailable.")
+    before = post["body"]
+    if VISIT_START not in before and VISIT_END not in before:
+        return
+    block = visit_block(next_free_at, datetime.now(timezone.utc))
+    after = replace_block(before, block, VISIT_START, VISIT_END)
+    if before == after:
+        return
+    if not post["viewerCanUpdate"]:
+        raise ValueError("The workflow cannot edit the configured guestbook discussion.")
+    mutation = """mutation VisitPostUpdate($id: ID!, $body: String!) {
+      updateDiscussion(input: {discussionId: $id, body: $body}) { discussion { id body } }
+    }"""
+    result = github_graphql(mutation, {"id": post["id"], "body": after}, token)["updateDiscussion"]["discussion"]
+    if result["id"] != post["id"] or result["body"] != after:
+        raise ValueError("GitHub did not confirm the expected guestbook update.")
 
 
 def main():
@@ -353,12 +397,21 @@ def main():
     parser.add_argument("--repository", default=os.getenv("GITHUB_REPOSITORY", "Kaustubhdalvi/Kaustubhdalvi"))
     parser.add_argument("--check", action="store_true", help="exit 1 if the README needs updating")
     parser.add_argument("--garden", action="store_true", help="also reconcile the visitor scene and event files")
+    parser.add_argument("--sync-guestbook", action="store_true", help="update only the guestbook starter using the reconciled public state")
     parser.add_argument("--installed-at", help="UTC timestamp when the garden was added to the default branch")
     args = parser.parse_args()
     if args.garden and not args.installed_at:
         parser.error("--garden requires --installed-at from the first ledger commit")
     root = args.readme.parent
     guestbook_number = guestbook_config(root)
+    if args.sync_guestbook:
+        if args.fixture or args.check or args.garden:
+            parser.error("--sync-guestbook runs separately after garden reconciliation")
+        if guestbook_number:
+            from garden import PUBLIC_STATE
+            state = json.loads((root / PUBLIC_STATE).read_bytes())
+            sync_guestbook(args.repository, guestbook_number, state["next_free_at"], os.environ["GH_TOKEN"])
+        return 0
     guestbook = None
     if args.fixture:
         fixture = json.loads(args.fixture.read_text(encoding="utf-8"))
