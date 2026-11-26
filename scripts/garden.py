@@ -6,7 +6,6 @@ import math
 from pathlib import Path
 import re
 import sys
-from urllib.parse import quote
 
 DURATION = 60
 PUBLIC_STATE = Path("garden/last-feeding.json")
@@ -97,12 +96,12 @@ def yard_picture(repository, guestbook_number, next_free_at, now, care_words):
         owner, name = repository.split("/")
         guestbook = f"https://github.com/{repository}/discussions/{guestbook_number}"
         biscuits = f"https://{owner.lower()}.github.io/{name}/feed-and-play.html#methods"
-        section.extend(["", "<p>"])
-        for label, href, color in (("Sit with the pups 🐾", guestbook, "35594D"),
-                                   ("Buy the pups a biscuit 🦴", biscuits, "805233")):
-            badge = f"https://img.shields.io/badge/{quote(label)}-{color}?style=flat"
-            section.append(f'  <a href="{href}"><img src="{badge}" alt="{label}" height="28"></a>')
-        section.append("</p>")
+        section.extend([
+            "", "<p>",
+            f'  <a href="{guestbook}"><img src="{base}action-sit.svg" alt="Sit with the pups 🐾"></a>',
+            f'  <a href="{biscuits}"><img src="{base}action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>',
+            "</p>",
+        ])
     section.extend(["", "<!-- yard:end -->"])
     return "\n".join(section)
 
