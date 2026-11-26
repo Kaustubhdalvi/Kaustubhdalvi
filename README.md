@@ -30,8 +30,8 @@ I’m exploring how mixtures of specialized models can work together in the next
 </picture></p>
 
 <p>
-  <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3"><img src="https://img.shields.io/badge/Sit%20with%20the%20pups%20%F0%9F%90%BE-35594D?style=flat" alt="Sit with the pups 🐾" height="28"></a>
-  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods"><img src="https://img.shields.io/badge/Buy%20the%20pups%20a%20biscuit%20%F0%9F%A6%B4-805233?style=flat" alt="Buy the pups a biscuit 🦴" height="28"></a>
+  <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-sit.svg" alt="Sit with the pups 🐾"></a>
+  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>
 </p>
 
 <!-- yard:end -->
