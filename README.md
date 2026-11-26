@@ -20,8 +20,9 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 <!-- yard:start -->
 <p><picture>
+  <source type="image/svg+xml" media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard-hd.svg">
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="100%" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard-hd-still.png" width="100%" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
 </picture></p>
 
 <p>
