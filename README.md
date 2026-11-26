@@ -7,7 +7,6 @@
 </h1>
 
 I build evaluation environments that help answer a practical question: how do we know an AI coding agent solved the problem it was given? I write automated tests in Python and investigate cases where the score and the software’s behavior tell different stories. I’m also exploring which parts of a complex task benefit from a specialist model and how to measure that benefit.
-
 I’d love to hear what you’re exploring in AI or quantum computing and what drew you to it.
 
 <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a>
