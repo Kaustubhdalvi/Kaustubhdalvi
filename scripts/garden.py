@@ -7,6 +7,8 @@ from pathlib import Path
 import re
 import sys
 
+VISITORS_START = "<!-- visitors:start -->"
+VISITORS_END = "<!-- visitors:end -->"
 DURATION = 60
 PUBLIC_STATE = Path("garden/last-feeding.json")
 LEDGER = Path(".github/garden-ledger.json")
@@ -89,7 +91,7 @@ def yard_picture(repository, guestbook_number, next_free_at, now, care_words):
         '  <source type="image/svg+xml" media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard-hd.svg">'.format(base),
         '  <source media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard.gif">'.format(base),
         '  <img src="{}pip-guest-yard-hd-still.png" width="100%" alt="{}">'.format(base, YARD_ALT),
-        "</picture></p>",
+        "</picture></p>", "", VISITORS_START, VISITORS_END,
     ]
     if guestbook_number is not None:
         if type(guestbook_number) is not int or guestbook_number < 1:

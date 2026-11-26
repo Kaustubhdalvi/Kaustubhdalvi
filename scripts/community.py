@@ -225,7 +225,7 @@ def record_meal(events, kind, request, number, when, choice, comment=None):
     events.append(event)
 
 
-def build_community(issues, repository, extra_meals=False, events=None, guestbook=None):
+def build_community(issues, repository, extra_meals=False, events=None, guestbook=None, *, yard_caption=None):
     if not re.fullmatch(r"[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+", repository):
         raise ValueError("Expected a GitHub owner/repository name.")
     free = Counter()
@@ -304,23 +304,36 @@ def build_community(issues, repository, extra_meals=False, events=None, guestboo
     totals = free + extras
     visits = sum(totals.values())
     noun = "visit" if visits == 1 else "visits"
-    lines.extend(["", "<details><summary>Garden leaderboard · {} recorded {}</summary>".format(visits, noun), ""])
-    if totals:
-        lines.extend(["Free leaderboard entries are at least 12 hours apart.", ""])
-        if extras:
-            lines.extend(["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"])
+    ranked = sorted(totals, key=lambda user: (-totals[user], first_meal[user]))
+    if yard_caption is not None and len(ranked) <= 1:
+        if ranked:
+            person = credited_user(logins[ranked[0]])
+            yard_caption.append(f"*Visited by {person} · {visits} {noun}*")
         else:
-            lines.extend(["| Rank | Garden visitor | Meals |", "| ---: | :--- | ---: |"])
-        ranked = sorted(totals, key=lambda user: (-totals[user], first_meal[user]))
-        for rank, person in enumerate(ranked, start=1):
-            cells = [str(rank) + MEDALS.get(rank, ""), credited_user(logins[person])]
-            if extras:
-                cells.extend([str(free[person]), str(extras[person])])
-            cells.append(str(totals[person]))
-            lines.append("| " + " | ".join(cells) + " |")
+            yard_caption.append("*Be the first to visit.*")
     else:
-        lines.append("The first credited visit will appear here.")
-    lines.extend(["", "</details>", "", END])
+        board = lines if yard_caption is None else yard_caption
+        if yard_caption is None:
+            summary = f"Garden leaderboard · {visits} recorded {noun}"
+        else:
+            summary = f"<em>Visited by {len(ranked)} people · {visits} visits</em>"
+        board.extend(["", f"<details><summary>{summary}</summary>", ""])
+        if ranked:
+            board.extend(["Free leaderboard entries are at least 12 hours apart.", ""])
+            if extras:
+                board.extend(["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"])
+            else:
+                board.extend(["| Rank | Garden visitor | Meals |", "| ---: | :--- | ---: |"])
+            for rank, person in enumerate(ranked, start=1):
+                cells = [str(rank) + MEDALS.get(rank, ""), credited_user(logins[person])]
+                if extras:
+                    cells.extend([str(free[person]), str(extras[person])])
+                cells.append(str(totals[person]))
+                board.append("| " + " | ".join(cells) + " |")
+        else:
+            board.append("The first credited visit will appear here.")
+        board.extend(["", "</details>"])
+    lines.extend(["", END])
     next_free_at = (last[0] + COOLDOWN).isoformat().replace("+00:00", "Z") if last else None
     return "\n".join(lines), next_free_at
 
@@ -331,11 +344,11 @@ def render(issues, repository, extra_meals=False, events=None, guestbook=None):
     return block
 
 
-def replace_block(readme, block):
-    starts = list(re.finditer(r"(?m)^" + re.escape(START) + r"\r?$", readme))
-    ends = list(re.finditer(r"(?m)^" + re.escape(END) + r"\r?$", readme))
+def replace_block(readme, block, start=START, finish=END):
+    starts = list(re.finditer(r"(?m)^" + re.escape(start) + r"\r?$", readme))
+    ends = list(re.finditer(r"(?m)^" + re.escape(finish) + r"\r?$", readme))
     if len(starts) != 1 or len(ends) != 1 or starts[0].start() >= ends[0].start():
-        raise ValueError("README.md needs one ordered pair of community markers.")
+        raise ValueError(f"README.md needs one ordered pair of markers: {start} and {finish}.")
     newline = "\r\n" if readme[starts[0].end() - 1] == "\r" else "\n"
     # Keep the original final newline and every byte outside the marker block.
     end = ends[0].end() - (1 if readme[ends[0].end() - 1] == "\r" else 0)
@@ -370,12 +383,14 @@ def main():
         issues = load_issues(args.repository, token)
         if guestbook_number:
             guestbook = load_guestbook(args.repository, guestbook_number, token)
+    from garden import VISITORS_START, VISITORS_END
     before = args.readme.read_bytes()
+    yard_caption = [] if args.garden or VISITORS_START.encode() in before else None
     # The optional issue form is installed on the trusted default branch at activation.
     active_form = args.readme.parent / ".github" / "ISSUE_TEMPLATE" / "extra-meal.yml"
     events = [] if args.garden else None
     block, next_free_at = build_community(issues, args.repository, extra_meals=active_form.is_file(), events=events,
-                                          guestbook=guestbook)
+                                          guestbook=guestbook, yard_caption=yard_caption)
     updated_readme = replace_block(before.decode("utf-8"), block)
     files = {}
     if args.garden:
@@ -383,6 +398,9 @@ def main():
         updated_readme, files = reconcile_files(args.readme.parent, updated_readme, issues, events,
                                                 args.repository, args.installed_at, next_free_at,
                                                 guestbook_number=guestbook_number, care_words=CARE_WORDS)
+    if yard_caption is not None:
+        caption = "\n".join([VISITORS_START, "", *yard_caption, "", VISITORS_END])
+        updated_readme = replace_block(updated_readme, caption, VISITORS_START, VISITORS_END)
     files[args.readme] = updated_readme.encode("utf-8")
     changed = {path: data for path, data in files.items() if not path.is_file() or path.read_bytes() != data}
     if changed and args.check:
