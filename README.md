@@ -27,7 +27,7 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 <!-- visitors:start -->
 
-*Visited by [@Kaustubhdalvi](https://github.com/Kaustubhdalvi) · 1 visit*
+*[@Kaustubhdalvi](https://github.com/Kaustubhdalvi) · 1*
 
 <!-- visitors:end -->
 
