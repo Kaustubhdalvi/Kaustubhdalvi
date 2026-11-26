@@ -205,10 +205,8 @@ def book_field(body, label, limit):
         return ""
     if len(value.splitlines()) != 1 or any(unicodedata.category(c).startswith("C") for c in value):
         return ""
-    # Markdown inside inline HTML can still be parsed by GitHub. Numeric entities
-    # keep all punctuation literal, including links, images, mentions and tags.
-    escaped = "".join(c if c.isalnum() or c == " " else "&#{};".format(ord(c)) for c in value)
-    return "<code>" + escaped + "</code>"
+    # Keep punctuation in the submitted title and author literal in Markdown.
+    return "".join(c if c.isalnum() or c == " " else "&#{};".format(ord(c)) for c in value)
 
 
 def credited_user(login):
@@ -296,14 +294,12 @@ def build_community(issues, repository, extra_meals=False, events=None, guestboo
 
     issue_url = "https://github.com/{}/issues/".format(repository)
     book_form = "https://github.com/{}/issues/new?template=book.yml".format(repository)
-    book_chip = "https://raw.githubusercontent.com/{}/main/assets/action-book.svg".format(repository)
-    lines = [START, "", "**Bookshelf** · [![Suggest a book]({})]({})".format(book_chip, book_form)]
-    if books:
-        lines.append("")
-        for number, person, title, author in reversed(books[-3:]):
-            work = title + (" by " + author if author else "")
-            lines.append("- {} · {} · [suggestion #{}]({}{})".format(
-                work, credited_user(logins[person]), number, issue_url, number))
+    heading = "Readers’ picks" if len(books) > 1 else "Reader’s pick"
+    lines = [START, "", f"**{heading}**<br>"]
+    for number, person, title, author in reversed(books[-3:]):
+        byline = f" by {author}" if author else ""
+        lines.append(f"*[{title}]({issue_url}{number})*{byline}, picked by {credited_user(logins[person])}<br>")
+    lines.append(f"[Leave a recommendation ↗]({book_form})")
 
     totals = free + extras
     visits = sum(totals.values())
