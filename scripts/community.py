@@ -1,4 +1,4 @@
-"""Rebuild the profile's public garden credits and bookshelf from GitHub issues."""
+"""Rebuild public garden credits and bookshelf from GitHub issues and one guestbook."""
 
 import argparse
 from collections import Counter
@@ -48,23 +48,47 @@ query CommunityIssues($owner: String!, $name: String!, $after: String) {
 """
 
 
+DISCUSSION_QUERY = """
+query GardenGuestbook($owner: String!, $name: String!, $number: Int!, $after: String) {
+  repository(owner: $owner, name: $name) {
+    discussion(number: $number) {
+      number createdAt
+      comments(first: 100, after: $after) {
+        nodes {
+          id databaseId body createdAt lastEditedAt deletedAt isMinimized
+          author { __typename login ... on User { id } }
+          replyTo { id }
+          discussion { number }
+        }
+        pageInfo { hasNextPage endCursor }
+      }
+    }
+  }
+}
+"""
+
+
 class NoRedirect(HTTPRedirectHandler):
     def redirect_request(self, *args):
         return None
 
 
-def load_github_page(variables, token):
+def github_repository(query, variables, token):
     request = Request(
         "https://api.github.com/graphql",
-        data=json.dumps({"query": ISSUE_QUERY, "variables": variables}).encode(),
+        data=json.dumps({"query": query, "variables": variables}).encode(),
         headers={"Authorization": "Bearer " + token, "Content-Type": "application/json",
                  "User-Agent": "github-profile-garden"},
     )
     with build_opener(NoRedirect()).open(request, timeout=45) as response:
         result = json.load(response)
     if result.get("errors"):
-        raise ValueError("GitHub could not read the full issue history.")
-    repository = result["data"]["repository"]
+        raise ValueError("GitHub could not read the complete community history.")
+    return result["data"]["repository"]
+
+
+def load_github_page(variables, token):
+    repository = github_repository(ISSUE_QUERY, variables, token)
     owner = repository["owner"]
     page = repository["issues"]
     for issue in page["nodes"]:
@@ -72,23 +96,92 @@ def load_github_page(variables, token):
     return page
 
 
+def pages(variables, token, get_page):
+    seen_cursors = set()
+    while True:
+        page = get_page(variables, token)
+        yield page
+        info = page["pageInfo"]
+        if not info["hasNextPage"]:
+            return
+        cursor = info["endCursor"]
+        if not cursor or cursor in seen_cursors:
+            raise ValueError("GitHub returned an incomplete community history.")
+        seen_cursors.add(cursor)
+        variables["after"] = cursor
+
+
 def load_issues(repository, token, get_page=load_github_page):
     owner, name = repository.split("/")
     variables = {"owner": owner, "name": name, "after": None}
-    seen_cursors = set()
     records = {}
-    while True:
-        page = get_page(variables, token)
+    for page in pages(variables, token, get_page):
         for issue in page["nodes"]:
             records[issue["number"]] = issue
-        info = page["pageInfo"]
-        if not info["hasNextPage"]:
-            return list(records.values())
-        cursor = info["endCursor"]
-        if not cursor or cursor in seen_cursors:
-            raise ValueError("GitHub returned an incomplete issue history.")
-        seen_cursors.add(cursor)
-        variables["after"] = cursor
+    return list(records.values())
+
+
+def guestbook_page(variables, token):
+    discussion = github_repository(DISCUSSION_QUERY, variables, token)["discussion"]
+    if discussion is None or discussion["number"] != variables["number"]:
+        raise ValueError("The configured guestbook discussion is unavailable.")
+    return {**discussion["comments"], "createdAt": discussion["createdAt"]}
+
+
+def load_guestbook(repository, number, token, get_page=guestbook_page):
+    owner, name = repository.split("/")
+    variables = {"owner": owner, "name": name, "number": number, "after": None}
+    records = {}
+    opened = None
+    for page in pages(variables, token, get_page):
+        if opened is not None and page["createdAt"] != opened:
+            raise ValueError("The configured guestbook changed during pagination.")
+        opened = page["createdAt"]
+        for comment in page["nodes"]:
+            if comment is not None:
+                records[comment["id"]] = comment
+    return {"number": number, "createdAt": opened, "comments": list(records.values())}
+
+
+def guestbook_config(root):
+    path = root / "garden" / "guestbook.json"
+    if not path.exists():
+        return None
+    number = json.loads(path.read_bytes()).get("number")
+    if type(number) is not int or not 0 < number <= 2147483647:
+        raise ValueError("garden/guestbook.json must contain a positive GitHub discussion number.")
+    return number
+
+
+def utc_time(value):
+    when = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if when.tzinfo is None:
+        raise ValueError("GitHub creation time is missing its offset.")
+    return when.astimezone(timezone.utc)
+
+
+def submissions(issues, guestbook):
+    records = []
+    unique_issues = {issue["number"]: issue for issue in issues}
+    for number, issue in unique_issues.items():
+        records.append(((utc_time(issue["createdAt"]), 0, number, ""), issue))
+    if guestbook:
+        discussion_number = guestbook["number"]
+        opened = utc_time(guestbook["createdAt"])
+        comments = {comment["id"]: comment for comment in guestbook["comments"]}
+        for node_id, comment in comments.items():
+            if (comment["discussion"]["number"] != discussion_number or comment.get("replyTo") is not None
+                    or comment.get("isMinimized") or comment.get("deletedAt") or comment.get("lastEditedAt")):
+                continue
+            when = utc_time(comment["createdAt"])
+            if when < opened or (comment.get("body") or "").strip().casefold() not in ("feed", "fetch"):
+                continue
+            database_id = comment.get("databaseId")
+            # GitHub's original numeric ID orders simultaneous comments when available.
+            # Null IDs sort after numbered comments, then by their immutable node ID.
+            tie = database_id if type(database_id) is int else float("inf")
+            records.append(((when, 1, tie, node_id), comment))
+    return sorted(records, key=lambda item: item[0])
 
 
 def form_field(body, label):
@@ -118,15 +211,19 @@ def credited_user(login):
     return "[@{}](https://github.com/{})".format(login, login)
 
 
-def record_meal(events, kind, request, number, when, choice):
+def record_meal(events, kind, request, number, when, choice, comment=None):
     if events is None:
         return
     visitor = {"Cap": "cap", "Braids": "braids"}.get(choice, "cap" if number % 2 == 0 else "braids")
-    events.append({"id": "{}-{}".format(kind, request), "kind": kind, "issue_number": number,
-                   "issued_at": when.strftime("%Y-%m-%dT%H:%M:%SZ"), "visitor": visitor})
+    event = {"id": "{}-{}".format(kind, request), "kind": kind, "issue_number": number,
+             "issued_at": when.isoformat().replace("+00:00", "Z"), "visitor": visitor}
+    if comment:
+        event.update(id="discussion-" + comment["id"], comment_id=comment["id"], discussion_number=number,
+                     login=comment["author"]["login"])
+    events.append(event)
 
 
-def build_community(issues, repository, extra_meals=False, events=None):
+def build_community(issues, repository, extra_meals=False, events=None, guestbook=None):
     if not re.fullmatch(r"[a-zA-Z0-9_-]+/[a-zA-Z0-9_.-]+", repository):
         raise ValueError("Expected a GitHub owner/repository name.")
     free = Counter()
@@ -136,40 +233,45 @@ def build_community(issues, repository, extra_meals=False, events=None):
     first_meal = {}
     books = []
     last = None
-    # All timestamps are generated by GitHub. Lower issue numbers break ties
-    # when two submissions arrive during the same UTC second.
-    def creation_key(issue):
-        when = datetime.fromisoformat(issue["createdAt"].replace("Z", "+00:00"))
-        if when.tzinfo is None:
-            raise ValueError("GitHub issue creation time is missing its offset.")
-        return when.astimezone(timezone.utc), issue["number"]
-
-    for issue in sorted(issues, key=creation_key):
-        user = issue.get("author") or {}
-        if user.get("__typename") != "User" or not user.get("id") or not NAME.fullmatch(user["login"]):
+    cutoff = utc_time(guestbook["createdAt"]) if guestbook else None
+    for order, record in submissions(issues, guestbook):
+        when, is_comment, _, _ = order
+        user = record.get("author") or {}
+        if user.get("__typename") != "User" or not user.get("id") or not NAME.fullmatch(user.get("login") or ""):
             continue
         user_id = user["id"]
         logins[user_id] = user["login"]
-        renames = issue["timelineItems"]["nodes"]
-        original = renames[0]["previousTitle"] if renames else issue["title"]
-        when, number = creation_key(issue)
-        body = (issue.get("body") or "").replace("\r\n", "\n")
-        if issue["transfers"]["totalCount"]:
-            # Imported issues retain an older creation date from another repository.
-            continue
-        if original in (FEED, VISIT):
-            if not has_consent(body, "Feeding credit", FEED_CONSENT, VISIT_CONSENT, YARD_CONSENT):
+        body = (record.get("body") or "").replace("\r\n", "\n")
+        if is_comment:
+            number = guestbook["number"]
+            original = None
+            is_free = True
+            choice = "Braids" if body.strip().casefold() == "fetch" else "Cap"
+        else:
+            if record["transfers"]["totalCount"]:
                 continue
+            number = record["number"]
+            renames = record["timelineItems"]["nodes"]
+            original = renames[0]["previousTitle"] if renames else record["title"]
+            is_free = original in (FEED, VISIT)
+            if is_free and (cutoff is not None and when >= cutoff
+                            or not has_consent(body, "Feeding credit", FEED_CONSENT, VISIT_CONSENT, YARD_CONSENT)):
+                continue
+            choice = form_field(body, "Yard visitor") if is_free or original == EXTRA else ""
+
+        # Preserve previously approved extra meals when the old request form is retired.
+        count_extras = extra_meals or (cutoff is not None and when < cutoff)
+        if is_free:
             if last and when < last[0] + COOLDOWN:
                 continue
             free[user_id] += 1
-            first_meal.setdefault(user_id, (when, number))
+            first_meal.setdefault(user_id, order)
             last = (when, number, user_id)
-            record_meal(events, "free", number, number, when, form_field(body, "Yard visitor"))
-        elif extra_meals and original == EXTRA:
+            record_meal(events, "free", number, number, when, choice, record if is_comment else None)
+        elif count_extras and original == EXTRA:
             if has_consent(body, "Extra meal credit", EXTRA_CONSENT):
-                extra_requests[number] = (user_id, form_field(body, "Yard visitor"))
-        elif extra_meals and user_id == issue.get("repositoryOwnerId"):
+                extra_requests[number] = (user_id, choice)
+        elif count_extras and user_id == record.get("repositoryOwnerId"):
             confirmation = EXTRA_CONFIRMATION.fullmatch(original)
             if confirmation:
                 # The referenced request must already exist and belong to the visitor.
@@ -180,7 +282,7 @@ def build_community(issues, repository, extra_meals=False, events=None):
                     recipient, choice = claim
                     record_meal(events, "extra", request_number, number, when, choice)
                     extras[recipient] += 1
-                    first_meal.setdefault(recipient, (when, number))
+                    first_meal.setdefault(recipient, order)
         if original == BOOK:
             if not has_consent(body, "Bookshelf credit", BOOK_CONSENT):
                 continue
@@ -223,9 +325,9 @@ def build_community(issues, repository, extra_meals=False, events=None):
     return "\n".join(lines), next_free_at
 
 
-def render(issues, repository, extra_meals=False, events=None):
+def render(issues, repository, extra_meals=False, events=None, guestbook=None):
     """Return the profile Markdown for callers that only render the community section."""
-    block, _ = build_community(issues, repository, extra_meals, events)
+    block, _ = build_community(issues, repository, extra_meals, events, guestbook)
     return block
 
 
@@ -242,7 +344,7 @@ def replace_block(readme, block):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--fixture", type=Path, help="read a JSON array of issue nodes offline")
+    parser.add_argument("--fixture", type=Path, help="read issue nodes or an object with issues and guestbook offline")
     parser.add_argument("--readme", type=Path, default=Path("README.md"))
     parser.add_argument("--repository", default=os.getenv("GITHUB_REPOSITORY", "Kaustubhdalvi/Kaustubhdalvi"))
     parser.add_argument("--check", action="store_true", help="exit 1 if the README needs updating")
@@ -251,21 +353,38 @@ def main():
     args = parser.parse_args()
     if args.garden and not args.installed_at:
         parser.error("--garden requires --installed-at from the first ledger commit")
+    root = args.readme.parent
+    guestbook_number = guestbook_config(root)
+    guestbook = None
     if args.fixture:
-        issues = json.loads(args.fixture.read_text(encoding="utf-8"))
+        fixture = json.loads(args.fixture.read_text(encoding="utf-8"))
+        if isinstance(fixture, list):
+            issues = fixture
+        else:
+            issues = fixture["issues"]
+            guestbook = fixture.get("guestbook")
+            if guestbook and guestbook["number"] != guestbook_number:
+                raise ValueError("Fixture discussion must match garden/guestbook.json.")
     else:
-        issues = load_issues(args.repository, os.environ["GH_TOKEN"])
+        token = os.environ["GH_TOKEN"]
+        issues = load_issues(args.repository, token)
+        if guestbook_number:
+            guestbook = load_guestbook(args.repository, guestbook_number, token)
     before = args.readme.read_bytes()
     # The optional issue form is installed on the trusted default branch at activation.
     active_form = args.readme.parent / ".github" / "ISSUE_TEMPLATE" / "extra-meal.yml"
     events = [] if args.garden else None
-    block, next_free_at = build_community(issues, args.repository, extra_meals=active_form.is_file(), events=events)
+    block, next_free_at = build_community(issues, args.repository, extra_meals=active_form.is_file(), events=events,
+                                          guestbook=guestbook)
     updated_readme = replace_block(before.decode("utf-8"), block)
     files = {}
     if args.garden:
         from garden import reconcile_files
+        latest_signer = next((event["login"] for event in reversed(events) if event.get("login")), None)
         updated_readme, files = reconcile_files(args.readme.parent, updated_readme, issues, events,
-                                                args.repository, args.installed_at, next_free_at)
+                                                args.repository, args.installed_at, next_free_at,
+                                                guestbook_number=guestbook_number,
+                                                latest_login=latest_signer)
     files[args.readme] = updated_readme.encode("utf-8")
     changed = {path: data for path, data in files.items() if not path.is_file() or path.read_bytes() != data}
     if changed and args.check:
