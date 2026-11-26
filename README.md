@@ -24,12 +24,13 @@ I’m exploring how mixtures of specialized models can work together in the next
 ## Pip’s yard
 
 <!-- yard:start -->
-<picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies chase a ball near the balloons. When it rolls away, they fetch their mother to play. The ball returns, and she eats beside the tree before going back to sleep.">
-</picture>
+<p><picture>
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard.gif">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
+</picture><br><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/yard-guest-sign.svg?guest=" width="576" height="46" alt="Garden sign awaiting its first guest."></p>
 
-<a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html?visit=1"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-feed-play.svg?ready" alt="Feed &amp; Play — Free now · every 12h"></a>
+[Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) · Post `feed` or `fetch` as a top-level comment. One free visit every 12 hours. The bowl is ready.
+
 <!-- yard:end -->
 
 <!-- community:start -->
