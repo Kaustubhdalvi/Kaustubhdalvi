@@ -27,7 +27,7 @@ I’m exploring how mixtures of specialized models can work together in the next
 <p><picture>
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard.gif">
   <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
-</picture><br><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/yard-guest-sign.svg?guest=Kaustubhdalvi" width="576" height="46" alt="Garden sign for @Kaustubhdalvi"></p>
+</picture></p>
 
 [Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) · Post `feed` or `fetch` as a top-level comment. The next free visit opens at 2026-11-26 17:41:36 UTC. [Extra visit options](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods)
 
