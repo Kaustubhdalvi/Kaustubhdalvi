@@ -29,7 +29,11 @@ I’m exploring how mixtures of specialized models can work together in the next
   <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
 </picture></p>
 
-[Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) · Post `feed` or `fetch` as a top-level comment. The next free visit opens at 2026-11-26 17:41:36 UTC. [Extra visit options](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods)
+How would you spend a minute with the puppies? [Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) with one word.
+
+`pet` · `cuddle` · `treat` · `play` · `comfort` · `boop`
+
+The next free visit opens at 2026-11-26 17:41:36 UTC. [Extra visit options](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods)
 
 <!-- yard:end -->
 
