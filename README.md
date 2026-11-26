@@ -21,7 +21,7 @@ I’m exploring how mixtures of specialized models can work together in the next
 <!-- yard:start -->
 <p><picture>
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard.gif">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="100%" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
 </picture></p>
 
 <p>
@@ -55,5 +55,5 @@ Free leaderboard entries are at least 12 hours apart.
 
 <picture>
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave.svg">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave-still.svg" width="700" alt="">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave-still.svg" width="100%" alt="">
 </picture>
