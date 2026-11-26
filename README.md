@@ -13,6 +13,7 @@ I’m exploring how mixtures of specialized models can work together in the next
 <p>
   <a href="mailto:kaustubhdalvi.20@gmail.com"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-email.svg" width="28" height="28" alt="Email Kaustubh"></a>
   <a href="https://www.linkedin.com/in/kaustubhdalvi02/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-linkedin.svg" width="28" height="28" alt="Kaustubh on LinkedIn"></a>
+  <a href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-instagram.svg" width="28" height="28" alt="Instagram homepage"></a>
 </p>
 
 <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a>
