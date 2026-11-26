@@ -10,12 +10,6 @@ I build reinforcement learning environments for coding agents and write the Pyth
 
 I’m exploring how mixtures of specialized models can work together in the next generation of computing.
 
-<p>
-  <a href="mailto:kaustubhdalvi.20@gmail.com"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-email.svg" width="28" height="28" alt="Email Kaustubh"></a>
-  <a href="https://www.linkedin.com/in/kaustubhdalvi02/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-linkedin.svg" width="28" height="28" alt="Kaustubh on LinkedIn"></a>
-  <a href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-instagram.svg" width="28" height="28" alt="Instagram homepage"></a>
-</p>
-
 <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a>
 <p>
   <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Open the puzzle notebook"></a>
@@ -52,6 +46,12 @@ Free leaderboard entries are at least 12 hours apart.
 </details>
 
 <!-- community:end -->
+
+<p align="left">
+  <a href="https://www.linkedin.com/in/kaustubhdalvi02/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-linkedin.svg" width="28" height="28" alt="Kaustubh on LinkedIn"></a>
+  <a href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-instagram.svg" width="28" height="28" alt="Instagram homepage"></a>
+  <a href="mailto:kaustubhdalvi.20@gmail.com"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-email.svg" width="28" height="28" alt="Email Kaustubh"></a>
+</p>
 
 <picture>
   <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave.svg">
