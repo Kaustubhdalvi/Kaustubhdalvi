@@ -62,7 +62,7 @@ def reconcile(issues, accepted, public, ledger, now, installed_at):
             {"observed": sorted(observed), "extra_requests": sorted(consumed_extras), "pending": pending})
 
 
-def yard_picture(repository, guestbook_number, next_free_at, now):
+def yard_picture(repository, guestbook_number, next_free_at, now, care_words):
     base = "https://raw.githubusercontent.com/{}/main/assets/".format(repository)
     section = [
         "<!-- yard:start -->", "<p><picture>",
@@ -74,14 +74,16 @@ def yard_picture(repository, guestbook_number, next_free_at, now):
         if type(guestbook_number) is not int or guestbook_number < 1:
             raise ValueError("The guestbook discussion number must be a positive integer.")
         url = "https://github.com/{}/discussions/{}".format(repository, guestbook_number)
-        line = "[Sign the guestbook]({}) · Post `feed` or `fetch` as a top-level comment. ".format(url)
+        choices = " · ".join("`{}`".format(word) for word in care_words)
+        section.extend(["", "How would you spend a minute with the puppies? " +
+                        "[Sign the guestbook]({}) with one word.".format(url), "", choices])
         if next_free_at and instant(next_free_at) > now:
             opens = utc_string(instant(next_free_at)).replace("T", " ").replace("Z", " UTC")
             owner, name = repository.split("/")
             options = "https://{}.github.io/{}/feed-and-play.html#methods".format(owner.lower(), name)
-            line += "The next free visit opens at {}. [Extra visit options]({})".format(opens, options)
+            line = "The next free visit opens at {}. [Extra visit options]({})".format(opens, options)
         else:
-            line += "One free visit every 12 hours. The bowl is ready."
+            line = "One free visit every 12 hours. The bowl is ready."
         section.extend(["", line])
     section.extend(["", "<!-- yard:end -->"])
     return "\n".join(section)
@@ -101,7 +103,7 @@ def replace_yard(readme, picture):
 
 
 def reconcile_files(root, readme, issues, events, repository, installed_at, next_free_at,
-                    guestbook_number=None):
+                    *, care_words, guestbook_number=None):
     now = datetime.now(timezone.utc)
     public_path, ledger_path = root / PUBLIC_STATE, root / LEDGER
     previous = json.loads(public_path.read_bytes())
@@ -124,7 +126,7 @@ def reconcile_files(root, readme, issues, events, repository, installed_at, next
         elif current and "comment_id" in current:
             public["event"] = None
     public["next_free_at"] = next_free_at
-    picture = yard_picture(repository, guestbook_number, next_free_at, now)
+    picture = yard_picture(repository, guestbook_number, next_free_at, now, care_words)
     files = {path: (json.dumps(value, indent=2, ensure_ascii=True) + "\n").encode("utf-8")
              for path, value in [(public_path, public), (ledger_path, ledger)]}
     return replace_yard(readme, picture), files

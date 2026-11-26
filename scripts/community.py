@@ -26,6 +26,9 @@ YARD_CONSENT = "- [x] Credit my GitHub username for this visit to [Pip’s yard]
 BOOK_CONSENT = "- [x] List my suggestion and GitHub username on the public profile."
 MEDALS = {1: " 🥇", 2: " 🥈", 3: " 🥉"}
 COOLDOWN = timedelta(hours=12)
+CARE_WORDS = ("pet", "cuddle", "treat", "play", "comfort", "boop")
+# Replay each comment under the vocabulary posted in the guestbook at that time.
+CARE_WORDS_SINCE = datetime(2026, 11, 26, 7, 52, tzinfo=timezone.utc)
 NAME = re.compile(r"[a-zA-Z0-9][a-zA-Z0-9_-]{0,99}")
 ISSUE_QUERY = """
 query CommunityIssues($owner: String!, $name: String!, $after: String) {
@@ -174,7 +177,8 @@ def submissions(issues, guestbook):
                     or comment.get("isMinimized") or comment.get("deletedAt") or comment.get("lastEditedAt")):
                 continue
             when = utc_time(comment["createdAt"])
-            if when < opened or (comment.get("body") or "").strip().casefold() not in ("feed", "fetch"):
+            words = CARE_WORDS if when >= CARE_WORDS_SINCE else ("feed", "fetch")
+            if when < opened or (comment.get("body") or "").strip().casefold() not in words:
                 continue
             database_id = comment.get("databaseId")
             # GitHub's original numeric ID orders simultaneous comments when available.
@@ -382,7 +386,7 @@ def main():
         from garden import reconcile_files
         updated_readme, files = reconcile_files(args.readme.parent, updated_readme, issues, events,
                                                 args.repository, args.installed_at, next_free_at,
-                                                guestbook_number=guestbook_number)
+                                                guestbook_number=guestbook_number, care_words=CARE_WORDS)
     files[args.readme] = updated_readme.encode("utf-8")
     changed = {path: data for path, data in files.items() if not path.is_file() or path.read_bytes() != data}
     if changed and args.check:
