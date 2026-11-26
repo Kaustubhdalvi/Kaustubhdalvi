@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="318" height="64" viewBox="0 0 318 64" role="img" aria-labelledby="title">
-  <title id="title">Next free visit. 26 Nov 2026 at 11:11:36 PM IST</title>
+  <title id="title">Free visit. The puppies are ready for a visit 🐾</title>
   <rect x=".5" y=".5" width="317" height="63" rx="8" fill="#f1f7f2" stroke="#a6bfad"/>
   <g font-family="system-ui, sans-serif">
-    <text x="14" y="23" fill="#365442" font-size="13">Next free visit</text>
-    <text x="14" y="47" fill="#192f23" font-size="16" font-weight="600">26 Nov 2026 at 11:11:36 PM IST</text>
+    <text x="14" y="23" fill="#365442" font-size="13">Free visit</text>
+    <text x="14" y="47" fill="#192f23" font-size="16" font-weight="600">The puppies are ready for a visit 🐾</text>
   </g>
 </svg>
