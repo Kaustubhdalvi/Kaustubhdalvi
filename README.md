@@ -47,7 +47,7 @@ Free leaderboard entries are at least 12 hours apart.
 
 <!-- community:end -->
 
-<p align="left">
+<p align="right">
   <a href="https://www.linkedin.com/in/kaustubhdalvi02/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-linkedin.svg" width="28" height="28" alt="Kaustubh on LinkedIn"></a>
   <a href="https://www.instagram.com/"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-instagram.svg" width="28" height="28" alt="Instagram homepage"></a>
   <a href="mailto:kaustubhdalvi.20@gmail.com"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/contact-email.svg" width="28" height="28" alt="Email Kaustubh"></a>
