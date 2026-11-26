@@ -1,18 +1,15 @@
 """Render the profile yard and preserve its opt-in visit records."""
 
 from datetime import datetime, timezone
-from html import escape
 import json
 import math
 from pathlib import Path
 import re
 import sys
-from urllib.parse import quote
 
 DURATION = 60
 PUBLIC_STATE = Path("garden/last-feeding.json")
 LEDGER = Path(".github/garden-ledger.json")
-GUEST_SIGN = Path("assets/yard-guest-sign.svg")
 YARD_ALT = ("Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, "
             "plays fetch, and waves goodbye.")
 
@@ -65,45 +62,13 @@ def reconcile(issues, accepted, public, ledger, now, installed_at):
             {"observed": sorted(observed), "extra_requests": sorted(consumed_extras), "pending": pending})
 
 
-def guest_sign(login):
-    label = "@" + login if login else "Be the first guest"
-    alt = "Garden sign for " + label if login else "Garden sign awaiting its first guest."
-    # Center the sign under the doghouse door (x=406 in the 576px-wide scene).
-    # Managed enterprise handles can be longer than personal GitHub usernames.
-    display = label if len(label) <= 40 else label[:23] + "…" + label[-14:]
-    size = 15 if len(display) < 26 else 12
-    width = max(132, round(len(display) * size * .63) + 24)
-    left = 406 - width // 2
-    right = left + width
-    svg = f"""<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 46" width="576" height="46" role="img" aria-labelledby="title">
-  <title id="title">{escape(alt)}</title>
-  <g shape-rendering="crispEdges">
-    <path fill="#739462" d="M379 40h6v2h-6zm6-3h2v3h-2zm38 3h7v2h-7zm7-3h2v3h-2z"/>
-    <path fill="#9cab75" d="M393 41h6v2h-6zm31 2h11v2h-11z"/>
-    <path fill="#8e6a47" d="M398 0h4v40h-4zm14 0h4v40h-4z"/>
-    <rect x="{left}" y="3" width="{width}" height="33" rx="2" fill="#72543b"/>
-    <rect x="{left + 2}" y="5" width="{width - 4}" height="28" rx="1" fill="#edd8a7"/>
-    <path fill="#92704d" d="M{left + 5} 16h2v2h-2zm{width - 14} 0h2v2h-2z"/>
-    <path fill="#9d805d" d="M{right - 18} 30h10v1h-10z"/>
-  </g>
-  <g font-family="ui-monospace, SFMono-Regular, Consolas, monospace" text-anchor="middle" fill="#42392b">
-    <text x="406" y="14" font-size="8" letter-spacing="1.1">LATEST GUEST</text>
-    <text x="406" y="29" font-size="{size}" font-weight="600">{escape(display)}</text>
-  </g>
-</svg>
-"""
-    return alt, svg
-
-
-def yard_picture(repository, guestbook_number, next_free_at, latest_login, now):
+def yard_picture(repository, guestbook_number, next_free_at, now):
     base = "https://raw.githubusercontent.com/{}/main/assets/".format(repository)
-    sign_alt, svg = guest_sign(latest_login)
-    sign = GUEST_SIGN.name + "?guest=" + quote(latest_login or "", safe="")
     section = [
         "<!-- yard:start -->", "<p><picture>",
         '  <source media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard.gif">'.format(base),
         '  <img src="{}pip-ball-yard-still.png" width="576" height="84" alt="{}">'.format(base, YARD_ALT),
-        '</picture><br><img src="{}{}" width="576" height="46" alt="{}"></p>'.format(base, sign, escape(sign_alt, quote=True)),
+        "</picture></p>",
     ]
     if guestbook_number is not None:
         if type(guestbook_number) is not int or guestbook_number < 1:
@@ -119,7 +84,7 @@ def yard_picture(repository, guestbook_number, next_free_at, latest_login, now):
             line += "One free visit every 12 hours. The bowl is ready."
         section.extend(["", line])
     section.extend(["", "<!-- yard:end -->"])
-    return "\n".join(section), svg
+    return "\n".join(section)
 
 
 def replace_yard(readme, picture):
@@ -136,7 +101,7 @@ def replace_yard(readme, picture):
 
 
 def reconcile_files(root, readme, issues, events, repository, installed_at, next_free_at,
-                    guestbook_number=None, latest_login=None):
+                    guestbook_number=None):
     now = datetime.now(timezone.utc)
     public_path, ledger_path = root / PUBLIC_STATE, root / LEDGER
     previous = json.loads(public_path.read_bytes())
@@ -159,10 +124,9 @@ def reconcile_files(root, readme, issues, events, repository, installed_at, next
         elif current and "comment_id" in current:
             public["event"] = None
     public["next_free_at"] = next_free_at
-    picture, sign = yard_picture(repository, guestbook_number, next_free_at, latest_login, now)
+    picture = yard_picture(repository, guestbook_number, next_free_at, now)
     files = {path: (json.dumps(value, indent=2, ensure_ascii=True) + "\n").encode("utf-8")
              for path, value in [(public_path, public), (ledger_path, ledger)]}
-    files[root / GUEST_SIGN] = sign.encode("utf-8")
     return replace_yard(readme, picture), files
 
 

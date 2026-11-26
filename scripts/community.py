@@ -380,11 +380,9 @@ def main():
     files = {}
     if args.garden:
         from garden import reconcile_files
-        latest_signer = next((event["login"] for event in reversed(events) if event.get("login")), None)
         updated_readme, files = reconcile_files(args.readme.parent, updated_readme, issues, events,
                                                 args.repository, args.installed_at, next_free_at,
-                                                guestbook_number=guestbook_number,
-                                                latest_login=latest_signer)
+                                                guestbook_number=guestbook_number)
     files[args.readme] = updated_readme.encode("utf-8")
     changed = {path: data for path, data in files.items() if not path.is_file() or path.read_bytes() != data}
     if changed and args.check:
