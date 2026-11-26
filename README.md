@@ -36,6 +36,8 @@ I’m exploring how mixtures of specialized models can work together in the next
 
 **Bookshelf** · [![Suggest a book](https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-book.svg)](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
 
+- <code>Testing 1</code> by <code>Test</code> · [@Kaustubhdalvi](https://github.com/Kaustubhdalvi) · [suggestion #5](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/5)
+
 <details><summary>Garden leaderboard · 1 recorded visit</summary>
 
 Free leaderboard entries are at least 12 hours apart.
