@@ -86,8 +86,9 @@ def yard_picture(repository, guestbook_number, next_free_at, now, care_words):
     base = "https://raw.githubusercontent.com/{}/main/assets/".format(repository)
     section = [
         "<!-- yard:start -->", "<p><picture>",
+        '  <source type="image/svg+xml" media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard-hd.svg">'.format(base),
         '  <source media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard.gif">'.format(base),
-        '  <img src="{}pip-ball-yard-still.png" width="100%" alt="{}">'.format(base, YARD_ALT),
+        '  <img src="{}pip-guest-yard-hd-still.png" width="100%" alt="{}">'.format(base, YARD_ALT),
         "</picture></p>",
     ]
     if guestbook_number is not None:
