@@ -12,7 +12,7 @@ on:
 permissions:
   contents: write
   issues: read
-  discussions: write
+  discussions: read
 
 concurrency:
   group: profile-garden-reconciliation
@@ -42,13 +42,10 @@ jobs:
             test -n "$installed"
             python3 scripts/community.py --garden --installed-at "$installed"
             git add -- README.md garden/last-feeding.json .github/garden-ledger.json
+            if [ -f garden/free-visit.svg ]; then git add -- garden/free-visit.svg; fi
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'Refresh the profile guestbook and bookshelf'
             if git push origin "HEAD:refs/heads/$PROFILE_BRANCH"; then exit 0; fi
             if [ "$attempt" -eq 3 ]; then exit 1; fi
             sleep "$((attempt * 2))"
           done
-      - name: Refresh the visit status in the guestbook starter
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: python3 scripts/community.py --sync-guestbook
