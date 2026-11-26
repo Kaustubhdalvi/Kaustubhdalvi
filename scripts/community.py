@@ -302,37 +302,31 @@ def build_community(issues, repository, extra_meals=False, events=None, guestboo
     lines.append(f"[Leave a recommendation ↗]({book_form})")
 
     totals = free + extras
-    visits = sum(totals.values())
-    noun = "visit" if visits == 1 else "visits"
     ranked = sorted(totals, key=lambda user: (-totals[user], first_meal[user]))
-    if yard_caption is not None and len(ranked) <= 1:
+    if yard_caption is not None:
         if ranked:
-            person = credited_user(logins[ranked[0]])
-            yard_caption.append(f"*Visited by {person} · {visits} {noun}*")
-        else:
-            yard_caption.append("*Be the first to visit.*")
+            entries = (f"{credited_user(logins[user])} · {totals[user]}" for user in ranked)
+            yard_caption.append("*" + " &#92; ".join(entries) + "*")
     else:
-        board = lines if yard_caption is None else yard_caption
-        if yard_caption is None:
-            summary = f"Garden leaderboard · {visits} recorded {noun}"
-        else:
-            summary = f"<em>Visited by {len(ranked)} people · {visits} visits</em>"
-        board.extend(["", f"<details><summary>{summary}</summary>", ""])
+        visits = sum(totals.values())
+        noun = "visit" if visits == 1 else "visits"
+        summary = f"Garden leaderboard · {visits} recorded {noun}"
+        lines.extend(["", f"<details><summary>{summary}</summary>", ""])
         if ranked:
-            board.extend(["Free leaderboard entries are at least 12 hours apart.", ""])
+            lines.extend(["Free leaderboard entries are at least 12 hours apart.", ""])
             if extras:
-                board.extend(["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"])
+                lines.extend(["| Rank | Garden visitor | Free | Extra | Meals |", "| ---: | :--- | ---: | ---: | ---: |"])
             else:
-                board.extend(["| Rank | Garden visitor | Meals |", "| ---: | :--- | ---: |"])
+                lines.extend(["| Rank | Garden visitor | Meals |", "| ---: | :--- | ---: |"])
             for rank, person in enumerate(ranked, start=1):
                 cells = [str(rank) + MEDALS.get(rank, ""), credited_user(logins[person])]
                 if extras:
                     cells.extend([str(free[person]), str(extras[person])])
                 cells.append(str(totals[person]))
-                board.append("| " + " | ".join(cells) + " |")
+                lines.append("| " + " | ".join(cells) + " |")
         else:
-            board.append("The first credited visit will appear here.")
-        board.extend(["", "</details>"])
+            lines.append("The first credited visit will appear here.")
+        lines.extend(["", "</details>"])
     lines.extend(["", END])
     next_free_at = (last[0] + COOLDOWN).isoformat().replace("+00:00", "Z") if last else None
     return "\n".join(lines), next_free_at
