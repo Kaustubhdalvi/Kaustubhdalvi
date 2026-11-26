@@ -29,11 +29,10 @@ I’m exploring how mixtures of specialized models can work together in the next
   <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" width="576" height="84" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
 </picture></p>
 
-How would you spend a minute with the puppies? [Sign the guestbook](https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3) with one word.
-
-`pet` · `cuddle` · `treat` · `play` · `comfort` · `boop`
-
-The next free visit opens at 2026-11-26 17:41:36 UTC. [Extra visit options](https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods)
+<p>
+  <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3"><img src="https://img.shields.io/badge/Sit%20with%20the%20pups%20%F0%9F%90%BE-35594D?style=flat" alt="Sit with the pups 🐾" height="28"></a>
+  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods"><img src="https://img.shields.io/badge/Buy%20the%20pups%20a%20biscuit%20%F0%9F%A6%B4-805233?style=flat" alt="Buy the pups a biscuit 🦴" height="28"></a>
+</p>
 
 <!-- yard:end -->
 
