@@ -1,25 +1,25 @@
-name: Suggest a book
-description: Leave a reading recommendation for Kaustubh's bookshelf.
-title: "Suggest a book for the bookshelf"
+name: Recommend a research paper or book
+description: Share a research paper or book for Reader’s pick.
+title: "Recommend a research paper or book"
 body:
   - type: input
     id: book
     attributes:
-      label: Book title
-      description: Enter one title, up to 120 characters.
-      placeholder: The End of Everything (Astrophysically Speaking)
+      label: Title
+      description: Enter the title of one research paper or book, up to 120 characters.
+      placeholder: Attention Is All You Need
     validations:
       required: true
   - type: input
     id: author
     attributes:
-      label: Book author
+      label: Author or authors
       description: Optional. Up to 90 characters.
-      placeholder: Katie Mack
+      placeholder: Ashish Vaswani et al.
   - type: checkboxes
     id: consent
     attributes:
-      label: Bookshelf credit
+      label: Profile credit
       options:
         - label: List my suggestion and GitHub username on the public profile.
           required: true
