@@ -35,7 +35,8 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 <p><a id="claim" href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3">Open the guestbook</a></p>
 <p role="status" id="message"></p>
 <button id="retry" type="button" hidden>Check again</button>
-<section id="methods" hidden><h2>Next free visit</h2><output id="countdown" aria-live="off"></output><time id="deadline"></time>
+<section id="free-visit" hidden><h2>Next free visit</h2><output id="countdown" aria-live="off"></output><time id="deadline"></time></section>
+<section id="methods" aria-labelledby="biscuit-heading"><h2 id="biscuit-heading">Buy the pups a biscuit 🦴</h2>
 <ul>
 <li><button type="button" class="method" data-method="paypal">PayPal</button><small>Payment link pending</small></li>
 <li><button type="button" class="method" data-method="crypto">Crypto</button><small>Wallet pending</small></li>
@@ -43,7 +44,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-off
 </ul><p class="info" id="method-note" aria-live="polite">Paid visits will open when Kaustubh connects the payment details.</p></section>
 </main>
 <script>
-const message=document.querySelector('#message'),methods=document.querySelector('#methods');
+const message=document.querySelector('#message'),freeVisit=document.querySelector('#free-visit');
 const deadline=document.querySelector('#deadline'),countdown=document.querySelector('#countdown'),retry=document.querySelector('#retry');
 
 const slug='Kaustubhdalvi/Kaustubhdalvi', file='garden/last-feeding.json';
@@ -76,14 +77,14 @@ async function check(){
     catch{next=await readState('https://raw.githubusercontent.com/'+slug+'/main/'+file+'?checked='+Date.now())}
     if(next>Date.now()){
       heldUntil=next;message.textContent='The shared bowl has been claimed.';
-      methods.hidden=false;deadline.dateTime=new Date(next).toISOString();deadline.textContent=new Date(next).toISOString().slice(0,19).replace('T',' ')+' UTC';
+      freeVisit.hidden=false;deadline.dateTime=new Date(next).toISOString();deadline.textContent=new Date(next).toISOString().slice(0,19).replace('T',' ')+' UTC';
       remaining();timer=setInterval(remaining,1000);
     }else{
-      methods.hidden=true;message.textContent='The free bowl is available.';
+      freeVisit.hidden=true;message.textContent='The free bowl is available.';
     }
     retry.hidden=true;
   }catch{
-    methods.hidden=true;retry.hidden=false;
+    freeVisit.hidden=true;retry.hidden=false;
     message.textContent='The timer is unavailable. You can still leave a guestbook comment. The garden checks eligibility when it records your visit.';
   }
   finally{busy=false;retry.disabled=false}
