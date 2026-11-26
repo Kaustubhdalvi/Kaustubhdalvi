@@ -17,6 +17,7 @@ END = "<!-- community:end -->"
 FEED = "Feed the profile puppies"
 VISIT = "Record a feed & play visit"
 BOOK = "Suggest a book for the bookshelf"
+READING_PICK = "Recommend a research paper or book"
 EXTRA = "Request an extra meal for the profile puppies"
 EXTRA_CONFIRMATION = re.compile(r"Confirm extra meal #([1-9][0-9]{0,14})")
 EXTRA_CONSENT = "- [x] List my GitHub username for this extra meal once the owner verifies it."
@@ -285,12 +286,16 @@ def build_community(issues, repository, extra_meals=False, events=None, guestboo
                     record_meal(events, "extra", request_number, number, when, choice)
                     extras[recipient] += 1
                     first_meal.setdefault(recipient, order)
-        if original == BOOK:
-            if not has_consent(body, "Bookshelf credit", BOOK_CONSENT):
+        if original in (BOOK, READING_PICK):
+            title_label, author_label, credit_label = (
+                ("Book title", "Book author", "Bookshelf credit") if original == BOOK
+                else ("Title", "Author or authors", "Profile credit")
+            )
+            if not has_consent(body, credit_label, BOOK_CONSENT):
                 continue
-            title = book_field(body, "Book title", 120)
+            title = book_field(body, title_label, 120)
             if title:
-                books.append((number, user_id, title, book_field(body, "Book author", 90)))
+                books.append((number, user_id, title, book_field(body, author_label, 90)))
 
     issue_url = "https://github.com/{}/issues/".format(repository)
     book_form = "https://github.com/{}/issues/new?template=book.yml".format(repository)
@@ -299,7 +304,7 @@ def build_community(issues, repository, extra_meals=False, events=None, guestboo
     for number, person, title, author in reversed(books[-3:]):
         byline = f" by {author}" if author else ""
         lines.append(f"*[{title}]({issue_url}{number})*{byline}, picked by {credited_user(logins[person])}<br>")
-    lines.append(f"[Leave a recommendation ↗]({book_form})")
+    lines.append(f"[Recommend a research paper or book ↗]({book_form})")
 
     totals = free + extras
     ranked = sorted(totals, key=lambda user: (-totals[user], first_meal[user]))
