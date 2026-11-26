@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>Feed &amp; Play · Pip’s yard</title>
+<link rel="canonical" href="https://github.com/Kaustubhdalvi#pips-yard">
 <style>
 :root{color-scheme:light dark;--bg:#f5f6f0;--panel:#fffefa;--ink:#233b30;--muted:#526459;--line:#cbd5c8;--accent:#275d4b}
 @media(prefers-color-scheme:dark){:root{--bg:#13211c;--panel:#1d3027;--ink:#edf0e6;--muted:#c2cfc4;--line:#42594b;--accent:#a6d9bc}}
@@ -23,26 +24,16 @@ ul{list-style:none;padding:0;margin:20px 0 8px}.method{color:var(--accent);backg
 li{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:9px 0;border-top:1px solid var(--line)}
 button{font:inherit;background:none;border:1px solid var(--line);border-radius:6px;padding:5px 10px;cursor:pointer;margin-right:12px}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
-figure{margin:20px 0;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel)}
-.scene{display:block;width:100%;aspect-ratio:48/7;object-fit:contain;image-rendering:pixelated}
-figcaption{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:9px 13px;font-size:.875rem}
-figcaption button{margin:0}
 #claim{display:inline-block;color:var(--panel);background:var(--accent);border-radius:8px;padding:8px 14px;font-weight:650;text-decoration:none}
 #claim:hover{text-decoration:underline}
 </style>
 </head>
 <body><main>
-<a href="https://github.com/Kaustubhdalvi#pips-yard">← Back to the GitHub profile</a>
-<h1>Feed &amp; Play</h1>
-<figure>
-<img id="idle" class="scene" width="576" height="84" src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-ball-yard-still.png" alt="Two puppies in the grass beside the doghouse.">
-<video id="movie" class="scene" width="576" height="84" muted playsinline preload="none" hidden aria-label="A visitor feeds both puppies, plays ball with them, then waves goodbye."></video>
-<figcaption><span id="scene-note">Pip’s yard</span><button type="button" id="motion" aria-controls="movie" hidden>Play visit</button></figcaption>
-</figure>
-<p id="video-error" hidden>The video could not load. <a id="movie-link" href="pip-visitor-minute.mp4" target="_blank" rel="noopener">Open the animation in a new tab</a>.</p>
+<a id="yard" href="https://github.com/Kaustubhdalvi#pips-yard">Watch the puppies on the GitHub profile</a>
+<h1>Pip’s guestbook</h1>
+<p>Comment <code>feed</code> or <code>fetch</code> in the guestbook to sign with your GitHub username. Everyone shares one free bowl every 12 hours. The first eligible comment earns one point.</p>
+<p><a id="claim" href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3">Open the guestbook</a></p>
 <p role="status" id="message"></p>
-<div id="actions" hidden><a id="claim" href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml" target="_blank" rel="noopener">Record my visit on GitHub ↗</a>
-<p class="info">A new tab opens for confirmation. The first eligible request earns your GitHub username a spot on the leaderboard.</p></div>
 <button id="retry" type="button" hidden>Check again</button>
 <section id="methods" hidden><h2>Next free visit</h2><output id="countdown" aria-live="off"></output><time id="deadline"></time>
 <ul>
@@ -50,58 +41,10 @@ figcaption button{margin:0}
 <li><button type="button" class="method" data-method="crypto">Crypto</button><small>Wallet pending</small></li>
 <li><button type="button" class="method" data-method="qr">QR code</button><small>Code pending</small></li>
 </ul><p class="info" id="method-note" aria-live="polite">Paid visits will open when Kaustubh connects the payment details.</p></section>
-<noscript><p><a href="pip-visitor-minute.mp4">Watch the one-minute visit</a></p><p>One free bowl is shared every 12 hours. <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=feed.yml" target="_blank" rel="noopener">Request leaderboard credit on GitHub (new tab)</a>.</p></noscript>
 </main>
 <script>
-const message=document.querySelector('#message'),actions=document.querySelector('#actions'),methods=document.querySelector('#methods');
+const message=document.querySelector('#message'),methods=document.querySelector('#methods');
 const deadline=document.querySelector('#deadline'),countdown=document.querySelector('#countdown'),retry=document.querySelector('#retry');
-const movie=document.querySelector('#movie'), motion=document.querySelector('#motion'), idle=document.querySelector('#idle');
-const sceneNote=document.querySelector('#scene-note'), videoError=document.querySelector('#video-error');
-const reduced=window.matchMedia('(prefers-reduced-motion: reduce)');
-let sceneStarted=false, wantsPlay=false, playAttempt=0;
-
-function updatePlayback(){
-  const attempt=++playAttempt;
-  if(!wantsPlay||document.hidden){
-    movie.pause();
-    motion.textContent=movie.ended?'Replay visit':'Play visit';
-    return;
-  }
-  motion.textContent='Pause visit';
-  movie.play().catch(()=>{
-    if(attempt===playAttempt){wantsPlay=false;motion.textContent='Play visit'}
-  });
-}
-function startScene(userRequested=false){
-  if(sceneStarted)return;
-  sceneStarted=true;
-  const name=Math.random()<.5?'pip-visitor':'pip-visitor-braids';
-  movie.poster='https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/'+name+'-still.png';
-  movie.src=name+'-minute.mp4';
-  document.querySelector('#movie-link').href=movie.src;
-  idle.hidden=true;movie.hidden=false;motion.hidden=false;
-  sceneNote.textContent='A minute with the puppies';
-  wantsPlay=userRequested||!reduced.matches;
-  updatePlayback();
-}
-motion.addEventListener('click',()=>{
-  if(!sceneStarted){startScene(true);return}
-  if(movie.error){movie.load();videoError.hidden=true}
-  if(movie.ended)movie.currentTime=0;
-  wantsPlay=!wantsPlay;updatePlayback();
-});
-movie.addEventListener('ended',()=>{wantsPlay=false;motion.textContent='Replay visit'});
-movie.addEventListener('error',()=>{playAttempt++;wantsPlay=false;motion.textContent='Retry video';videoError.hidden=false});
-reduced.addEventListener('change',()=>{
-  if(reduced.matches&&sceneStarted){wantsPlay=false;updatePlayback()}
-});
-document.addEventListener('visibilitychange',()=>{
-  if(sceneStarted){
-    if(document.hidden&&reduced.matches)wantsPlay=false;
-    updatePlayback();
-  }
-  if(!document.hidden)check();
-});
 
 const slug='Kaustubhdalvi/Kaustubhdalvi', file='garden/last-feeding.json';
 let busy=false, timer, heldUntil=0;
@@ -125,7 +68,7 @@ function remaining(){
 }
 async function check(){
   if(busy)return;
-  busy=true;clearInterval(timer);retry.disabled=true;actions.hidden=true;
+  busy=true;clearInterval(timer);retry.disabled=true;
   message.textContent='Checking the shared free visit…';
   try {
     let next;
@@ -133,18 +76,15 @@ async function check(){
     catch{next=await readState('https://raw.githubusercontent.com/'+slug+'/main/'+file+'?checked='+Date.now())}
     if(next>Date.now()){
       heldUntil=next;message.textContent='The shared bowl has been claimed.';
-      if(!sceneStarted)motion.hidden=true;
-      methods.hidden=false;actions.hidden=true;deadline.dateTime=new Date(next).toISOString();deadline.textContent=new Date(next).toISOString().slice(0,19).replace('T',' ')+' UTC';
+      methods.hidden=false;deadline.dateTime=new Date(next).toISOString();deadline.textContent=new Date(next).toISOString().slice(0,19).replace('T',' ')+' UTC';
       remaining();timer=setInterval(remaining,1000);
     }else{
-      methods.hidden=true;actions.hidden=false;message.textContent='The free bowl is available. One visit can earn credit every 12 hours.';
-      startScene();
+      methods.hidden=true;message.textContent='The free bowl is available.';
     }
     retry.hidden=true;
   }catch{
-    methods.hidden=true;actions.hidden=false;retry.hidden=false;
-    if(!sceneStarted){motion.hidden=false;motion.textContent='Watch without credit'}
-    message.textContent='The timer is unavailable. GitHub will check eligibility if you request credit.';
+    methods.hidden=true;retry.hidden=false;
+    message.textContent='The timer is unavailable. You can still leave a guestbook comment. The garden checks eligibility when it records your visit.';
   }
   finally{busy=false;retry.disabled=false}
 }
@@ -157,6 +97,10 @@ for(const option of document.querySelectorAll('.method')){
   option.addEventListener('click',()=>{document.querySelector('#method-note').textContent=instructions[option.dataset.method]});
 }
 retry.addEventListener('click',check);
-if(new URLSearchParams(location.search).get('replay')==='1')startScene();
-check();
+if(location.hash==='#methods'||new URLSearchParams(location.search).has('free_at')){
+  check();
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden)check()});
+}else{
+  location.replace(document.querySelector('#yard').href);
+}
 </script></body></html>
