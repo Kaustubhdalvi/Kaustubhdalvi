@@ -41,7 +41,7 @@ jobs:
             installed=$(git log -1 --diff-filter=A --format=%cI -- .github/garden-ledger.json)
             test -n "$installed"
             python3 scripts/community.py --garden --installed-at "$installed"
-            git add -- README.md assets/yard-guest-sign.svg garden/last-feeding.json .github/garden-ledger.json
+            git add -- README.md garden/last-feeding.json .github/garden-ledger.json
             if git diff --cached --quiet; then exit 0; fi
             git commit -m 'Refresh the profile guestbook and bookshelf'
             if git push origin "HEAD:refs/heads/$PROFILE_BRANCH"; then exit 0; fi
