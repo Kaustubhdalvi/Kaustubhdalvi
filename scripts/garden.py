@@ -1,6 +1,6 @@
 """Render the profile yard and preserve its opt-in visit records."""
 
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 import json
 import math
 from pathlib import Path
@@ -24,6 +24,26 @@ def instant(value):
 
 def utc_string(value):
     return value.astimezone(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def free_visit_svg(next_free_at, now):
+    opens = instant(next_free_at) if next_free_at else None
+    if opens and opens > now:
+        india = opens.astimezone(timezone(timedelta(hours=5, minutes=30)))
+        heading = "Next free visit"
+        status = india.strftime("%d %b %Y at %I:%M:%S %p IST")
+    else:
+        heading = "Free visit"
+        status = "The puppies are ready for a visit 🐾"
+    return f"""<svg xmlns="http://www.w3.org/2000/svg" width="318" height="64" viewBox="0 0 318 64" role="img" aria-labelledby="title">
+  <title id="title">{heading}. {status}</title>
+  <rect x=".5" y=".5" width="317" height="63" rx="8" fill="#f1f7f2" stroke="#a6bfad"/>
+  <g font-family="system-ui, sans-serif">
+    <text x="14" y="23" fill="#365442" font-size="13">{heading}</text>
+    <text x="14" y="47" fill="#192f23" font-size="16" font-weight="600">{status}</text>
+  </g>
+</svg>
+""".encode("utf-8")
 
 
 def seconds_remaining(event, now):
@@ -127,6 +147,8 @@ def reconcile_files(root, readme, issues, events, repository, installed_at, next
     picture = yard_picture(repository, guestbook_number, next_free_at, now, care_words)
     files = {path: (json.dumps(value, indent=2, ensure_ascii=True) + "\n").encode("utf-8")
              for path, value in [(public_path, public), (ledger_path, ledger)]}
+    if guestbook_number is not None:
+        files[root / "garden/free-visit.svg"] = free_visit_svg(next_free_at, now)
     return replace_yard(readme, picture), files
 
 
