@@ -25,6 +25,12 @@ I’m exploring how mixtures of specialized models can work together in the next
   <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/pip-guest-yard-hd-still.png" width="100%" alt="Two puppies play in the grass by their doghouse. A visitor arrives with a bowl, plays fetch, and waves goodbye.">
 </picture></p>
 
+<!-- visitors:start -->
+
+*Visited by [@Kaustubhdalvi](https://github.com/Kaustubhdalvi) · 1 visit*
+
+<!-- visitors:end -->
+
 <p>
   <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-sit.svg" alt="Sit with the pups 🐾"></a>
   <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>
@@ -37,16 +43,6 @@ I’m exploring how mixtures of specialized models can work together in the next
 **Reader’s pick**<br>
 *[Testing 1](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/5)* by Test, picked by [@Kaustubhdalvi](https://github.com/Kaustubhdalvi)<br>
 [Leave a recommendation ↗](https://github.com/Kaustubhdalvi/Kaustubhdalvi/issues/new?template=book.yml)
-
-<details><summary>Garden leaderboard · 1 recorded visit</summary>
-
-Free leaderboard entries are at least 12 hours apart.
-
-| Rank | Garden visitor | Meals |
-| ---: | :--- | ---: |
-| 1 🥇 | [@Kaustubhdalvi](https://github.com/Kaustubhdalvi) | 1 |
-
-</details>
 
 <!-- community:end -->
 
