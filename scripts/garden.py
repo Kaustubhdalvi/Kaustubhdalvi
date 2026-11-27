@@ -106,7 +106,7 @@ def yard_picture(repository, guestbook_number, next_free_at, now, care_words):
             f'  <a href="{biscuits}"><img src="{base}action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>',
         ])
     section.extend([
-        f'  <a href="{pages}/puzzles.html"><img src="{base}action-notebook.svg" alt="Puzzles"></a>',
+        f'  <a href="{pages}/puzzles.html"><img src="{base}action-notebook.svg" alt="Can you crack it?"></a>',
         "</p>", "", "<!-- yard:end -->",
     ])
     return "\n".join(section)
