@@ -85,27 +85,30 @@ def reconcile(issues, accepted, public, ledger, now, installed_at):
 
 
 def yard_picture(repository, guestbook_number, next_free_at, now, care_words):
+    owner, name = repository.split("/")
+    pages = f"https://{owner.lower()}.github.io/{name}"
     base = "https://raw.githubusercontent.com/{}/main/assets/".format(repository)
     section = [
         "<!-- yard:start -->", "<p><picture>",
         '  <source type="image/svg+xml" media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard-hd.svg">'.format(base),
         '  <source media="(prefers-reduced-motion: no-preference)" srcset="{}pip-guest-yard.gif">'.format(base),
         '  <img src="{}pip-guest-yard-hd-still.png" width="100%" alt="{}">'.format(base, YARD_ALT),
-        "</picture></p>", "", VISITORS_START, VISITORS_END,
+        "</picture></p>", "", VISITORS_START, VISITORS_END, "", "<p>",
+        '  <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a><a name="puzzles"></a>',
     ]
     if guestbook_number is not None:
         if type(guestbook_number) is not int or guestbook_number < 1:
             raise ValueError("The guestbook discussion number must be a positive integer.")
-        owner, name = repository.split("/")
         guestbook = f"https://github.com/{repository}/discussions/{guestbook_number}"
-        biscuits = f"https://{owner.lower()}.github.io/{name}/feed-and-play.html#methods"
+        biscuits = f"{pages}/feed-and-play.html#methods"
         section.extend([
-            "", "<p>",
             f'  <a href="{guestbook}"><img src="{base}action-sit.svg" alt="Sit with the pups 🐾"></a>',
             f'  <a href="{biscuits}"><img src="{base}action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>',
-            "</p>",
         ])
-    section.extend(["", "<!-- yard:end -->"])
+    section.extend([
+        f'  <a href="{pages}/puzzles.html"><img src="{base}action-notebook.svg" alt="Puzzles"></a>',
+        "</p>", "", "<!-- yard:end -->",
+    ])
     return "\n".join(section)
 
 
