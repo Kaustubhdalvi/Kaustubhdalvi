@@ -16,7 +16,9 @@ I’m also exploring which parts of a complex task benefit from a **specialist m
   <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#chess"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-chess.svg" alt="Play the chess puzzles"></a>
 </p>
 
-## Pip’s yard
+<a name="pips-yard"></a>
+
+## The Welcoming Committee
 
 <!-- yard:start -->
 <p><picture>
