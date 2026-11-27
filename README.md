@@ -13,7 +13,6 @@ I’m also exploring which parts of a complex task benefit from a **specialist m
 <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a>
 <p>
   <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Open the puzzle notebook"></a>
-  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html#chess"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-chess.svg" alt="Play the chess puzzles"></a>
 </p>
 
 <a name="pips-yard"></a>
