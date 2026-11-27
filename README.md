@@ -6,7 +6,7 @@
   </picture>
 </h1>
 
-I build **evaluation environments** that help answer a practical question: how do we know an AI coding agent solved the problem it was given? I write automated tests in Python and investigate cases where the score and the software’s behavior tell different stories.
+I study how verifier design shapes the rewards we assign to LLM coding agents. I build reinforcement learning environments, implement executable checks in Python, and analyze agent trajectories to understand disagreements between measured reward and task correctness. My broader research interest is model composition, particularly how routing decisions affect the accuracy and computational cost of a mixture of specialists.
 
 I’m also exploring which parts of a complex task benefit from a **specialist model** and how to measure that benefit. I’d love to hear what you’re exploring in *AI or quantum computing* and what drew you to it.
 
@@ -31,7 +31,7 @@ I’m also exploring which parts of a complex task benefit from a **specialist m
   <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a><a name="puzzles"></a>
   <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-sit.svg" alt="Sit with the pups 🐾"></a>
   <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>
-  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Puzzles"></a>
+  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Can you crack it?"></a>
 </p>
 
 <!-- yard:end -->
