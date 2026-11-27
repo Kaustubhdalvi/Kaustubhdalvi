@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" width="28" height="28" role="img" aria-label="Instagram">
   <title>Instagram</title>
-  <rect x=".75" y=".75" width="26.5" height="26.5" rx="8" fill="#e4eddf" stroke="#748e81" stroke-width="1.15"/>
-  <g fill="none" stroke="#253e3e" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
+  <rect x=".75" y=".75" width="26.5" height="26.5" rx="8" fill="#AFE1F0" stroke="#527289" stroke-width="1.15"/>
+  <g fill="none" stroke="#162D3D" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round">
     <rect x="7.2" y="7.2" width="13.6" height="13.6" rx="3.8"/>
     <circle cx="14" cy="14" r="3.15"/>
-    <circle cx="18" cy="10" r=".95" fill="#253e3e" stroke="none"/>
+    <circle cx="18" cy="10" r=".95" fill="#162D3D" stroke="none"/>
   </g>
 </svg>

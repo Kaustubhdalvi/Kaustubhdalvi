@@ -4,7 +4,8 @@
 @keyframes undertow{from{transform:translateX(-224px)}to{transform:translateX(0)}}
 .tide{animation:tide 15s linear infinite}.undertow{animation:undertow 21s linear infinite}
 @media(prefers-reduced-motion:reduce){.tide,.undertow{animation:none}}
+@media(prefers-color-scheme:dark){.undertow path[stroke]{stroke:#7FAFC6}.tide path[stroke]{stroke:#AFE1F0}.tide path:not([stroke]){fill:#78B1CC}}
 </style>
-  <g class="undertow"><path d="M-224 15q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0V27H-224Z" fill="#7e9eaf" opacity=".18"/><path d="M-224 15q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0" fill="none" stroke="#7b9aaa" stroke-width="1.1" opacity=".68"/></g>
-  <g class="tide"><path d="M-224 17q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0V27H-224Z" fill="#729c87" opacity=".34"/><path d="M-224 17q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0" fill="none" stroke="#648c7c" stroke-width="1.1" opacity=".68"/></g>
+  <g class="undertow"><path d="M-224 15q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0V27H-224Z" fill="#AFE1F0" opacity=".18"/><path d="M-224 15q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0q56 -12 112 0t112 0" fill="none" stroke="#5588A2" stroke-width="1.1" opacity=".68"/></g>
+  <g class="tide"><path d="M-224 17q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0V27H-224Z" fill="#5A93B0" opacity=".34"/><path d="M-224 17q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0q56 -14 112 0t112 0" fill="none" stroke="#284D68" stroke-width="1.1" opacity=".68"/></g>
 </svg>
