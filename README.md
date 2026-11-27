@@ -51,6 +51,8 @@ I’m also exploring which parts of a complex task benefit from a **specialist m
 </p>
 
 <picture>
-  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave.svg">
-  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave-still.svg" width="100%" alt="">
+  <source media="(max-width: 767px) and (prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave-mobile.svg">
+  <source media="(max-width: 767px)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave-mobile-still.svg">
+  <source media="(prefers-reduced-motion: no-preference)" srcset="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave.svg?v=cocoa-cottage">
+  <img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/wave-still.svg?v=cocoa-cottage" width="100%" alt="Cocoa carries a paper boat out of his cottage, nudges it onto the waves, and watches from the window.">
 </picture>
