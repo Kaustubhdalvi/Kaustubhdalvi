@@ -10,11 +10,6 @@ I build **evaluation environments** that help answer a practical question: how d
 
 I’m also exploring which parts of a complex task benefit from a **specialist model** and how to measure that benefit. I’d love to hear what you’re exploring in *AI or quantum computing* and what drew you to it.
 
-<a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a>
-<p>
-  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Open the puzzle notebook"></a>
-</p>
-
 <a name="pips-yard"></a>
 
 ## The Welcoming Committee
@@ -33,8 +28,10 @@ I’m also exploring which parts of a complex task benefit from a **specialist m
 <!-- visitors:end -->
 
 <p>
+  <a name="science-puzzles"></a><a name="puzzle-notebook"></a><a name="which-run-would-you-ship"></a><a name="puzzles"></a>
   <a href="https://github.com/Kaustubhdalvi/Kaustubhdalvi/discussions/3"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-sit.svg" alt="Sit with the pups 🐾"></a>
   <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/feed-and-play.html#methods"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-biscuit.svg" alt="Buy the pups a biscuit 🦴"></a>
+  <a href="https://kaustubhdalvi.github.io/Kaustubhdalvi/puzzles.html"><img src="https://raw.githubusercontent.com/Kaustubhdalvi/Kaustubhdalvi/main/assets/action-notebook.svg" alt="Puzzles"></a>
 </p>
 
 <!-- yard:end -->
