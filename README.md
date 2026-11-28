@@ -6,7 +6,7 @@
   </picture>
 </h1>
 
-I study how verifier design shapes the rewards we assign to LLM coding agents. I build reinforcement learning environments, implement executable checks in Python, and analyze agent trajectories to understand disagreements between measured reward and task correctness. My broader research interest is model composition, particularly how routing decisions affect the accuracy and computational cost of a mixture of specialists.
+I research how verifier design shapes the rewards we assign to LLM coding agents. I build reinforcement learning environments, implement executable checks , and analyze agent trajectories to understand disagreements between measured reward and task correctness. My broader research interest is model composition, particularly how routing decisions affect the accuracy and computational cost of a mixture of specialists.
 
 I’m also exploring which parts of a complex task benefit from a **specialist model** and how to measure that benefit. I’d love to hear what you’re exploring in *AI or quantum computing* and what drew you to it.
 
