@@ -1,15 +1,15 @@
 {
   "version": 1,
   "event": {
-    "id": "discussion-DC_kwDOGewqxM4BL9a3",
+    "id": "discussion-DC_kwDOGewqxM4BMMqe",
     "kind": "free",
     "issue_number": 3,
-    "issued_at": "2026-11-26T05:41:36Z",
+    "issued_at": "2026-11-28T10:45:14Z",
     "visitor": "cap",
-    "comment_id": "DC_kwDOGewqxM4BL9a3",
+    "comment_id": "DC_kwDOGewqxM4BMMqe",
     "discussion_number": 3,
-    "started_at": "2026-11-26T05:41:36Z",
+    "started_at": "2026-11-28T10:45:14Z",
     "duration_seconds": 60
   },
-  "next_free_at": "2026-11-26T17:41:36Z"
+  "next_free_at": "2026-11-28T22:45:14Z"
 }
